@@ -73,128 +73,128 @@ const sections: Array<{
   featured: { name: string; tag: string; price: string };
   products: Product[];
 }> = [
-  {
-    id: "makeup",
-    index: "01",
-    eyebrow: "The Makeup Suite",
-    title: "Pigment, polished.",
-    description:
-      "Couture-grade textures and curated color stories — from the satin matte to the molten lacquer.",
-    image: makeup,
-    featured: { name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
-    products: [
-      { name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
-      { name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
-      { name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
-      { name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
-    ],
-  },
-  {
-    id: "skincare",
-    index: "02",
-    eyebrow: "Skincare Sanctuary",
-    title: "Clinical poetry.",
-    description: "Studied formulas, atelier-grade actives. The ritual of the considered face.",
-    image: skincare,
-    featured: { name: "Hydra-Glass Serum", tag: "House Hero", price: "$92" },
-    products: [
-      { name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76", image: skincare1 },
-      { name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68", image: skincare2 },
-      { name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54", image: skincare3 },
-      { name: "Marble Cleanser", note: "Cream · 150ml", price: "$44", image: skincare4 },
-    ],
-  },
-  {
-    id: "hair",
-    index: "03",
-    eyebrow: "The Hair Lab",
-    title: "Precision, distilled.",
-    description: "A laboratory of liquids and tools for hair that behaves like art direction.",
-    image: hair,
-    featured: { name: "Bond Repair Elixir", tag: "Lab Edition", price: "$64" },
-    products: [
-      { name: "Silk Press Mist", note: "Spray · 200ml", price: "$32", image: hair1 },
-      { name: "Density Shampoo", note: "Wash · 250ml", price: "$36", image: hair2 },
-      { name: "Glass Conditioner", note: "Mask · 250ml", price: "$38", image: hair3 },
-      { name: "Heat Veil", note: "Primer · 150ml", price: "$28", image: hair4 },
-    ],
-  },
-  {
-    id: "bath",
-    index: "04",
-    eyebrow: "Bath & Body Rituals",
-    title: "Slow water.",
-    description: "Spa-grade rituals: oils, salts, and skin balms designed for the long evening.",
-    image: bath,
-    featured: { name: "Cashmere Body Oil", tag: "Ritual No. 4", price: "$72" },
-    products: [
-      { name: "Mineral Soak", note: "Salt · 500g", price: "$42", image: bath1 },
-      { name: "Linen Body Wash", note: "Gel · 300ml", price: "$34", image: bath2 },
-      { name: "Velour Cream", note: "Lotion · 250ml", price: "$48", image: bath3 },
-      { name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26", image: bath4 },
-    ],
-  },
-  {
-    id: "tools",
-    index: "05",
-    eyebrow: "The Tool Box",
-    title: "The maker's hand.",
-    description: "Sculpted hardware. Heirloom brushes. Instruments designed for the daily atelier.",
-    image: tools,
-    featured: { name: "Atelier Brush Set", tag: "Maison Edit", price: "$220" },
-    products: [
-      { name: "Powder Brush 04", note: "Brush · Goat", price: "$58", image: tools1 },
-      { name: "Blending Sponge", note: "Tool · Latex-free", price: "$22", image: tools2 },
-      { name: "Lash Curler", note: "Steel · Polished", price: "$28", image: tools3 },
-      { name: "Brow Comb", note: "Brass · Lacquer", price: "$24", image: tools4 },
-    ],
-  },
-  {
-    id: "fragrance",
-    index: "06",
-    eyebrow: "The Fragrance Wardrobe",
-    title: "Air, made memorable.",
-    description: "Olfactive heirlooms in cut glass — to be worn like a tailored coat.",
-    image: fragrance,
-    featured: { name: "Velnora No.7 — Amber Smoke", tag: "Maison Signature", price: "$185" },
-    products: [
-      { name: "Iris Pavé", note: "EDP · 50ml", price: "$140", image: fragrance1 },
-      { name: "Neroli Suite", note: "EDP · 50ml", price: "$150", image: fragrance2 },
-      { name: "Rose Obscura", note: "EDP · 50ml", price: "$165", image: fragrance3 },
-      { name: "Vetiver Noir", note: "EDP · 50ml", price: "$170", image: fragrance4 },
-    ],
-  },
-  {
-    id: "wellness",
-    index: "07",
-    eyebrow: "Inside-Out Beauty",
-    title: "Beauty, ingested.",
-    description: "Quietly powerful supplements, considered for skin, hair, and the long arc of glow.",
-    image: wellness,
-    featured: { name: "Inner Glow Capsules", tag: "30-Day Ritual", price: "$58" },
-    products: [
-      { name: "Collagen Pearl", note: "Powder · 200g", price: "$48", image: wellness1 },
-      { name: "Hair Density", note: "Capsules · 60ct", price: "$42", image: wellness2 },
-      { name: "Skin Hydration", note: "Capsules · 60ct", price: "$44", image: wellness3 },
-      { name: "Calm & Clear", note: "Tincture · 30ml", price: "$52", image: wellness4 },
-    ],
-  },
-  {
-    id: "tech",
-    index: "08",
-    eyebrow: "Beauty Tech",
-    title: "Light as treatment.",
-    description: "LED, microcurrent, and intelligent devices — clinic-grade, dressed for the vanity.",
-    image: tech,
-    featured: { name: "LumiOne LED Mask", tag: "Smart Device", price: "$420" },
-    products: [
-      { name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280", image: tech1 },
-      { name: "Cryo Globes", note: "Tool · Steel", price: "$78", image: tech2 },
-      { name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140", image: tech3 },
-      { name: "Red Light Panel", note: "Device · Pro", price: "$520", image: tech4 },
-    ],
-  },
-];
+    {
+      id: "makeup",
+      index: "01",
+      eyebrow: "The Makeup Suite",
+      title: "Pigment, polished.",
+      description:
+        "Couture-grade textures and curated color stories — from the satin matte to the molten lacquer.",
+      image: makeup,
+      featured: { name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
+      products: [
+        { name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
+        { name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
+        { name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
+        { name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
+      ],
+    },
+    {
+      id: "skincare",
+      index: "02",
+      eyebrow: "Skincare Sanctuary",
+      title: "Clinical poetry.",
+      description: "Studied formulas, atelier-grade actives. The ritual of the considered face.",
+      image: skincare,
+      featured: { name: "Hydra-Glass Serum", tag: "House Hero", price: "$92" },
+      products: [
+        { name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76", image: skincare1 },
+        { name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68", image: skincare2 },
+        { name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54", image: skincare3 },
+        { name: "Marble Cleanser", note: "Cream · 150ml", price: "$44", image: skincare4 },
+      ],
+    },
+    {
+      id: "hair",
+      index: "03",
+      eyebrow: "The Hair Lab",
+      title: "Precision, distilled.",
+      description: "A laboratory of liquids and tools for hair that behaves like art direction.",
+      image: hair,
+      featured: { name: "Bond Repair Elixir", tag: "Lab Edition", price: "$64" },
+      products: [
+        { name: "Silk Press Mist", note: "Spray · 200ml", price: "$32", image: hair1 },
+        { name: "Density Shampoo", note: "Wash · 250ml", price: "$36", image: hair2 },
+        { name: "Glass Conditioner", note: "Mask · 250ml", price: "$38", image: hair3 },
+        { name: "Heat Veil", note: "Primer · 150ml", price: "$28", image: hair4 },
+      ],
+    },
+    {
+      id: "bath",
+      index: "04",
+      eyebrow: "Bath & Body Rituals",
+      title: "Slow water.",
+      description: "Spa-grade rituals: oils, salts, and skin balms designed for the long evening.",
+      image: bath,
+      featured: { name: "Cashmere Body Oil", tag: "Ritual No. 4", price: "$72" },
+      products: [
+        { name: "Mineral Soak", note: "Salt · 500g", price: "$42", image: bath1 },
+        { name: "Linen Body Wash", note: "Gel · 300ml", price: "$34", image: bath2 },
+        { name: "Velour Cream", note: "Lotion · 250ml", price: "$48", image: bath3 },
+        { name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26", image: bath4 },
+      ],
+    },
+    {
+      id: "tools",
+      index: "05",
+      eyebrow: "The Tool Box",
+      title: "The maker's hand.",
+      description: "Sculpted hardware. Heirloom brushes. Instruments designed for the daily atelier.",
+      image: tools,
+      featured: { name: "Atelier Brush Set", tag: "Maison Edit", price: "$220" },
+      products: [
+        { name: "Powder Brush 04", note: "Brush · Goat", price: "$58", image: tools1 },
+        { name: "Blending Sponge", note: "Tool · Latex-free", price: "$22", image: tools2 },
+        { name: "Lash Curler", note: "Steel · Polished", price: "$28", image: tools3 },
+        { name: "Brow Comb", note: "Brass · Lacquer", price: "$24", image: tools4 },
+      ],
+    },
+    {
+      id: "fragrance",
+      index: "06",
+      eyebrow: "The Fragrance Wardrobe",
+      title: "Air, made memorable.",
+      description: "Olfactive heirlooms in cut glass — to be worn like a tailored coat.",
+      image: fragrance,
+      featured: { name: "Velnora No.7 — Amber Smoke", tag: "Maison Signature", price: "$185" },
+      products: [
+        { name: "Iris Pavé", note: "EDP · 50ml", price: "$140", image: fragrance1 },
+        { name: "Neroli Suite", note: "EDP · 50ml", price: "$150", image: fragrance2 },
+        { name: "Rose Obscura", note: "EDP · 50ml", price: "$165", image: fragrance3 },
+        { name: "Vetiver Noir", note: "EDP · 50ml", price: "$170", image: fragrance4 },
+      ],
+    },
+    {
+      id: "wellness",
+      index: "07",
+      eyebrow: "Inside-Out Beauty",
+      title: "Beauty, ingested.",
+      description: "Quietly powerful supplements, considered for skin, hair, and the long arc of glow.",
+      image: wellness,
+      featured: { name: "Inner Glow Capsules", tag: "30-Day Ritual", price: "$58" },
+      products: [
+        { name: "Collagen Pearl", note: "Powder · 200g", price: "$48", image: wellness1 },
+        { name: "Hair Density", note: "Capsules · 60ct", price: "$42", image: wellness2 },
+        { name: "Skin Hydration", note: "Capsules · 60ct", price: "$44", image: wellness3 },
+        { name: "Calm & Clear", note: "Tincture · 30ml", price: "$52", image: wellness4 },
+      ],
+    },
+    {
+      id: "tech",
+      index: "08",
+      eyebrow: "Beauty Tech",
+      title: "Light as treatment.",
+      description: "LED, microcurrent, and intelligent devices — clinic-grade, dressed for the vanity.",
+      image: tech,
+      featured: { name: "LumiOne LED Mask", tag: "Smart Device", price: "$420" },
+      products: [
+        { name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280", image: tech1 },
+        { name: "Cryo Globes", note: "Tool · Steel", price: "$78", image: tech2 },
+        { name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140", image: tech3 },
+        { name: "Red Light Panel", note: "Device · Pro", price: "$520", image: tech4 },
+      ],
+    },
+  ];
 
 function Hero() {
   return (
@@ -254,7 +254,7 @@ function Hero() {
             </div>
           </Reveal>
           <Reveal delay={300}>
-            <div className="flex items-end justify-between text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+            <div className="flex items-end mt-20 justify-between text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
               <span>Eight Chapters</span>
               <span>Curated · Not Sold</span>
               <span>Est. 2026</span>

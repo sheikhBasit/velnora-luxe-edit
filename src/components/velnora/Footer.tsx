@@ -1,4 +1,4 @@
-import { Instagram, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 export function Footer() {
   return (
@@ -35,16 +35,6 @@ export function Footer() {
           <a href="#" className="hover:text-background transition">Disclosure</a>
           <a href="#" className="hover:text-background transition">Contact</a>
         </nav>
-
-        <div className="mt-10 flex justify-center">
-          <a
-            href="#"
-            aria-label="Instagram"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-background/20 text-background/70 transition hover:bg-background hover:text-foreground"
-          >
-            <Instagram className="h-4 w-4" strokeWidth={1.5} />
-          </a>
-        </div>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
           <p>Amazon Associate &amp; Skimlinks partner. Earnings via qualifying purchases.</p>
