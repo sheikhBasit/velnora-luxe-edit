@@ -13,6 +13,38 @@ import tools from "@/assets/tools.jpg";
 import fragrance from "@/assets/fragrance.jpg";
 import wellness from "@/assets/wellness.jpg";
 import tech from "@/assets/tech.jpg";
+import makeup1 from "@/assets/products/makeup-1.jpg";
+import makeup2 from "@/assets/products/makeup-2.jpg";
+import makeup3 from "@/assets/products/makeup-3.jpg";
+import makeup4 from "@/assets/products/makeup-4.jpg";
+import skincare1 from "@/assets/products/skincare-1.jpg";
+import skincare2 from "@/assets/products/skincare-2.jpg";
+import skincare3 from "@/assets/products/skincare-3.jpg";
+import skincare4 from "@/assets/products/skincare-4.jpg";
+import hair1 from "@/assets/products/hair-1.jpg";
+import hair2 from "@/assets/products/hair-2.jpg";
+import hair3 from "@/assets/products/hair-3.jpg";
+import hair4 from "@/assets/products/hair-4.jpg";
+import bath1 from "@/assets/products/bath-1.jpg";
+import bath2 from "@/assets/products/bath-2.jpg";
+import bath3 from "@/assets/products/bath-3.jpg";
+import bath4 from "@/assets/products/bath-4.jpg";
+import tools1 from "@/assets/products/tools-1.jpg";
+import tools2 from "@/assets/products/tools-2.jpg";
+import tools3 from "@/assets/products/tools-3.jpg";
+import tools4 from "@/assets/products/tools-4.jpg";
+import fragrance1 from "@/assets/products/fragrance-1.jpg";
+import fragrance2 from "@/assets/products/fragrance-2.jpg";
+import fragrance3 from "@/assets/products/fragrance-3.jpg";
+import fragrance4 from "@/assets/products/fragrance-4.jpg";
+import wellness1 from "@/assets/products/wellness-1.jpg";
+import wellness2 from "@/assets/products/wellness-2.jpg";
+import wellness3 from "@/assets/products/wellness-3.jpg";
+import wellness4 from "@/assets/products/wellness-4.jpg";
+import tech1 from "@/assets/products/tech-1.jpg";
+import tech2 from "@/assets/products/tech-2.jpg";
+import tech3 from "@/assets/products/tech-3.jpg";
+import tech4 from "@/assets/products/tech-4.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -51,10 +83,10 @@ const sections: Array<{
     image: makeup,
     featured: { name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
     products: [
-      { name: "Cashmere Blush", note: "Powder · Rose", price: "$38" },
-      { name: "Obsidian Liner", note: "Liquid · Jet", price: "$26" },
-      { name: "Halo Highlighter", note: "Cream · Champagne", price: "$42" },
-      { name: "Silk Foundation", note: "Liquid · 30ml", price: "$58" },
+      { name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
+      { name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
+      { name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
+      { name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
     ],
   },
   {
@@ -66,10 +98,10 @@ const sections: Array<{
     image: skincare,
     featured: { name: "Hydra-Glass Serum", tag: "House Hero", price: "$92" },
     products: [
-      { name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76" },
-      { name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68" },
-      { name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54" },
-      { name: "Marble Cleanser", note: "Cream · 150ml", price: "$44" },
+      { name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76", image: skincare1 },
+      { name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68", image: skincare2 },
+      { name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54", image: skincare3 },
+      { name: "Marble Cleanser", note: "Cream · 150ml", price: "$44", image: skincare4 },
     ],
   },
   {
@@ -81,10 +113,10 @@ const sections: Array<{
     image: hair,
     featured: { name: "Bond Repair Elixir", tag: "Lab Edition", price: "$64" },
     products: [
-      { name: "Silk Press Mist", note: "Spray · 200ml", price: "$32" },
-      { name: "Density Shampoo", note: "Wash · 250ml", price: "$36" },
-      { name: "Glass Conditioner", note: "Mask · 250ml", price: "$38" },
-      { name: "Heat Veil", note: "Primer · 150ml", price: "$28" },
+      { name: "Silk Press Mist", note: "Spray · 200ml", price: "$32", image: hair1 },
+      { name: "Density Shampoo", note: "Wash · 250ml", price: "$36", image: hair2 },
+      { name: "Glass Conditioner", note: "Mask · 250ml", price: "$38", image: hair3 },
+      { name: "Heat Veil", note: "Primer · 150ml", price: "$28", image: hair4 },
     ],
   },
   {
@@ -96,10 +128,10 @@ const sections: Array<{
     image: bath,
     featured: { name: "Cashmere Body Oil", tag: "Ritual No. 4", price: "$72" },
     products: [
-      { name: "Mineral Soak", note: "Salt · 500g", price: "$42" },
-      { name: "Linen Body Wash", note: "Gel · 300ml", price: "$34" },
-      { name: "Velour Cream", note: "Lotion · 250ml", price: "$48" },
-      { name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26" },
+      { name: "Mineral Soak", note: "Salt · 500g", price: "$42", image: bath1 },
+      { name: "Linen Body Wash", note: "Gel · 300ml", price: "$34", image: bath2 },
+      { name: "Velour Cream", note: "Lotion · 250ml", price: "$48", image: bath3 },
+      { name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26", image: bath4 },
     ],
   },
   {
@@ -111,10 +143,10 @@ const sections: Array<{
     image: tools,
     featured: { name: "Atelier Brush Set", tag: "Maison Edit", price: "$220" },
     products: [
-      { name: "Powder Brush 04", note: "Brush · Goat", price: "$58" },
-      { name: "Blending Sponge", note: "Tool · Latex-free", price: "$22" },
-      { name: "Lash Curler", note: "Steel · Polished", price: "$28" },
-      { name: "Brow Comb", note: "Brass · Lacquer", price: "$24" },
+      { name: "Powder Brush 04", note: "Brush · Goat", price: "$58", image: tools1 },
+      { name: "Blending Sponge", note: "Tool · Latex-free", price: "$22", image: tools2 },
+      { name: "Lash Curler", note: "Steel · Polished", price: "$28", image: tools3 },
+      { name: "Brow Comb", note: "Brass · Lacquer", price: "$24", image: tools4 },
     ],
   },
   {
@@ -126,10 +158,10 @@ const sections: Array<{
     image: fragrance,
     featured: { name: "Velnora No.7 — Amber Smoke", tag: "Maison Signature", price: "$185" },
     products: [
-      { name: "Iris Pavé", note: "EDP · 50ml", price: "$140" },
-      { name: "Neroli Suite", note: "EDP · 50ml", price: "$150" },
-      { name: "Rose Obscura", note: "EDP · 50ml", price: "$165" },
-      { name: "Vetiver Noir", note: "EDP · 50ml", price: "$170" },
+      { name: "Iris Pavé", note: "EDP · 50ml", price: "$140", image: fragrance1 },
+      { name: "Neroli Suite", note: "EDP · 50ml", price: "$150", image: fragrance2 },
+      { name: "Rose Obscura", note: "EDP · 50ml", price: "$165", image: fragrance3 },
+      { name: "Vetiver Noir", note: "EDP · 50ml", price: "$170", image: fragrance4 },
     ],
   },
   {
@@ -141,10 +173,10 @@ const sections: Array<{
     image: wellness,
     featured: { name: "Inner Glow Capsules", tag: "30-Day Ritual", price: "$58" },
     products: [
-      { name: "Collagen Pearl", note: "Powder · 200g", price: "$48" },
-      { name: "Hair Density", note: "Capsules · 60ct", price: "$42" },
-      { name: "Skin Hydration", note: "Capsules · 60ct", price: "$44" },
-      { name: "Calm & Clear", note: "Tincture · 30ml", price: "$52" },
+      { name: "Collagen Pearl", note: "Powder · 200g", price: "$48", image: wellness1 },
+      { name: "Hair Density", note: "Capsules · 60ct", price: "$42", image: wellness2 },
+      { name: "Skin Hydration", note: "Capsules · 60ct", price: "$44", image: wellness3 },
+      { name: "Calm & Clear", note: "Tincture · 30ml", price: "$52", image: wellness4 },
     ],
   },
   {
@@ -156,10 +188,10 @@ const sections: Array<{
     image: tech,
     featured: { name: "LumiOne LED Mask", tag: "Smart Device", price: "$420" },
     products: [
-      { name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280" },
-      { name: "Cryo Globes", note: "Tool · Steel", price: "$78" },
-      { name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140" },
-      { name: "Red Light Panel", note: "Device · Pro", price: "$520" },
+      { name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280", image: tech1 },
+      { name: "Cryo Globes", note: "Tool · Steel", price: "$78", image: tech2 },
+      { name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140", image: tech3 },
+      { name: "Red Light Panel", note: "Device · Pro", price: "$520", image: tech4 },
     ],
   },
 ];
