@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
@@ -81,12 +81,12 @@ const sections: Array<{
       description:
         "Couture-grade textures and curated color stories — from the satin matte to the molten lacquer.",
       image: makeup,
-      featured: { name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
+      featured: { id: "velvet-noir-lip-lacquer", name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
       products: [
-        { name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
-        { name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
-        { name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
-        { name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
+        { id: "cashmere-blush", name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
+        { id: "obsidian-liner", name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
+        { id: "halo-highlighter", name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
+        { id: "silk-foundation", name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
       ],
     },
     {
@@ -96,12 +96,12 @@ const sections: Array<{
       title: "Clinical poetry.",
       description: "Studied formulas, atelier-grade actives. The ritual of the considered face.",
       image: skincare,
-      featured: { name: "Hydra-Glass Serum", tag: "House Hero", price: "$92" },
+      featured: { id: "hydra-glass-serum", name: "Hydra-Glass Serum", tag: "House Hero", price: "$92" },
       products: [
-        { name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76", image: skincare1 },
-        { name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68", image: skincare2 },
-        { name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54", image: skincare3 },
-        { name: "Marble Cleanser", note: "Cream · 150ml", price: "$44", image: skincare4 },
+        { id: "retinal-0-1", name: "Retinal 0.1%", note: "Treatment · 30ml", price: "$76", image: skincare1 },
+        { id: "vitamin-c-15", name: "Vitamin C 15%", note: "Serum · 30ml", price: "$68", image: skincare2 },
+        { id: "niacinamide-veil", name: "Niacinamide Veil", note: "Essence · 50ml", price: "$54", image: skincare3 },
+        { id: "marble-cleanser", name: "Marble Cleanser", note: "Cream · 150ml", price: "$44", image: skincare4 },
       ],
     },
     {
@@ -111,12 +111,12 @@ const sections: Array<{
       title: "Precision, distilled.",
       description: "A laboratory of liquids and tools for hair that behaves like art direction.",
       image: hair,
-      featured: { name: "Bond Repair Elixir", tag: "Lab Edition", price: "$64" },
+      featured: { id: "bond-repair-elixir", name: "Bond Repair Elixir", tag: "Lab Edition", price: "$64" },
       products: [
-        { name: "Silk Press Mist", note: "Spray · 200ml", price: "$32", image: hair1 },
-        { name: "Density Shampoo", note: "Wash · 250ml", price: "$36", image: hair2 },
-        { name: "Glass Conditioner", note: "Mask · 250ml", price: "$38", image: hair3 },
-        { name: "Heat Veil", note: "Primer · 150ml", price: "$28", image: hair4 },
+        { id: "silk-press-mist", name: "Silk Press Mist", note: "Spray · 200ml", price: "$32", image: hair1 },
+        { id: "density-shampoo", name: "Density Shampoo", note: "Wash · 250ml", price: "$36", image: hair2 },
+        { id: "glass-conditioner", name: "Glass Conditioner", note: "Mask · 250ml", price: "$38", image: hair3 },
+        { id: "heat-veil", name: "Heat Veil", note: "Primer · 150ml", price: "$28", image: hair4 },
       ],
     },
     {
@@ -126,12 +126,12 @@ const sections: Array<{
       title: "Slow water.",
       description: "Spa-grade rituals: oils, salts, and skin balms designed for the long evening.",
       image: bath,
-      featured: { name: "Cashmere Body Oil", tag: "Ritual No. 4", price: "$72" },
+      featured: { id: "cashmere-body-oil", name: "Cashmere Body Oil", tag: "Ritual No. 4", price: "$72" },
       products: [
-        { name: "Mineral Soak", note: "Salt · 500g", price: "$42", image: bath1 },
-        { name: "Linen Body Wash", note: "Gel · 300ml", price: "$34", image: bath2 },
-        { name: "Velour Cream", note: "Lotion · 250ml", price: "$48", image: bath3 },
-        { name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26", image: bath4 },
+        { id: "mineral-soak", name: "Mineral Soak", note: "Salt · 500g", price: "$42", image: bath1 },
+        { id: "linen-body-wash", name: "Linen Body Wash", note: "Gel · 300ml", price: "$34", image: bath2 },
+        { id: "velour-cream", name: "Velour Cream", note: "Lotion · 250ml", price: "$48", image: bath3 },
+        { id: "hand-balm-no-1", name: "Hand Balm No.1", note: "Cream · 75ml", price: "$26", image: bath4 },
       ],
     },
     {
@@ -141,12 +141,12 @@ const sections: Array<{
       title: "The maker's hand.",
       description: "Sculpted hardware. Heirloom brushes. Instruments designed for the daily atelier.",
       image: tools,
-      featured: { name: "Atelier Brush Set", tag: "Maison Edit", price: "$220" },
+      featured: { id: "atelier-brush-set", name: "Atelier Brush Set", tag: "Maison Edit", price: "$220" },
       products: [
-        { name: "Powder Brush 04", note: "Brush · Goat", price: "$58", image: tools1 },
-        { name: "Blending Sponge", note: "Tool · Latex-free", price: "$22", image: tools2 },
-        { name: "Lash Curler", note: "Steel · Polished", price: "$28", image: tools3 },
-        { name: "Brow Comb", note: "Brass · Lacquer", price: "$24", image: tools4 },
+        { id: "powder-brush-04", name: "Powder Brush 04", note: "Brush · Goat", price: "$58", image: tools1 },
+        { id: "blending-sponge", name: "Blending Sponge", note: "Tool · Latex-free", price: "$22", image: tools2 },
+        { id: "lash-curler", name: "Lash Curler", note: "Steel · Polished", price: "$28", image: tools3 },
+        { id: "brow-comb", name: "Brow Comb", note: "Brass · Lacquer", price: "$24", image: tools4 },
       ],
     },
     {
@@ -156,12 +156,12 @@ const sections: Array<{
       title: "Air, made memorable.",
       description: "Olfactive heirlooms in cut glass — to be worn like a tailored coat.",
       image: fragrance,
-      featured: { name: "Velnora No.7 — Amber Smoke", tag: "Maison Signature", price: "$185" },
+      featured: { id: "velnora-no-7-amber-smoke", name: "Velnora No.7 — Amber Smoke", tag: "Maison Signature", price: "$185" },
       products: [
-        { name: "Iris Pavé", note: "EDP · 50ml", price: "$140", image: fragrance1 },
-        { name: "Neroli Suite", note: "EDP · 50ml", price: "$150", image: fragrance2 },
-        { name: "Rose Obscura", note: "EDP · 50ml", price: "$165", image: fragrance3 },
-        { name: "Vetiver Noir", note: "EDP · 50ml", price: "$170", image: fragrance4 },
+        { id: "iris-pave", name: "Iris Pavé", note: "EDP · 50ml", price: "$140", image: fragrance1 },
+        { id: "neroli-suite", name: "Neroli Suite", note: "EDP · 50ml", price: "$150", image: fragrance2 },
+        { id: "rose-obscura", name: "Rose Obscura", note: "EDP · 50ml", price: "$165", image: fragrance3 },
+        { id: "vetiver-noir", name: "Vetiver Noir", note: "EDP · 50ml", price: "$170", image: fragrance4 },
       ],
     },
     {
@@ -171,12 +171,12 @@ const sections: Array<{
       title: "Beauty, ingested.",
       description: "Quietly powerful supplements, considered for skin, hair, and the long arc of glow.",
       image: wellness,
-      featured: { name: "Inner Glow Capsules", tag: "30-Day Ritual", price: "$58" },
+      featured: { id: "inner-glow-capsules", name: "Inner Glow Capsules", tag: "30-Day Ritual", price: "$58" },
       products: [
-        { name: "Collagen Pearl", note: "Powder · 200g", price: "$48", image: wellness1 },
-        { name: "Hair Density", note: "Capsules · 60ct", price: "$42", image: wellness2 },
-        { name: "Skin Hydration", note: "Capsules · 60ct", price: "$44", image: wellness3 },
-        { name: "Calm & Clear", note: "Tincture · 30ml", price: "$52", image: wellness4 },
+        { id: "collagen-pearl", name: "Collagen Pearl", note: "Powder · 200g", price: "$48", image: wellness1 },
+        { id: "hair-density", name: "Hair Density", note: "Capsules · 60ct", price: "$42", image: wellness2 },
+        { id: "skin-hydration", name: "Skin Hydration", note: "Capsules · 60ct", price: "$44", image: wellness3 },
+        { id: "calm-clear", name: "Calm & Clear", note: "Tincture · 30ml", price: "$52", image: wellness4 },
       ],
     },
     {
@@ -186,19 +186,20 @@ const sections: Array<{
       title: "Light as treatment.",
       description: "LED, microcurrent, and intelligent devices — clinic-grade, dressed for the vanity.",
       image: tech,
-      featured: { name: "LumiOne LED Mask", tag: "Smart Device", price: "$420" },
+      featured: { id: "lumione-led-mask", name: "LumiOne LED Mask", tag: "Smart Device", price: "$420" },
       products: [
-        { name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280", image: tech1 },
-        { name: "Cryo Globes", note: "Tool · Steel", price: "$78", image: tech2 },
-        { name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140", image: tech3 },
-        { name: "Red Light Panel", note: "Device · Pro", price: "$520", image: tech4 },
+        { id: "microcurrent-wand", name: "Microcurrent Wand", note: "Device · 5-mode", price: "$280", image: tech1 },
+        { id: "cryo-globes", name: "Cryo Globes", note: "Tool · Steel", price: "$78", image: tech2 },
+        { id: "sonic-cleansing", name: "Sonic Cleansing", note: "Brush · USB-C", price: "$140", image: tech3 },
+        { id: "red-light-panel", name: "Red Light Panel", note: "Device · Pro", price: "$520", image: tech4 },
       ],
     },
+
   ];
 
 function Hero() {
   return (
-    <section className="relative">
+    <section id="editorial" className="relative">
       {/* Mobile: full-bleed banner */}
       <div className="relative h-[100svh] min-h-[640px] w-full lg:hidden">
         <img
@@ -218,9 +219,9 @@ function Hero() {
             A private curation of the year's most coveted objects in beauty — from the Maison's archive to your vanity.
           </p>
           <div className="mt-8">
-            <a href="#makeup" className="pill-btn bg-background text-foreground hover:bg-background/90">
+            <Link to="/category/$slug" params={{ slug: "makeup" }} className="pill-btn bg-background text-foreground hover:bg-background/90">
               Shop the Curation
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -243,9 +244,9 @@ function Hero() {
                 From the Maison's archive to your vanity.
               </p>
               <div className="mt-12 flex items-center gap-6">
-                <a href="#makeup" className="pill-btn">
+                <Link to="/category/$slug" params={{ slug: "makeup" }} className="pill-btn">
                   Shop the Curation
-                </a>
+                </Link>
                 <a href="#editorial" className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-foreground">
                   Read the Editorial
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.5} />
@@ -304,6 +305,30 @@ function Index() {
       {sections.map((s, i) => (
         <BoutiqueSection key={s.id} {...s} reverse={i % 2 === 1} />
       ))}
+
+      {/* About Section */}
+      <section id="about" className="border-t border-border/60 bg-background">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 md:py-32">
+          <Reveal>
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="eyebrow mb-6">About the Maison</p>
+              <h2 className="font-serif text-4xl leading-[1.1] text-foreground md:text-6xl">
+                Curated, never sold.
+              </h2>
+              <p className="mt-8 text-base leading-relaxed text-muted-foreground md:text-lg">
+                Velnora is not a store — it is an editorial house. Every product in our collection has been
+                hand-selected, tested, and approved by our team of beauty editors. We earn a small commission
+                through affiliate partnerships, which allows us to keep this curation free, honest, and
+                independent. No brand pays for placement. No algorithm decides what you see.
+              </p>
+              <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+                Eight chapters. One obsession. From the Maison's archive to your vanity.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

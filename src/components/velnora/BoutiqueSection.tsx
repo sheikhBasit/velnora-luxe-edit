@@ -1,7 +1,8 @@
 import { Plus } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { Link } from "@tanstack/react-router";
 
-export type Product = { name: string; note: string; price: string; image: string };
+export type Product = { id?: string; name: string; note: string; price: string; image: string };
 
 export function BoutiqueSection({
   id,
@@ -20,7 +21,7 @@ export function BoutiqueSection({
   title: string;
   description: string;
   image: string;
-  featured: { name: string; tag: string; price: string };
+  featured: { id?: string; name: string; tag: string; price: string };
   products: Product[];
   reverse?: boolean;
 }) {
@@ -57,12 +58,22 @@ export function BoutiqueSection({
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent p-6 md:p-10">
                 <div className="text-background">
                   <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">{featured.tag}</p>
-                  <h3 className="mt-2 font-serif text-2xl md:text-4xl">{featured.name}</h3>
+                  {featured.id ? (
+                    <Link to="/product/$id" params={{ id: featured.id }}>
+                      <h3 className="mt-2 font-serif text-2xl md:text-4xl hover:underline">{featured.name}</h3>
+                    </Link>
+                  ) : (
+                    <h3 className="mt-2 font-serif text-2xl md:text-4xl">{featured.name}</h3>
+                  )}
                   <p className="mt-2 text-sm opacity-90">{featured.price}</p>
                 </div>
-                <button className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground">
+                <Link
+                  to="/category/$slug"
+                  params={{ slug: id }}
+                  className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground"
+                >
                   Shop Now
-                </button>
+                </Link>
               </div>
             </article>
           </Reveal>
@@ -71,31 +82,65 @@ export function BoutiqueSection({
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               {products.map((p, i) => (
                 <Reveal key={p.name} delay={i * 80}>
-                  <article className="group flex h-full flex-col">
-                    <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        loading="lazy"
-                        width={768}
-                        height={768}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <button
-                        aria-label={`Quick add ${p.name}`}
-                        className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background"
-                      >
-                        <Plus className="h-4 w-4" strokeWidth={1.8} />
-                      </button>
-                    </div>
-                    <div className="mt-4 flex items-baseline justify-between gap-2">
-                      <div>
-                        <h4 className="font-serif text-base text-foreground">{p.name}</h4>
-                        <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{p.note}</p>
+                  {p.id ? (
+                    <article className="group relative flex h-full flex-col">
+                      <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                        <Link to="/product/$id" params={{ id: p.id }} className="absolute inset-0 h-full w-full">
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            loading="lazy"
+                            width={768}
+                            height={768}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </Link>
+                        <Link
+                          to="/category/$slug"
+                          params={{ slug: id }}
+                          aria-label={`View ${p.name} in category`}
+                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background"
+                        >
+                          <Plus className="h-4 w-4" strokeWidth={1.8} />
+                        </Link>
                       </div>
-                      <span className="font-sans text-sm text-foreground">{p.price}</span>
-                    </div>
-                  </article>
+                      <div className="mt-4 flex items-baseline justify-between gap-2">
+                        <div>
+                          <Link to="/product/$id" params={{ id: p.id }} className="hover:underline">
+                            <h4 className="font-serif text-base text-foreground">{p.name}</h4>
+                          </Link>
+                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{p.note}</p>
+                        </div>
+                        <span className="font-sans text-sm text-foreground">{p.price}</span>
+                      </div>
+                    </article>
+                  ) : (
+                    <article className="group flex h-full flex-col">
+                      <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          width={768}
+                          height={768}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <button
+                          aria-label={`Quick add ${p.name}`}
+                          className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background"
+                        >
+                          <Plus className="h-4 w-4" strokeWidth={1.8} />
+                        </button>
+                      </div>
+                      <div className="mt-4 flex items-baseline justify-between gap-2">
+                        <div>
+                          <h4 className="font-serif text-base text-foreground">{p.name}</h4>
+                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{p.note}</p>
+                        </div>
+                        <span className="font-sans text-sm text-foreground">{p.price}</span>
+                      </div>
+                    </article>
+                  )}
                 </Reveal>
               ))}
             </div>
@@ -105,3 +150,4 @@ export function BoutiqueSection({
     </section>
   );
 }
+

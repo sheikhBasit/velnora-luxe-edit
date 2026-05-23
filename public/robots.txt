@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://velnora-luxe-edit.vercel.app/sitemap.xml

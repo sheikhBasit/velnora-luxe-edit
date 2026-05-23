@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ShoppingBag } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function Header() {
   const [solid, setSolid] = useState(false);
@@ -20,13 +21,13 @@ export function Header() {
       }}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-12">
-        <a href="#" className="font-serif text-2xl tracking-[0.2em] text-foreground md:text-[28px]">
+        <a href="/" className="font-serif text-2xl tracking-[0.2em] text-foreground md:text-[28px]">
           VELNORA
         </a>
         <nav className="hidden items-center gap-10 md:flex">
-          <a href="#makeup" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">Shop</a>
-          <a href="#about" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">About</a>
-          <a href="#editorial" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">Editorial</a>
+          <Link to="/category/$slug" params={{ slug: "makeup" }} className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">Shop</Link>
+          <a href="/#about" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">About</a>
+          <a href="/#editorial" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">Editorial</a>
         </nav>
         <button
           aria-label="Shopping bag"

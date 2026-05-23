@@ -30,10 +30,10 @@ export function Footer() {
         </form>
 
         <nav className="mt-14 flex flex-wrap justify-center gap-x-10 gap-y-4 text-[11px] uppercase tracking-[0.28em] text-background/70">
-          <a href="#" className="hover:text-background transition">Shop</a>
-          <a href="#" className="hover:text-background transition">About</a>
-          <a href="#" className="hover:text-background transition">Disclosure</a>
-          <a href="#" className="hover:text-background transition">Contact</a>
+          <a href="/category/makeup" className="hover:text-background transition">Shop</a>
+          <a href="/#about" className="hover:text-background transition">About</a>
+          <a href="/#disclosure" className="hover:text-background transition">Disclosure</a>
+          <a href="/#editorial" className="hover:text-background transition">Contact</a>
         </nav>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
