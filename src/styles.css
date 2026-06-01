@@ -253,14 +253,21 @@
   }
 }
 
-@media (max-width: 768px) {
-  /* Target the CTA buttons within the image banner / anti-gravity sections */
-  .anti-gravity-section .cta-button,
-  [class*="banner"] a[href*="shop"],
-  .image-overlay-button {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border: 1px solid #000000 !important;
-    opacity: 1 !important;
-  }
+/* Target the CTA buttons within the image banner / anti-gravity sections on both mobile and web */
+.anti-gravity-section .cta-button,
+[class*="banner"] a[href*="shop"],
+.image-overlay-button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
+  opacity: 1 !important;
+}
+
+.anti-gravity-section .cta-button:hover,
+[class*="banner"] a[href*="shop"]:hover,
+.image-overlay-button:hover {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #1a1a1a !important;
+  transform: translateY(-1px);
 }
