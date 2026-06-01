@@ -29,7 +29,9 @@ function CategoryPage() {
       <Header />
       <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <Reveal>
-          <p className="eyebrow mb-4">{category.index} — {category.label}</p>
+          <p className="eyebrow mb-4">
+            {category.index} — {category.label}
+          </p>
           <h1 className="font-serif text-5xl md:text-7xl mb-6">The {category.label}</h1>
           <p className="text-muted-foreground max-w-lg mb-16">
             Curated selections, editor-tested and affiliate-linked to Amazon.

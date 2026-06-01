@@ -10,9 +10,7 @@ const isVercel = !!process.env.VERCEL;
 
 // On Vercel, load the nitro/vite plugin for serverless deployment.
 // On Cloudflare, the lovable wrapper handles @cloudflare/vite-plugin automatically.
-const nitroPlugin = isVercel
-  ? await import("nitro/vite").then((m) => m.nitro())
-  : null;
+const nitroPlugin = isVercel ? await import("nitro/vite").then((m) => m.nitro()) : null;
 
 export default defineConfig({
   tanstackStart: {

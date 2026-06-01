@@ -47,11 +47,7 @@ function ProductPage() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="aspect-square overflow-hidden rounded-sm bg-muted">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-full w-full object-cover"
-            />
+            <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col justify-center">
             {product.badge && <p className="eyebrow mb-4">{product.badge}</p>}

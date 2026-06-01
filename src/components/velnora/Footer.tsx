@@ -7,7 +7,8 @@ export function Footer() {
         <p className="text-[10px] uppercase tracking-[0.4em] text-background/50">The House of</p>
         <h2 className="mt-6 font-serif text-5xl tracking-[0.18em] md:text-7xl">VELNORA</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-background/70">
-          Join the Glow List. Private editorials, first looks, and curator's notes — delivered with intention.
+          Join the Glow List. Private editorials, first looks, and curator's notes — delivered with
+          intention.
         </p>
 
         <form
@@ -30,15 +31,25 @@ export function Footer() {
         </form>
 
         <nav className="mt-14 flex flex-wrap justify-center gap-x-10 gap-y-4 text-[11px] uppercase tracking-[0.28em] text-background/70">
-          <a href="/category/makeup" className="hover:text-background transition">Shop</a>
-          <a href="/#about" className="hover:text-background transition">About</a>
-          <a href="/#disclosure" className="hover:text-background transition">Disclosure</a>
-          <a href="/#editorial" className="hover:text-background transition">Contact</a>
+          <a href="/category/makeup" className="hover:text-background transition">
+            Shop
+          </a>
+          <a href="/#about" className="hover:text-background transition">
+            About
+          </a>
+          <a href="/#disclosure" className="hover:text-background transition">
+            Disclosure
+          </a>
+          <a href="/#editorial" className="hover:text-background transition">
+            Contact
+          </a>
         </nav>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
           <p>Amazon Associate &amp; Skimlinks partner. Earnings via qualifying purchases.</p>
-          <p className="mt-2">© {new Date().getFullYear()} Velnora — A Curated House of Beauty. All rights reserved.</p>
+          <p className="mt-2">
+            © {new Date().getFullYear()} Velnora — A Curated House of Beauty. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -96,7 +96,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  const gaId = typeof window !== "undefined" ? (window as any).VITE_GA_TRACKING_ID || import.meta.env.VITE_GA_TRACKING_ID : import.meta.env.VITE_GA_TRACKING_ID;
+  const gaId =
+    typeof window !== "undefined"
+      ? (window as any).VITE_GA_TRACKING_ID || import.meta.env.VITE_GA_TRACKING_ID
+      : import.meta.env.VITE_GA_TRACKING_ID;
 
   return (
     <html lang="en">

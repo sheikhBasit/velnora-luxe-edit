@@ -26,13 +26,18 @@ export function BoutiqueSection({
   reverse?: boolean;
 }) {
   return (
-    <section id={id} className="border-t border-border/60 bg-background">
+    <section
+      id={id}
+      className="border-t border-border/60 bg-background anti-gravity-section boutique-banner"
+    >
       <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 md:py-32">
         {/* Section header */}
         <Reveal>
           <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="eyebrow mb-4">{index} — {eyebrow}</p>
+              <p className="eyebrow mb-4">
+                {index} — {eyebrow}
+              </p>
               <h2 className="font-serif text-4xl leading-[1.05] text-foreground md:text-6xl lg:text-7xl">
                 {title}
               </h2>
@@ -44,7 +49,9 @@ export function BoutiqueSection({
         </Reveal>
 
         {/* Featured 60 / Grid 40 */}
-        <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
+        <div
+          className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}
+        >
           <Reveal className="lg:col-span-3 lg:[direction:ltr]">
             <article className="group relative overflow-hidden rounded-sm bg-muted">
               <div className="aspect-[4/5] w-full overflow-hidden md:aspect-[5/4]">
@@ -57,10 +64,14 @@ export function BoutiqueSection({
               </div>
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent p-6 md:p-10">
                 <div className="text-background">
-                  <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">{featured.tag}</p>
+                  <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">
+                    {featured.tag}
+                  </p>
                   {featured.id ? (
                     <Link to="/product/$id" params={{ id: featured.id }}>
-                      <h3 className="mt-2 font-serif text-2xl md:text-4xl hover:underline">{featured.name}</h3>
+                      <h3 className="mt-2 font-serif text-2xl md:text-4xl hover:underline">
+                        {featured.name}
+                      </h3>
                     </Link>
                   ) : (
                     <h3 className="mt-2 font-serif text-2xl md:text-4xl">{featured.name}</h3>
@@ -70,7 +81,7 @@ export function BoutiqueSection({
                 <Link
                   to="/category/$slug"
                   params={{ slug: id }}
-                  className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground"
+                  className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground cta-button image-overlay-button"
                 >
                   Shop Now
                 </Link>
@@ -85,7 +96,11 @@ export function BoutiqueSection({
                   {p.id ? (
                     <article className="group relative flex h-full flex-col">
                       <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                        <Link to="/product/$id" params={{ id: p.id }} className="absolute inset-0 h-full w-full">
+                        <Link
+                          to="/product/$id"
+                          params={{ id: p.id }}
+                          className="absolute inset-0 h-full w-full"
+                        >
                           <img
                             src={p.image}
                             alt={p.name}
@@ -109,7 +124,9 @@ export function BoutiqueSection({
                           <Link to="/product/$id" params={{ id: p.id }} className="hover:underline">
                             <h4 className="font-serif text-base text-foreground">{p.name}</h4>
                           </Link>
-                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{p.note}</p>
+                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                            {p.note}
+                          </p>
                         </div>
                         <span className="font-sans text-sm text-foreground">{p.price}</span>
                       </div>
@@ -135,7 +152,9 @@ export function BoutiqueSection({
                       <div className="mt-4 flex items-baseline justify-between gap-2">
                         <div>
                           <h4 className="font-serif text-base text-foreground">{p.name}</h4>
-                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{p.note}</p>
+                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                            {p.note}
+                          </p>
                         </div>
                         <span className="font-sans text-sm text-foreground">{p.price}</span>
                       </div>
@@ -150,4 +169,3 @@ export function BoutiqueSection({
     </section>
   );
 }
-
