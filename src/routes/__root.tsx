@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
+import { CartProvider } from "@/hooks/use-cart";
 
 import appCss from "../styles.css?url";
 
@@ -87,6 +88,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "icon",
+        href: "/favicon.svg",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -135,7 +140,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <CartProvider>
+        <Outlet />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
