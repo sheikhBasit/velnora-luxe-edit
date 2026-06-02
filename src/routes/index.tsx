@@ -412,7 +412,13 @@ function Hero() {
           height={1600}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-foreground/20 to-foreground/80" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.75) 100%)",
+          }}
+        />
         <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-16 pt-28 text-background">
           <p className="text-[10px] uppercase tracking-[0.4em] opacity-80">
             Maison Velnora · Volume X
@@ -489,6 +495,13 @@ function Hero() {
             width={1280}
             height={1600}
             className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.75) 100%)",
+            }}
           />
           <div className="absolute bottom-8 right-8 rounded-full bg-background/90 px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-foreground backdrop-blur">
             Cover · No. 01

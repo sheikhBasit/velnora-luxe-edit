@@ -1,6 +1,8 @@
 import { Plus } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Link } from "@tanstack/react-router";
+import { useCart } from "@/hooks/use-cart";
+import { getProduct } from "@/data/products";
 
 export type Product = { id?: string; name: string; note: string; price: string; image: string };
 
@@ -25,6 +27,50 @@ export function BoutiqueSection({
   products: Product[];
   reverse?: boolean;
 }) {
+  const { addToCart } = useCart();
+
+  const handleAddProduct = (p: Product) => {
+    if (p.id) {
+      const fullProduct = getProduct(p.id);
+      if (fullProduct) {
+        addToCart({
+          id: fullProduct.id,
+          name: fullProduct.name,
+          note: fullProduct.note,
+          price: fullProduct.price,
+          image: fullProduct.image,
+          amazonUrl: fullProduct.amazonUrl,
+        });
+        return;
+      }
+    }
+    // Fallback if product has no id or is not found in database
+    addToCart({
+      id: p.id || p.name.toLowerCase().replace(/\s+/g, "-"),
+      name: p.name,
+      note: p.note,
+      price: p.price,
+      image: p.image,
+      amazonUrl: "https://www.amazon.com/dp/B0716KGFKK?tag=velnora-luxe-20",
+    });
+  };
+
+  const handleAddFeatured = () => {
+    if (featured.id) {
+      const fullProduct = getProduct(featured.id);
+      if (fullProduct) {
+        addToCart({
+          id: fullProduct.id,
+          name: fullProduct.name,
+          note: fullProduct.note, // Wait, featured has tag but db has note (e.g. Liquid · Deep Plum)
+          price: fullProduct.price,
+          image: fullProduct.image,
+          amazonUrl: fullProduct.amazonUrl,
+        });
+      }
+    }
+  };
+
   return (
     <section
       id={id}
@@ -62,7 +108,15 @@ export function BoutiqueSection({
                   className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                 />
               </div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent p-6 md:p-10">
+              {/* Background gradient overlay covering the entire card to protect small white tags */}
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
+                }}
+              />
+              <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 p-6 md:p-10">
                 <div className="text-background">
                   <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">
                     {featured.tag}
@@ -78,13 +132,24 @@ export function BoutiqueSection({
                   )}
                   <p className="mt-2 text-sm opacity-90">{featured.price}</p>
                 </div>
-                <Link
-                  to="/category/$slug"
-                  params={{ slug: id }}
-                  className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground cta-button image-overlay-button"
-                >
-                  Shop Now
-                </Link>
+                <div className="flex gap-3 items-center">
+                  <Link
+                    to="/category/$slug"
+                    params={{ slug: id }}
+                    className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground cta-button image-overlay-button"
+                  >
+                    Shop Now
+                  </Link>
+                  {featured.id && (
+                    <button
+                      onClick={handleAddFeatured}
+                      aria-label={`Add ${featured.name} to bag`}
+                      className="flex h-11 w-11 items-center justify-center rounded-full border border-background/30 text-background transition hover:bg-background hover:text-foreground cursor-pointer"
+                    >
+                      <Plus className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                  )}
+                </div>
               </div>
             </article>
           </Reveal>
@@ -110,14 +175,20 @@ export function BoutiqueSection({
                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </Link>
-                        <Link
-                          to="/category/$slug"
-                          params={{ slug: id }}
-                          aria-label={`View ${p.name} in category`}
-                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background"
+                        <div
+                          className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
+                          style={{
+                            background:
+                              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
+                          }}
+                        />
+                        <button
+                          onClick={() => handleAddProduct(p)}
+                          aria-label={`Add ${p.name} to bag`}
+                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background cursor-pointer"
                         >
                           <Plus className="h-4 w-4" strokeWidth={1.8} />
-                        </Link>
+                        </button>
                       </div>
                       <div className="mt-4 flex items-baseline justify-between gap-2">
                         <div>
@@ -141,10 +212,16 @@ export function BoutiqueSection({
                           width={768}
                           height={768}
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <button
-                          aria-label={`Quick add ${p.name}`}
-                          className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background"
+                        />                        <div
+                          className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
+                          style={{
+                            background:
+                              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
+                          }}
+                        />                        <button
+                          onClick={() => handleAddProduct(p)}
+                          aria-label={`Add ${p.name} to bag`}
+                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background cursor-pointer"
                         >
                           <Plus className="h-4 w-4" strokeWidth={1.8} />
                         </button>
