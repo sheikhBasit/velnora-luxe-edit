@@ -547,7 +547,7 @@ function Index() {
 
       {/* About Section */}
       <section id="about" className="border-t border-border/60 bg-background">
-        <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 md:py-32">
+        <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-32">
           <Reveal>
             <div className="mx-auto max-w-3xl text-center">
               <p className="eyebrow mb-6">About the Maison</p>

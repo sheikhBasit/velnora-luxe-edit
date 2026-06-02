@@ -71,12 +71,17 @@ export function BoutiqueSection({
     }
   };
 
+  const sectionAnchor = eyebrow
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
   return (
     <section
-      id={id}
+      id={sectionAnchor}
       className="border-t border-border/60 bg-background anti-gravity-section boutique-banner"
     >
-      <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-32">
         {/* Section header */}
         <Reveal>
           <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
@@ -116,7 +121,7 @@ export function BoutiqueSection({
                     "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
                 }}
               />
-              <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 p-6 md:p-10">
+              <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-start gap-4 p-6 md:p-10">
                 <div className="text-background">
                   <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">
                     {featured.tag}
@@ -132,23 +137,13 @@ export function BoutiqueSection({
                   )}
                   <p className="mt-2 text-sm opacity-90">{featured.price}</p>
                 </div>
-                <div className="flex gap-3 items-center">
-                  <Link
-                    to="/category/$slug"
-                    params={{ slug: id }}
+                <div className="ml-auto flex items-center">
+                  <a
+                    href={`#${sectionAnchor}`}
                     className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground cta-button image-overlay-button"
                   >
                     Shop Now
-                  </Link>
-                  {featured.id && (
-                    <button
-                      onClick={handleAddFeatured}
-                      aria-label={`Add ${featured.name} to bag`}
-                      className="flex h-11 w-11 items-center justify-center rounded-full border border-background/30 text-background transition hover:bg-background hover:text-foreground cursor-pointer"
-                    >
-                      <Plus className="h-4 w-4" strokeWidth={1.5} />
-                    </button>
-                  )}
+                  </a>
                 </div>
               </div>
             </article>
