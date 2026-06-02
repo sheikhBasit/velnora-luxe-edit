@@ -416,10 +416,10 @@ function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.75) 100%)",
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.85) 100%)",
           }}
         />
-        <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-16 pt-28 text-background">
+        <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 text-background">
           <p className="text-[10px] uppercase tracking-[0.4em] opacity-80">
             Maison Velnora · Volume X
           </p>
