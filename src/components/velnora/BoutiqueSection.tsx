@@ -71,14 +71,9 @@ export function BoutiqueSection({
     }
   };
 
-  const sectionAnchor = eyebrow
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
   return (
     <section
-      id={sectionAnchor}
+      id={id}
       className="border-t border-border/60 bg-background anti-gravity-section boutique-banner"
     >
       <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-32">
@@ -138,12 +133,14 @@ export function BoutiqueSection({
                   <p className="mt-2 text-sm opacity-90">{featured.price}</p>
                 </div>
                 <div className="ml-auto flex items-center">
-                  <a
-                    href={`#${sectionAnchor}`}
+                  <Link
+                    to="/shop"
+                    params={{}}
+                    search={{ category: id }}
                     className="pill-btn pill-btn-outline border-background text-background hover:bg-background hover:text-foreground cta-button image-overlay-button"
                   >
                     Shop Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </article>
