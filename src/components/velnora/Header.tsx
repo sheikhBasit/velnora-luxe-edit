@@ -22,15 +22,19 @@ export function Header() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 pointer-events-auto"
         style={{
-          backgroundColor: solid ? "var(--color-background)" : "transparent",
+          backgroundColor: solid ? "var(--color-background)" : "rgba(255,255,255,0.78)",
           borderBottom: solid ? "1px solid var(--color-border)" : "1px solid transparent",
-          backdropFilter: solid ? "saturate(140%) blur(8px)" : "none",
+          backdropFilter: "saturate(140%) blur(12px)",
         }}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-12">
-          <a href="/" className="font-serif text-2xl tracking-[0.2em] text-foreground md:text-[28px]">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-12">
+          <Link
+            to="/"
+            className="font-serif text-2xl tracking-[0.2em] text-foreground md:text-[28px]"
+            aria-label="Velnora homepage"
+          >
             VELNORA
-          </a>
+          </Link>
           <nav className="hidden items-center gap-10 md:flex">
             <Link
               to="/category/$slug"
@@ -65,6 +69,21 @@ export function Header() {
           </button>
         </div>
       </header>
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-3 md:hidden">
+        <div className="flex items-center gap-3 rounded-full border border-foreground/10 bg-[#f4f0e6]/70 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-foreground/90 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+          <Link to="/" className="transition hover:text-foreground">
+            Editorial
+          </Link>
+          <span className="text-foreground/50">•</span>
+          <Link to="/shop" className="transition hover:text-foreground">
+            Shop
+          </Link>
+          <span className="text-foreground/50">•</span>
+          <a href="/shop#search" className="transition hover:text-foreground">
+            Search
+          </a>
+        </div>
+      </nav>
       <CartDrawer />
     </>
   );
