@@ -30,7 +30,7 @@ function ShopPage() {
   const products = getProductsByCategory(selectedCategory.id);
 
   return (
-    <main className="bg-background text-foreground min-h-screen">
+    <main className="bg-background text-foreground">
       <Header />
       <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <Reveal>
@@ -58,7 +58,7 @@ function ShopPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">

@@ -5,6 +5,7 @@ import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
 import { Link } from "@tanstack/react-router";
 import { ShoppingBag, ExternalLink } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 
 export const Route = createFileRoute("/category/$slug")({
   component: CategoryPage,
@@ -23,9 +24,10 @@ export const Route = createFileRoute("/category/$slug")({
 
 function CategoryPage() {
   const { category, products } = Route.useLoaderData();
+  const { addToCart } = useCart();
 
   return (
-    <main className="bg-background text-foreground min-h-screen">
+    <main className="bg-background text-foreground">
       <Header />
       <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <Reveal>
@@ -55,7 +57,7 @@ function CategoryPage() {
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
@@ -79,14 +81,32 @@ function CategoryPage() {
                 </Link>
                 <div className="mt-auto flex items-center justify-between gap-3">
                   <span className="text-sm">{product.price}</span>
-                  <a
-                    href={product.amazonUrl}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
-                  >
-                    Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() =>
+                        addToCart({
+                          id: product.id,
+                          name: product.name,
+                          note: product.note,
+                          price: product.price,
+                          image: product.image,
+                          amazonUrl: product.amazonUrl,
+                        })
+                      }
+                      aria-label={`Add ${product.name} to bag`}
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/20 text-foreground transition hover:bg-foreground hover:text-background cursor-pointer"
+                    >
+                      <ShoppingBag className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </button>
+                    <a
+                      href={product.amazonUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                    >
+                      Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+                    </a>
+                  </div>
                 </div>
               </article>
             </Reveal>
