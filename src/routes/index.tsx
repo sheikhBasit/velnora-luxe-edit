@@ -538,7 +538,7 @@ function Marquee() {
 function Index() {
   return (
     <main className="bg-background text-foreground">
-      <Header />
+      <Header hideMobileBottomNav />
       <Hero />
       <Marquee />
       {sections.map((s, i) => (

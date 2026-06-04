@@ -31,7 +31,7 @@ function ShopPage() {
 
   return (
     <main className="bg-background text-foreground">
-      <Header />
+      <Header hideMobileBottomNav />
       <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
         <Reveal>
           <p className="eyebrow mb-4">

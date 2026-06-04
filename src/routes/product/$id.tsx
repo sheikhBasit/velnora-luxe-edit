@@ -3,6 +3,7 @@ import { getProduct } from "@/data/products";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { ExternalLink, Check, ArrowLeft } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 
 export const Route = createFileRoute("/product/$id")({
   component: ProductPage,
@@ -33,6 +34,8 @@ export const Route = createFileRoute("/product/$id")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
+  const { addToCart } = useCart();
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Header />
@@ -65,15 +68,32 @@ function ProductPage() {
                 </li>
               ))}
             </ul>
-            {/* THE MONEY BUTTON */}
-            <a
-              href={product.amazonUrl}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="pill-btn inline-flex items-center gap-2 w-fit"
-            >
-              Shop on Amazon <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
-            </a>
+            {/* THE ACTION BUTTONS */}
+            <div className="flex flex-wrap gap-4 items-center">
+              <button
+                onClick={() =>
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    note: product.note,
+                    price: product.price,
+                    image: product.image,
+                    amazonUrl: product.amazonUrl,
+                  })
+                }
+                className="pill-btn pill-btn-outline inline-flex items-center gap-2 w-fit cursor-pointer"
+              >
+                Add to Bag
+              </button>
+              <a
+                href={product.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="pill-btn inline-flex items-center gap-2 w-fit"
+              >
+                Shop on Amazon <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
+              </a>
+            </div>
             <p className="mt-4 text-[10px] text-muted-foreground">
               As an Amazon Associate, Velnora earns from qualifying purchases.
             </p>

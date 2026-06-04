@@ -69,21 +69,6 @@ export function Header() {
           </button>
         </div>
       </header>
-      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-3 md:hidden">
-        <div className="flex items-center gap-3 rounded-full border border-foreground/10 bg-[#f4f0e6]/70 px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-foreground/90 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
-          <Link to="/" className="transition hover:text-foreground">
-            Editorial
-          </Link>
-          <span className="text-foreground/50">•</span>
-          <Link to="/shop" className="transition hover:text-foreground">
-            Shop
-          </Link>
-          <span className="text-foreground/50">•</span>
-          <a href="/shop#search" className="transition hover:text-foreground">
-            Search
-          </a>
-        </div>
-      </nav>
       <CartDrawer />
     </>
   );

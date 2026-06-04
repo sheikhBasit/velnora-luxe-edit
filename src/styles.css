@@ -272,3 +272,15 @@
   border-color: #1a1a1a !important;
   transform: translateY(-1px);
 }
+
+/* Hide mobile-only bottom floating nav containing Editorial / Shop / Search */
+@media (max-width: 768px) {
+  .mobile-bottom-nav,
+  .bottom-navigation,
+  .nav-bottom,
+  .bottom-nav,
+  nav:has(a[href*="#editorial"]):has(a[href*="/shop"]),
+  nav:has(a[href*="#editorial"]):has(button[aria-label*="Search"]) {
+    display: none !important;
+  }
+}
