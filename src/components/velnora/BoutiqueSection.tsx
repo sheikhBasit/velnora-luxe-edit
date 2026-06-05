@@ -1,10 +1,17 @@
-import { Plus } from "lucide-react";
-import { Reveal } from "./Reveal";
+import { useState } from "react";
+import { ArrowUpRight, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useCart } from "@/hooks/use-cart";
-import { getProduct } from "@/data/products";
+import { getProduct, Product } from "@/data/products";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Reveal } from "./Reveal";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
-export type Product = { id?: string; name: string; note: string; price: string; image: string };
+export type ProductPreview = Pick<Product, "id" | "name" | "note" | "price" | "image">;
 
 export function BoutiqueSection({
   id,
@@ -24,51 +31,30 @@ export function BoutiqueSection({
   description: string;
   image: string;
   featured: { id?: string; name: string; tag: string; price: string };
-  products: Product[];
+  products: ProductPreview[];
   reverse?: boolean;
 }) {
-  const { addToCart } = useCart();
+  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const isMobile = useIsMobile();
 
-  const handleAddProduct = (p: Product) => {
-    if (p.id) {
-      const fullProduct = getProduct(p.id);
-      if (fullProduct) {
-        addToCart({
-          id: fullProduct.id,
-          name: fullProduct.name,
-          note: fullProduct.note,
-          price: fullProduct.price,
-          image: fullProduct.image,
-          amazonUrl: fullProduct.amazonUrl,
-        });
-        return;
-      }
-    }
-    // Fallback if product has no id or is not found in database
-    addToCart({
-      id: p.id || p.name.toLowerCase().replace(/\s+/g, "-"),
-      name: p.name,
-      note: p.note,
-      price: p.price,
-      image: p.image,
-      amazonUrl: "https://www.amazon.com/dp/B0716KGFKK?tag=velnora-luxe-20",
-    });
-  };
+  const openProduct = (product: ProductPreview) => {
+    const fullProduct = product.id ? getProduct(product.id) : null;
 
-  const handleAddFeatured = () => {
-    if (featured.id) {
-      const fullProduct = getProduct(featured.id);
-      if (fullProduct) {
-        addToCart({
-          id: fullProduct.id,
-          name: fullProduct.name,
-          note: fullProduct.note, // Wait, featured has tag but db has note (e.g. Liquid · Deep Plum)
-          price: fullProduct.price,
-          image: fullProduct.image,
-          amazonUrl: fullProduct.amazonUrl,
-        });
-      }
-    }
+    setActiveProduct(
+      fullProduct ?? {
+        id: product.id || product.name.toLowerCase().replace(/\s+/g, "-"),
+        name: product.name,
+        note: product.note,
+        price: product.price,
+        image: product.image,
+        category: id,
+        amazonUrl: "#",
+        description: product.note,
+        features: [],
+      },
+    );
+    setDrawerOpen(true);
   };
 
   return (
@@ -77,7 +63,6 @@ export function BoutiqueSection({
       className="border-t border-border/60 bg-background anti-gravity-section boutique-banner"
     >
       <div className="mx-auto max-w-[1400px] px-6 py-16 md:px-12 md:py-32">
-        {/* Section header */}
         <Reveal>
           <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
             <div>
@@ -94,7 +79,6 @@ export function BoutiqueSection({
           </div>
         </Reveal>
 
-        {/* Featured 60 / Grid 40 */}
         <div
           className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}
         >
@@ -108,7 +92,6 @@ export function BoutiqueSection({
                   className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                 />
               </div>
-              {/* Background gradient overlay covering the entire card to protect small white tags */}
               <div
                 className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
                 style={{
@@ -118,9 +101,7 @@ export function BoutiqueSection({
               />
               <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-start gap-4 p-6 md:p-10">
                 <div className="text-background">
-                  <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">
-                    {featured.tag}
-                  </p>
+                  <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">{featured.tag}</p>
                   {featured.id ? (
                     <Link to="/product/$id" params={{ id: featured.id }}>
                       <h3 className="mt-2 font-serif text-2xl md:text-4xl hover:underline">
@@ -148,25 +129,24 @@ export function BoutiqueSection({
 
           <div className="lg:col-span-2 lg:[direction:ltr]">
             <div className="grid grid-cols-2 gap-4 md:gap-6">
-              {products.map((p, i) => (
-                <Reveal key={p.name} delay={i * 80}>
-                  {p.id ? (
-                    <article className="group relative flex h-full flex-col">
+              {products.map((product, index) => (
+                <Reveal key={product.name} delay={index * 80}>
+                  <article className="group h-full">
+                    <button
+                      type="button"
+                      onClick={() => openProduct(product)}
+                      aria-label={`View details for ${product.name}`}
+                      className="group flex h-full w-full flex-col text-left"
+                    >
                       <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                        <Link
-                          to="/product/$id"
-                          params={{ id: p.id }}
-                          className="absolute inset-0 h-full w-full"
-                        >
-                          <img
-                            src={p.image}
-                            alt={p.name}
-                            loading="lazy"
-                            width={768}
-                            height={768}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        </Link>
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          width={768}
+                          height={768}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
                         <div
                           className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
                           style={{
@@ -174,67 +154,97 @@ export function BoutiqueSection({
                               "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
                           }}
                         />
-                        <button
-                          onClick={() => handleAddProduct(p)}
-                          aria-label={`Add ${p.name} to bag`}
-                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background cursor-pointer"
-                        >
-                          <Plus className="h-4 w-4" strokeWidth={1.8} />
-                        </button>
+                        <span className="absolute bottom-3 right-3 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-background/95 text-foreground shadow-sm ring-1 ring-foreground/10 transition group-hover:bg-foreground group-hover:text-background">
+                          <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
+                        </span>
                       </div>
                       <div className="mt-4 flex items-baseline justify-between gap-2">
                         <div>
-                          <Link to="/product/$id" params={{ id: p.id }} className="hover:underline">
-                            <h4 className="font-serif text-base text-foreground">{p.name}</h4>
-                          </Link>
+                          <h4 className="font-serif text-base text-foreground">{product.name}</h4>
                           <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                            {p.note}
+                            {product.note}
                           </p>
                         </div>
-                        <span className="font-sans text-sm text-foreground">{p.price}</span>
+                        <span className="font-sans text-sm text-foreground">{product.price}</span>
                       </div>
-                    </article>
-                  ) : (
-                    <article className="group flex h-full flex-col">
-                      <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          loading="lazy"
-                          width={768}
-                          height={768}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />                        <div
-                          className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-95"
-                          style={{
-                            background:
-                              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0.8) 90%)",
-                          }}
-                        />                        <button
-                          onClick={() => handleAddProduct(p)}
-                          aria-label={`Add ${p.name} to bag`}
-                          className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground shadow-md transition hover:bg-foreground hover:text-background cursor-pointer"
-                        >
-                          <Plus className="h-4 w-4" strokeWidth={1.8} />
-                        </button>
-                      </div>
-                      <div className="mt-4 flex items-baseline justify-between gap-2">
-                        <div>
-                          <h4 className="font-serif text-base text-foreground">{p.name}</h4>
-                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                            {p.note}
-                          </p>
-                        </div>
-                        <span className="font-sans text-sm text-foreground">{p.price}</span>
-                      </div>
-                    </article>
-                  )}
+                    </button>
+                  </article>
                 </Reveal>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      <Sheet open={drawerOpen} onOpenChange={(open) => {
+        setDrawerOpen(open);
+        if (!open) setActiveProduct(null);
+      }}>
+        <SheetContent side={isMobile ? "top" : "right"} className="max-w-[92vw] md:max-w-[46rem] p-6 md:p-8">
+          {activeProduct ? (
+            <div className="grid gap-6 md:grid-cols-[1.05fr_0.95fr]">
+              <div className="overflow-hidden rounded-[32px] bg-muted">
+                <img
+                  src={activeProduct.image}
+                  alt={activeProduct.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex min-h-full flex-col justify-between gap-6">
+                <div className="space-y-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                        {activeProduct.note}
+                      </p>
+                      <SheetTitle className="mt-3 font-serif text-4xl leading-tight text-foreground">
+                        {activeProduct.name}
+                      </SheetTitle>
+                    </div>
+                    <SheetClose className="rounded-full border border-border/50 bg-background p-3 text-foreground transition hover:bg-foreground hover:text-background">
+                      <X className="h-4 w-4" />
+                      <span className="sr-only">Close</span>
+                    </SheetClose>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {activeProduct.description}
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="rounded-[28px] border border-border/30 bg-background/90 p-6">
+                    <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Price</p>
+                    <p className="mt-3 font-serif text-3xl text-foreground">{activeProduct.price}</p>
+                  </div>
+                  {activeProduct.features?.length ? (
+                    <div className="rounded-[28px] border border-border/30 bg-muted p-6">
+                      <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Details</p>
+                      <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+                        {activeProduct.features.map((feature) => (
+                          <li key={feature} className="flex gap-3">
+                            <span className="text-foreground">•</span>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
+
+                <a
+                  href={activeProduct.amazonUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-6 text-sm uppercase tracking-[0.22em] text-background transition hover:bg-foreground/90"
+                >
+                  Shop on Amazon
+                </a>
+              </div>
+            </div>
+          ) : null}
+        </SheetContent>
+      </Sheet>
     </section>
   );
 }

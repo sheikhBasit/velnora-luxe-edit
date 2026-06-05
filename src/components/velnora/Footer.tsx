@@ -1,6 +1,9 @@
-import { Send } from "lucide-react";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 export function Footer() {
+  const [disclosureOpen, setDisclosureOpen] = useState(false);
+
   return (
     <footer style={{ backgroundColor: "oklch(0.16 0.003 0)" }} className="text-background">
       <div className="mx-auto max-w-[1400px] px-6 py-24 text-center md:px-12 md:py-32">
@@ -26,7 +29,7 @@ export function Footer() {
             aria-label="Subscribe"
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-background/80 transition hover:bg-background/10 hover:text-background"
           >
-            <Send className="h-4 w-4" strokeWidth={1.5} />
+            Subscribe
           </button>
         </form>
 
@@ -37,21 +40,43 @@ export function Footer() {
           <a href="/#about" className="hover:text-background transition">
             About
           </a>
-          <a href="/#disclosure" className="hover:text-background transition">
+          <button
+            type="button"
+            onClick={() => setDisclosureOpen(true)}
+            className="hover:text-background transition"
+          >
             Disclosure
-          </a>
-          <a href="/#editorial" className="hover:text-background transition">
+          </button>
+          <a href="mailto:hello@velnora.com" className="hover:text-background transition">
             Contact
           </a>
         </nav>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
-          <p>Amazon Associate &amp; Skimlinks partner. Earnings via qualifying purchases.</p>
-          <p className="mt-2">
-            © {new Date().getFullYear()} Velnora — A Curated House of Beauty. All rights reserved.
+          <p>
+            As an Amazon Associate, I earn from qualifying purchases. VELNORA is an independent
+            curation and a Skimlinks partner.
           </p>
+          <p className="mt-2">© {new Date().getFullYear()} velnora — curated beauty edit. all rights reserved.</p>
         </div>
       </div>
+
+      <Dialog open={disclosureOpen} onOpenChange={setDisclosureOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogTitle>Disclosure</DialogTitle>
+          <DialogDescription className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+            <p>
+              As an Amazon Associate, I earn from qualifying purchases. VELNORA is an independent
+              curation and a Skimlinks partner.
+            </p>
+            <p>
+              This editorial is produced independently and is not a storefront. The selections shown
+              represent a curated beauty edit, and affiliate partnerships allow the Maison to
+              publish without pay-to-play placement.
+            </p>
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
     </footer>
   );
 }

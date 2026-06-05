@@ -1,4 +1,4 @@
-export type Product = {
+﻿export type Product = {
   id: string;
   name: string;
   note: string;
@@ -21,8 +21,9 @@ export const products: Product[] = [
     image: "/assets/makeup.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B0716KGFKK?tag=velnora-luxe-20",
-    description: "A couture-grade lip lacquer with an impossibly smooth satin matte finish and pigment-rich intensity.",
-    features: ["Long-wearing formula", "Hydrating base", "16-hour wear", "Smudge-resistant finish"],
+    description:
+      "A weightless, couture-grade liquid formula delivering a dramatic satin-matte finish. Enriched with botanical oils to provide rich, pigment-polished hydration that lasts all evening.",
+    features: ["Satin-matte finish", "Botanical oils", "Long-wear hydration"],
     badge: "Editor's Pick",
   },
   {
@@ -33,8 +34,9 @@ export const products: Product[] = [
     image: "/assets/products/makeup-1.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B08HJMRF23?tag=velnora-luxe-20",
-    description: "An ultra-milled rose powder blush that mimics the soft-focus warmth of pure cashmere.",
-    features: ["Seamless blendability", "Buildable pigment", "Natural radiant finish"],
+    description:
+      "An ultra-fine, buildable powder blush that melts seamlessly into the skin for a natural, soft-focus flush. Captures a radiant rose glow with a velvety, modern finish.",
+    features: ["Buildable pigment", "Soft-focus texture", "Natural finish"],
   },
   {
     id: "obsidian-liner",
@@ -44,8 +46,9 @@ export const products: Product[] = [
     image: "/assets/products/makeup-2.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B07N9D7MTF?tag=velnora-luxe-20",
-    description: "A waterproof liquid eyeliner in jet black, engineered with a flexible calligrapher's tip for surgical precision.",
-    features: ["Ultra-matte black finish", "24-hour waterproof wear", "Precision applicator tip"],
+    description:
+      "A precise, high-definition liquid eyeliner in absolute jet black. Delivers an unyielding, molten-lacquer stroke that contours the eyes with art-direction precision.",
+    features: ["Precision tip", "Jet-black intensity", "Long-lasting wear"],
   },
   {
     id: "halo-highlighter",
@@ -55,8 +58,9 @@ export const products: Product[] = [
     image: "/assets/products/makeup-3.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B01E2E4A98?tag=velnora-luxe-20",
-    description: "A solid-to-cream champagne highlighter that captures and reflects ambient light for an ethereal glow.",
-    features: ["Dewy finish", "Seamless cream-to-powder texture", "Squalane-infused base"],
+    description:
+      "A molten, champagne-toned cream highlighter designed to catch light at the highest points of the face. Creates an ethereal, dew-kissed glow without disruptive glitter.",
+    features: ["Champagne luminosity", "Creamy texture", "Glitter-free glow"],
   },
   {
     id: "silk-foundation",
@@ -66,8 +70,9 @@ export const products: Product[] = [
     image: "/assets/products/makeup-4.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B01M3W9BIF?tag=velnora-luxe-20",
-    description: "A fluid, weightless foundation that floats over pores to deliver a skin-like luminous finish.",
-    features: ["Medium buildable coverage", "Breathable micro-silk tech", "Available in 30 shades"],
+    description:
+      "A fluid, breathable foundation that mimics the natural texture of perfected skin. Offers customizable medium coverage with a luminous, lit-from-within finish.",
+    features: ["Breathable coverage", "Luminous finish", "Skin-like texture"],
   },
 
   // --- SKINCARE SANCTUARY (skincare) ---
@@ -79,8 +84,9 @@ export const products: Product[] = [
     image: "/assets/skincare.jpg",
     category: "skincare",
     amazonUrl: "https://www.amazon.com/dp/B076G5RKKD?tag=velnora-luxe-20",
-    description: "A deeply penetrating hydrating serum that floods the skin barrier with multi-weight hyaluronic acid.",
-    features: ["Instant plump and glass sheen", "Strengthens moisture barrier", "Soothing botanical complexes"],
+    description:
+      "A deeply hydrating, molecule-dense serum engineered to anchor moisture within the epidermal layers. Leaves the skin with an instant, reflective glass-like clarity.",
+    features: ["Glass skin clarity", "Deep hydration", "Lightweight finish"],
     badge: "House Hero",
   },
   {
@@ -91,8 +97,9 @@ export const products: Product[] = [
     image: "/assets/products/skincare-1.jpg",
     category: "skincare",
     amazonUrl: "https://www.amazon.com/dp/B08X1S7F3Z?tag=velnora-luxe-20",
-    description: "A clinical-strength retinaldehyde cream that accelerates cell turnover without the irritation of traditional retinol.",
-    features: ["0.1% stabilized retinaldehyde", "Improves elasticity and texture", "Hyaluronic acid padded base"],
+    description:
+      "An advanced, atelier-grade nocturnal treatment containing stabilized retinaldehyde. Accelerates cell renewal to visibly refine fine lines and smooth uneven texture gently.",
+    features: ["Stabilized retinaldehyde", "Refines texture", "Gentle overnight action"],
   },
   {
     id: "vitamin-c-15",
@@ -102,8 +109,9 @@ export const products: Product[] = [
     image: "/assets/products/skincare-2.jpg",
     category: "skincare",
     amazonUrl: "https://www.amazon.com/dp/B08N5N5KK3?tag=velnora-luxe-20",
-    description: "A potent 15% L-Ascorbic acid serum combined with Ferulic acid to brighten skin tone and shield from environmental pollutants.",
-    features: ["Brightens dark spots", "Potent antioxidant defence", "Lightweight, non-sticky formula"],
+    description:
+      "A potent, daily antioxidant shield that aggressively targets dark spots and environmental fatigue. Restores a unified, brilliantly illuminated skin tone.",
+    features: ["15% vitamin C", "Brightens uneven tone", "Environmental protection"],
   },
   {
     id: "niacinamide-veil",
@@ -113,8 +121,9 @@ export const products: Product[] = [
     image: "/assets/products/skincare-3.jpg",
     category: "skincare",
     amazonUrl: "https://www.amazon.com/dp/B09D8RFG6G?tag=velnora-luxe-20",
-    description: "A balancing, milky essence containing 5% niacinamide to minimize the appearance of pores and reduce redness.",
-    features: ["Regulates sebum production", "Soothes skin redness", "Prepares skin for active serums"],
+    description:
+      "A soothing, ultra-light botanical essence designed to regulate sebum and reinforce the lipid barrier. Minimizes pores while leaving a weightless, calming hydration veil.",
+    features: ["Sebum regulation", "Pore minimization", "Light botanical hydration"],
   },
   {
     id: "marble-cleanser",
@@ -124,8 +133,9 @@ export const products: Product[] = [
     image: "/assets/products/skincare-4.jpg",
     category: "skincare",
     amazonUrl: "https://www.amazon.com/dp/B09GF2NKFG?tag=velnora-luxe-20",
-    description: "A nourishing cream-to-milk cleanser packed with cold-pressed oils that melts makeup and impurities away.",
-    features: ["Ph-balanced formulation", "Removes waterproof cosmetics", "Leaves skin hydrated, not tight"],
+    description:
+      "A decadent, conditioning cream cleanser that lifts impurities while preserving natural oils. Transforms a daily necessity into a meditative, spa-grade skin ritual.",
+    features: ["Conditioning cream texture", "Preserves natural oils", "Ritualistic cleanse"],
   },
 
   // --- THE HAIR LAB (hair) ---
@@ -137,8 +147,9 @@ export const products: Product[] = [
     image: "/assets/hair.jpg",
     category: "hair",
     amazonUrl: "https://www.amazon.com/dp/B08C4L5L9Y?tag=velnora-luxe-20",
-    description: "A highly concentrated hair repair oil that restructures broken keratin bonds and shields from high heat styling.",
-    features: ["Restores damaged bonds", "Frizz control up to 72 hours", "Protects up to 450°F (230°C)"],
+    description:
+      "A concentrated, residue-free treatment that targets damaged disulfide bonds from deep within. Reconstructs frayed hair cuticles to restore structural elasticity and mirror-like shine.",
+    features: ["Bond reconstruction", "Frizz smoothing", "Shine restoration"],
     badge: "Lab Edition",
   },
   {
@@ -149,8 +160,9 @@ export const products: Product[] = [
     image: "/assets/products/hair-1.jpg",
     category: "hair",
     amazonUrl: "https://www.amazon.com/dp/B08KHBKKP2?tag=velnora-luxe-20",
-    description: "A weightless heat-protective mist designed to deliver a high-gloss, ultra-straight silk press finish.",
-    features: ["High-gloss shine coating", "Shields from humidity", "Zero weight formulation"],
+    description:
+      "An ultra-light, thermal-protective shield engineered to guard delicate strands against high-heat styling. Banishes frizz to deliver an incredibly sleek, fluid movement.",
+    features: ["Heat protection", "Frizz elimination", "Weightless finish"],
   },
   {
     id: "density-shampoo",
@@ -160,8 +172,9 @@ export const products: Product[] = [
     image: "/assets/products/hair-2.jpg",
     category: "hair",
     amazonUrl: "https://www.amazon.com/dp/B08ZNS7XFD?tag=velnora-luxe-20",
-    description: "A caffeine and peptide infused shampoo designed to stimulate the scalp and promote visibly thicker hair density.",
-    features: ["Stimulates hair follicles", "Adds instant volume and body", "Sulphate and paraben free"],
+    description:
+      "A revitalizing, follicle-stimulating wash that gently clarifies the scalp while thickening the root structure. Imparts airy, voluptuous volume right from the first rinse.",
+    features: ["Scalp clarity", "Root thickening", "Volumizing wash"],
   },
   {
     id: "glass-conditioner",
@@ -171,19 +184,21 @@ export const products: Product[] = [
     image: "/assets/products/hair-3.jpg",
     category: "hair",
     amazonUrl: "https://www.amazon.com/dp/B09BDKFF2D?tag=velnora-luxe-20",
-    description: "A deep conditioning mask that seals cuticles for a smooth, reflective glass-like hair texture.",
-    features: ["Reflective mirror-like shine", "Deep moisture infusion", "Detangles instantly"],
+    description:
+      "A weightless, rinse-out glossing mask that seals down cuticles and locks in essential hydration. Leaves hair feeling impossibly soft with a reflective, high-shine finish.",
+    features: ["Cuticle sealing", "Gloss finish", "Hydration boost"],
   },
   {
     id: "heat-veil",
-    name: "Heat Veil",
+    name: "Heat Veil Primer",
     note: "Primer · 150ml",
     price: "$28",
     image: "/assets/products/hair-4.jpg",
     category: "hair",
     amazonUrl: "https://www.amazon.com/dp/B09J5NDFFF?tag=velnora-luxe-20",
-    description: "A pre-styling cream primer that hydrates, detangles, and forms a protective veil against blow dryer heat.",
-    features: ["Reduces blow dry time", "Protects hair cuticle", "Light hold factor"],
+    description:
+      "A nourishing, leave-in pre-styling cream packed with UV filters and protective nourishment. Defends against styling damage while acting as a foundation for hold and manageability.",
+    features: ["Thermal defense", "UV protection", "Styling support"],
   },
 
   // --- BATH & BODY RITUALS (bath) ---
@@ -195,8 +210,9 @@ export const products: Product[] = [
     image: "/assets/bath.jpg",
     category: "bath",
     amazonUrl: "https://www.amazon.com/dp/B09KGLKKFK?tag=velnora-luxe-20",
-    description: "A luxurious body oil that absorbs instantly to wrap skin in moisture and a delicate cashmere-wood fragrance.",
-    features: ["Non-greasy dry oil finish", "Notes of amber and warm wood", "Deep nourishment"],
+    description:
+      "A lavish, dry botanical body oil that sinks into dry skin instantly without leaving a greasy trace. Wrapped in an understated, warm sensory fragrance perfect for long evenings.",
+    features: ["Dry oil finish", "Warm fragrance notes", "Fast absorption"],
     badge: "Ritual No. 4",
   },
   {
@@ -207,8 +223,9 @@ export const products: Product[] = [
     image: "/assets/products/bath-1.jpg",
     category: "bath",
     amazonUrl: "https://www.amazon.com/dp/B07T2K5FKK?tag=velnora-luxe-20",
-    description: "Harvested sea salts infused with magnesium and essential oils to soothe sore muscles and calm the mind.",
-    features: ["High magnesium concentration", "Infused with lavender oil", "De-stresses skin and muscles"],
+    description:
+      "A curative blend of pure, trace-mineral crystals and calming salts harvested for deep relaxation. Relieves physical tension while softening the skin in a comforting bath ritual.",
+    features: ["Trace mineral blend", "Soothing relaxation", "Skin-softening ritual"],
   },
   {
     id: "linen-body-wash",
@@ -218,8 +235,9 @@ export const products: Product[] = [
     image: "/assets/products/bath-2.jpg",
     category: "bath",
     amazonUrl: "https://www.amazon.com/dp/B08D3KJJJK?tag=velnora-luxe-20",
-    description: "A gentle body wash with notes of fresh white linen and cedar, creating a spa-like cleansing ritual.",
-    features: ["Sulphate-free lather", "Nourishing aloe vera base", "Crisp clean scent profile"],
+    description:
+      "A crisp, low-foaming gel cleanser that purifies the body with notes of fresh flax and pale woods. Conditions the skin barrier to leave it clean, soft, and balanced.",
+    features: ["Low foam gel", "Barrier conditioning", "Fresh linen fragrance"],
   },
   {
     id: "velour-cream",
@@ -229,8 +247,9 @@ export const products: Product[] = [
     image: "/assets/products/bath-3.jpg",
     category: "bath",
     amazonUrl: "https://www.amazon.com/dp/B08GFK66KK?tag=velnora-luxe-20",
-    description: "A thick, velvety body lotion that hydrates for 48 hours, leaving a skin texture reminiscent of soft velour.",
-    features: ["Shea butter enriched", "Fast absorbing", "Improves skin elasticity"],
+    description:
+      "A deeply rich, whipped body balm engineered to drench dehydrated skin in lasting moisture. Restores a supple, velvety softness to rough elbows, knees, and limbs.",
+    features: ["Whipped balm texture", "Long-lasting moisture", "Velvety finish"],
   },
   {
     id: "hand-balm-no-1",
@@ -240,8 +259,9 @@ export const products: Product[] = [
     image: "/assets/products/bath-4.jpg",
     category: "bath",
     amazonUrl: "https://www.amazon.com/dp/B07RGLKKFK?tag=velnora-luxe-20",
-    description: "A pocket-sized heavy-duty hand treatment cream that repairs cracked cuticles and dry palms.",
-    features: ["Non-greasy barrier protection", "Eucalyptus and pine extracts", "Travel-friendly luxury metal tube"],
+    description:
+      "A protective, fast-absorbing hand cream designed to shield delicate skin from harsh daily elements. Softens cuticles and rough skin texture with a subtle, clean aroma.",
+    features: ["Fast absorbing", "Cuticle protection", "Gentle fragrance"],
   },
 
   // --- THE TOOL BOX (tools) ---
@@ -253,8 +273,9 @@ export const products: Product[] = [
     image: "/assets/tools.jpg",
     category: "tools",
     amazonUrl: "https://www.amazon.com/dp/B08N5ND88F?tag=velnora-luxe-20",
-    description: "An heirloom-quality set of five essential face and eye brushes, handcrafted with sustainable timber handles.",
-    features: ["Ultra-soft synthetic fibers", "Ergonomic timber weights", "Includes leather rolling case"],
+    description:
+      "A masterfully sculpted collection of premium, handcrafted artisan brushes. Engineered with ultra-soft fibers to pick up and distribute pigment with absolute control.",
+    features: ["Handcrafted brush heads", "Precision pigment delivery", "Luxury storage case"],
     badge: "Maison Edit",
   },
   {
@@ -265,8 +286,9 @@ export const products: Product[] = [
     image: "/assets/products/tools-1.jpg",
     category: "tools",
     amazonUrl: "https://www.amazon.com/dp/B07B4FKKFK?tag=velnora-luxe-20",
-    description: "A fluffy, tapered powder brush optimized for sweeping loose powder or bronzer seamlessly.",
-    features: ["Natural goat fibers", "Perfect pigment diffusion", "Sturdy brass ferrule"],
+    description:
+      "A plush, domed powder brush tailored to deposit loose setting powders with an invisible touch. Ensures a flawless, airbrushed finish without disturbing base makeup.",
+    features: ["Soft goat hair", "Perfect powder diffusion", "Flawless finish"],
   },
   {
     id: "blending-sponge",
@@ -276,8 +298,9 @@ export const products: Product[] = [
     image: "/assets/products/tools-2.jpg",
     category: "tools",
     amazonUrl: "https://www.amazon.com/dp/B01F2EK5FF?tag=velnora-luxe-20",
-    description: "A latex-free beauty blending sponge designed to distribute cream and liquid makeup flawlessly.",
-    features: ["Expands in water", "Teardrop precision tip", "Durable and easy to clean"],
+    description:
+      "A zero-latex, water-activated blending tool sculpted with dual flat edges for high-precision mapping. Bounces fluid foundations and creams smoothly onto the skin.",
+    features: ["Water-activated expansion", "Precision flat edges", "Latex-free formula"],
   },
   {
     id: "lash-curler",
@@ -287,8 +310,9 @@ export const products: Product[] = [
     image: "/assets/products/tools-3.jpg",
     category: "tools",
     amazonUrl: "https://www.amazon.com/dp/B0007P09B8?tag=velnora-luxe-20",
-    description: "An award-winning carbon steel eyelash curler that shapes lashes upwards in one single squeeze.",
-    features: ["High-comfort silicone pads", "Calibrated double-hinge", "Suits all eye shapes"],
+    description:
+      "An ergonomically engineered, polished steel curler that captures every lash without pinching. Delivers a wide-awake, lasting lift that beautifully opens up the gaze.",
+    features: ["Comfort-fit pads", "Precision curve", "Lasting lift"],
   },
   {
     id: "brow-comb",
@@ -298,8 +322,9 @@ export const products: Product[] = [
     image: "/assets/products/tools-4.jpg",
     category: "tools",
     amazonUrl: "https://www.amazon.com/dp/B07D3KK9FF?tag=velnora-luxe-20",
-    description: "A dual-sided brass comb and natural bristle brush designed to groom brows and separate lashes.",
-    features: ["Fine-tooth solid brass comb", "Firm grooming bristles", "Lacquered wooden stem"],
+    description:
+      "A dual-sided, brass-lacquered tool built for grooming and separating individual brow hairs and lashes. Sculpts brows into a clean, feather-light symmetry.",
+    features: ["Dual-sided design", "Fine grooming teeth", "Brass lacquer finish"],
   },
 
   // --- THE FRAGRANCE WARDROBE (fragrance) ---
@@ -311,8 +336,9 @@ export const products: Product[] = [
     image: "/assets/fragrance.jpg",
     category: "fragrance",
     amazonUrl: "https://www.amazon.com/dp/B08V5N8FFD?tag=velnora-luxe-20",
-    description: "A rich, complex Eau de Parfum capturing notes of roasted amber, birch tar, and soft vanilla.",
-    features: ["Olfactive family: Woody Amber", "Intense, long-lasting projection", "Hand-finished glass bottle"],
+    description:
+      "An olfactory heirloom weaving together rich, golden amber with mysterious ribbons of charred vetiver and raw tobacco. A deeply complex, intimate scent tailored like a statement coat.",
+    features: ["Warm amber depth", "Dry tobacco nuance", "Long-lasting trail"],
     badge: "Maison Signature",
   },
   {
@@ -323,8 +349,9 @@ export const products: Product[] = [
     image: "/assets/products/fragrance-1.jpg",
     category: "fragrance",
     amazonUrl: "https://www.amazon.com/dp/B07S8KKFK9?tag=velnora-luxe-20",
-    description: "A delicate floral Eau de Parfum highlighting notes of powdery iris florets and white musk.",
-    features: ["Notes: Iris, Violet, White Musk", "Soft powdery projection", "Perfect for daily wear"],
+    description:
+      "A luminous, powdery floral fragrance built around a core of delicate Florentine iris and crisp aldehyde notes. Captures the crisp elegance of a clean, sunlit morning.",
+    features: ["Powdery iris heart", "Aldehyde brightness", "Airy freshness"],
   },
   {
     id: "neroli-suite",
@@ -334,8 +361,9 @@ export const products: Product[] = [
     image: "/assets/products/fragrance-2.jpg",
     category: "fragrance",
     amazonUrl: "https://www.amazon.com/dp/B0816NKJJF?tag=velnora-luxe-20",
-    description: "An invigorating splash of Mediterranean neroli combined with bitter orange and amber notes.",
-    features: ["Notes: Neroli, Bergamot, Amber", "Fresh citrus projection", "Reminiscent of summer"],
+    description:
+      "A sparkling, vibrant citrus EDP bursting with sun-drenched orange blossom, clean petitgrain, and bright sea salt. Evokes the timeless romance of a Mediterranean escape.",
+    features: ["Citrus blossom sparkle", "Sea salt freshness", "Mediterranean warmth"],
   },
   {
     id: "rose-obscura",
@@ -345,8 +373,9 @@ export const products: Product[] = [
     image: "/assets/products/fragrance-3.jpg",
     category: "fragrance",
     amazonUrl: "https://www.amazon.com/dp/B08W5NKKKF?tag=velnora-luxe-20",
-    description: "A dark, seductive take on traditional rose, paired with dry patchouli and black pepper.",
-    features: ["Notes: Crimson Rose, Patchouli, Pepper", "Sensual, deep scent trail", "Unisex scent signature"],
+    description:
+      "A sultry, subverted rose fragrance cutting deep crimson petals with dark patchouli and spicy black pepper. A bold, poetic composition that commands absolute attention.",
+    features: ["Deep rose heart", "Patchouli spice", "Bold sensuality"],
   },
   {
     id: "vetiver-noir",
@@ -356,8 +385,9 @@ export const products: Product[] = [
     image: "/assets/products/fragrance-4.jpg",
     category: "fragrance",
     amazonUrl: "https://www.amazon.com/dp/B07Y5KKJFK?tag=velnora-luxe-20",
-    description: "An earthy blend of Haitian vetiver root, smokey tobacco leaf, and a squeeze of fresh grapefruit.",
-    features: ["Notes: Vetiver, Cedarwood, Grapefruit", "Rich earthy undertones", "Complex dry-down profile"],
+    description:
+      "A crisp, earthy fragrance balancing bright green bergamot against deep, smokey vetiver roots and wet moss. Clean, sharp, and intensely memorable for day or night.",
+    features: ["Green bergamot top", "Smoky vetiver base", "Modern earthy finish"],
   },
 
   // --- INSIDE-OUT BEAUTY (wellness) ---
@@ -369,8 +399,9 @@ export const products: Product[] = [
     image: "/assets/wellness.jpg",
     category: "wellness",
     amazonUrl: "https://www.amazon.com/dp/B09D5ND88F?tag=velnora-luxe-20",
-    description: "A premium blend of cellular antioxidants, biotin, and hyaluronic acid formulated to promote glowing skin.",
-    features: ["Contains resveratrol and biotin", "Promotes cell regeneration", "30-day supply (60 capsules)"],
+    description:
+      "A 30-day ingestible ritual packed with clean, clinical-grade antioxidants and botanical extracts. Fights oxidative stress from within to cultivate a long, healthy arc of skin radiance.",
+    features: ["Clinical antioxidants", "Botanical support", "30-day ritual"],
     badge: "30-Day Ritual",
   },
   {
@@ -381,41 +412,45 @@ export const products: Product[] = [
     image: "/assets/products/wellness-1.jpg",
     category: "wellness",
     amazonUrl: "https://www.amazon.com/dp/B08HNSKKF8?tag=velnora-luxe-20",
-    description: "Marine-sourced hydrolyzed collagen powder designed to support firm skin structure and joint health.",
-    features: ["Hydrolyzed marine peptides", "Neutral taste profile", "Dissolves easily in coffee or water"],
+    description:
+      "An exceptionally pure, easily absorbable marine collagen powder designed to mix seamlessly into morning rituals. Supports natural elasticity and structural skin firmness.",
+    features: ["Marine collagen purity", "Easily mixable", "Supports elasticity"],
   },
   {
     id: "hair-density",
-    name: "Hair Density",
+    name: "Hair Density Capsules",
     note: "Capsules · 60ct",
     price: "$42",
     image: "/assets/products/wellness-2.jpg",
     category: "wellness",
     amazonUrl: "https://www.amazon.com/dp/B0916NKKFK?tag=velnora-luxe-20",
-    description: "A dietary supplement filled with keratin, zinc, and saw palmetto to strengthen hair from within.",
-    features: ["Fights thinning hair", "Clinically-proven results", "Sugar-free formulation"],
+    description:
+      "A targeted, nutrient-rich blend of essential biotin, zinc, and amino acids. Directly fortifies the internal root matrix to support thick, vibrant hair growth.",
+    features: ["Root matrix support", "Biotin and zinc", "Hair growth nourishment"],
   },
   {
     id: "skin-hydration",
-    name: "Skin Hydration",
+    name: "Skin Hydration Capsules",
     note: "Capsules · 60ct",
     price: "$44",
     image: "/assets/products/wellness-3.jpg",
     category: "wellness",
     amazonUrl: "https://www.amazon.com/dp/B095KKJFK7?tag=velnora-luxe-20",
-    description: "A supplement capsule rich in phytoceramides that helps retain moisture deep within skin cells.",
-    features: ["Improves skin dryness", "Contains botanical phytoceramides", "Gluten-free capsules"],
+    description:
+      "A moisture-locking phytoceramide complex that hydrates the cellular structure from the inside out. Visibly smooths rough patches and reduces dry flakes over time.",
+    features: ["Phytoceramide hydration", "Smooths texture", "Interior moisture support"],
   },
   {
     id: "calm-clear",
-    name: "Calm & Clear",
+    name: "Calm & Clear Tincture",
     note: "Tincture · 30ml",
     price: "$52",
     image: "/assets/products/wellness-4.jpg",
     category: "wellness",
     amazonUrl: "https://www.amazon.com/dp/B08X5NKKF2?tag=velnora-luxe-20",
-    description: "An herbal extract drops tincture containing ashwagandha and zinc to clear stress-induced skin flare-ups.",
-    features: ["Ashwagandha extract base", "Reduces cortisol-induced breakouts", "Vegan formulation"],
+    description:
+      "A concentrated, stress-adaptogenic liquid elixir formulated to regulate internal triggers behind acne flare-ups. Balances and centers the body to promote clear skin harmony.",
+    features: ["Stress-adaptogen blend", "Acne trigger support", "Liquid absorption"],
   },
 
   // --- BEAUTY TECH (tech) ---
@@ -427,8 +462,9 @@ export const products: Product[] = [
     image: "/assets/tech.jpg",
     category: "tech",
     amazonUrl: "https://www.amazon.com/dp/B09K8NF8FF?tag=velnora-luxe-20",
-    description: "A clinic-grade LED light therapy face mask emitting medical red and blue light wavelengths to treat aging and acne.",
-    features: ["Dual-wavelength LED system", "FDA-cleared medical silicone", "Rechargeable wireless control pad"],
+    description:
+      "An advanced, clinic-grade smart device harnessing targeted wavelengths of red and near-infrared light. Stimulates natural collagen synthesis to completely dress your vanity in innovation.",
+    features: ["Red + NIR wavelengths", "Collagen stimulation", "Smart device control"],
     badge: "Smart Device",
   },
   {
@@ -439,8 +475,9 @@ export const products: Product[] = [
     image: "/assets/products/tech-1.jpg",
     category: "tech",
     amazonUrl: "https://www.amazon.com/dp/B09F5NKJJK?tag=velnora-luxe-20",
-    description: "A sleek, rechargeable microcurrent wand that lifts facial contours and reduces puffiness in under five minutes.",
-    features: ["5 adjustable intensity levels", "Red light warming head", "Compact charging cradle"],
+    description:
+      "A pocket-sized, intelligent face-contouring wand that uses soft microcurrent waves to stimulate underlying facial muscles. Instantly lifts, defines, and sculpts the jaw and cheekbones.",
+    features: ["Soft microcurrent", "Facial contouring", "Portable design"],
   },
   {
     id: "cryo-globes",
@@ -450,19 +487,21 @@ export const products: Product[] = [
     image: "/assets/products/tech-2.jpg",
     category: "tech",
     amazonUrl: "https://www.amazon.com/dp/B08T3KKKJF?tag=velnora-luxe-20",
-    description: "Solid stainless steel globes designed to be chilled in the freezer to soothe skin inflammation and boost drainage.",
-    features: ["Medical-grade stainless steel", "Double insulated handle comfort", "Reduces puffiness instantly"],
+    description:
+      "Chilled, medical-grade steel globes engineered to instantly de-puff, calm inflammation, and tighten pores. A soothing, ice-cold massage ritual that wakes up tired morning skin.",
+    features: ["Steel cooling spheres", "De-puffing relief", "Pore-tightening massage"],
   },
   {
     id: "sonic-cleansing",
-    name: "Sonic Cleansing",
+    name: "Sonic Cleansing Brush",
     note: "Brush · USB-C",
     price: "$140",
     image: "/assets/products/tech-3.jpg",
     category: "tech",
     amazonUrl: "https://www.amazon.com/dp/B08V5NKKKF?tag=velnora-luxe-20",
-    description: "A waterproof sonic silicone face scrubber brush that clears out sebum and makeup residue.",
-    features: ["Sonic vibration technology", "Hygienic bacteria-free silicone", "USB-C rechargeable battery"],
+    description:
+      "A ultra-hygienic silicone brush powered by sonic pulsations to extract hidden dirt and oils deep from pores. Preps the skin texture to maximize skincare product absorption.",
+    features: ["Sonic silicone cleansing", "Deep pore extraction", "USB-C rechargeable"],
   },
   {
     id: "red-light-panel",
@@ -472,8 +511,9 @@ export const products: Product[] = [
     image: "/assets/products/tech-4.jpg",
     category: "tech",
     amazonUrl: "https://www.amazon.com/dp/B07T3KLKKF?tag=velnora-luxe-20",
-    description: "A professional-level standing LED panel that targets face, neck, and body area skin rejuvenation.",
-    features: ["Pro-grade LED irradiance output", "Dual switches for Red & NIR light", "Sturdy adjustable metal stand"],
+    description:
+      "A professional, stationary phototherapy panel engineered for broad-coverage face and chest treatments. Accelerates structural tissue repair and eviscerates widespread skin dullness.",
+    features: ["Broad coverage therapy", "Red + NIR phototherapy", "Professional-grade output"],
   },
 ];
 

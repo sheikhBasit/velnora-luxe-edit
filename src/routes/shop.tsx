@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { getProductsByCategory, categories } from "@/data/products";
 import { Header } from "@/components/velnora/Header";
@@ -17,15 +17,53 @@ export const Route = createFileRoute("/shop")({
 
 function ShopPage() {
   const { addToCart } = useCart();
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const pillListRef = useRef<HTMLDivElement>(null);
+
+  const normalizeCategoryParam = (value?: string) => {
+    if (!value) return undefined;
+    const normalized = value.trim().toLowerCase();
+
+    const aliasMap: Record<string, string> = {
+      makeup: "makeup",
+      "makeup-suite": "makeup",
+      skincare: "skincare",
+      "skincare-sanctuary": "skincare",
+      hair: "hair",
+      "hair-lab": "hair",
+      bath: "bath",
+      "bath-body": "bath",
+      "bath-and-body": "bath",
+      tools: "tools",
+      "tool-box": "tools",
+      fragrance: "fragrance",
+      wellness: "wellness",
+      tech: "tech",
+      "beauty-tech": "tech",
+    };
+
+    return aliasMap[normalized] ?? normalized;
+  };
+
+  const getSelectedCategoryId = () => {
+    if (typeof window === "undefined") return categories[0].id;
+
+    const search = new URLSearchParams(window.location.search);
+    const categoryFromQuery = normalizeCategoryParam(search.get("category") ?? undefined);
+    if (categoryFromQuery) return categoryFromQuery;
+
+    const hash = window.location.hash?.replace(/^#/, "");
+    return normalizeCategoryParam(hash) ?? categories[0].id;
+  };
+
+  const selectedCategory =
+    categories.find((c) => c.id === getSelectedCategoryId()) ?? categories[0];
 
   useEffect(() => {
-    const search = new URLSearchParams(window.location.search);
-    const hash = window.location.hash?.replace(/^#/, "");
-    const candidate = search.get("category") || hash || categories[0].id;
-    const found = categories.find((c) => c.id === candidate.toLowerCase());
-    setSelectedCategory(found ?? categories[0]);
-  }, []);
+    const pill = document.getElementById(`shop-pill-${selectedCategory.id}`);
+    if (pill) {
+      pill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }
+  }, [selectedCategory.id]);
 
   const products = getProductsByCategory(selectedCategory.id);
 
@@ -43,10 +81,11 @@ function ShopPage() {
           </p>
         </Reveal>
 
-        <div className="flex gap-3 mb-12 overflow-x-auto pb-2 no-scrollbar">
+        <div className="flex gap-3 mb-12 overflow-x-auto pb-2 no-scrollbar" ref={pillListRef}>
           {categories.map((c) => (
             <Link
               key={c.id}
+              id={`shop-pill-${c.id}`}
               to="/shop"
               search={{ category: c.id }}
               className={`pill-btn text-xs h-9 px-5 whitespace-nowrap ${
