@@ -42,6 +42,12 @@ export function Header() {
           >
             About
           </a>
+          <Link
+            to="/"
+            className="nav-editorial text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition"
+          >
+            Editorial
+          </Link>
         </nav>
       </div>
     </header>
