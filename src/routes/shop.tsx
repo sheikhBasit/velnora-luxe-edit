@@ -5,8 +5,7 @@ import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
 import { Link } from "@tanstack/react-router";
-import { ShoppingBag, ExternalLink } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/shop")({
   component: ShopPage,
@@ -16,7 +15,6 @@ export const Route = createFileRoute("/shop")({
 });
 
 function ShopPage() {
-  const { addToCart } = useCart();
   const pillListRef = useRef<HTMLDivElement>(null);
 
   const normalizeCategoryParam = (value?: string) => {
@@ -120,33 +118,15 @@ function ShopPage() {
                   </p>
                 </Link>
                 <div className="mt-auto flex items-center justify-between gap-3">
-                  <span className="text-sm">{product.price}</span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() =>
-                        addToCart({
-                          id: product.id,
-                          name: product.name,
-                          note: product.note,
-                          price: product.price,
-                          image: product.image,
-                          amazonUrl: product.amazonUrl,
-                        })
-                      }
-                      aria-label={`Add ${product.name} to bag`}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/20 text-foreground transition hover:bg-foreground hover:text-background cursor-pointer"
-                    >
-                      <ShoppingBag className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    </button>
-                    <a
-                      href={product.amazonUrl}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
-                    >
-                      Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
-                    </a>
-                  </div>
+                  <span className="text-sm text-foreground/80">{product.price}</span>
+                  <a
+                    href={product.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                  >
+                    Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+                  </a>
                 </div>
               </article>
             </Reveal>

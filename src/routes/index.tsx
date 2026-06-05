@@ -467,16 +467,6 @@ function Hero() {
                 <Link to="/category/$slug" params={{ slug: "makeup" }} className="pill-btn">
                   Shop the Curation
                 </Link>
-                <a
-                  href="#editorial"
-                  className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-foreground"
-                >
-                  Read the Editorial
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={1.5}
-                  />
-                </a>
               </div>
             </div>
           </Reveal>

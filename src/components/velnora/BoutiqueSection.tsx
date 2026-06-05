@@ -180,43 +180,67 @@ export function BoutiqueSection({
         setDrawerOpen(open);
         if (!open) setActiveProduct(null);
       }}>
-        <SheetContent side={isMobile ? "top" : "right"} className="max-w-[92vw] md:max-w-[46rem] p-6 md:p-8">
+        <SheetContent
+          side={isMobile ? "top" : "right"}
+          className={
+            isMobile
+              ? "w-screen h-screen max-w-none p-0 overflow-hidden"
+              : "max-w-[92vw] md:max-w-[46rem] p-6 md:p-8 max-h-[85vh] overflow-y-auto"
+          }
+        >
           {activeProduct ? (
-            <div className="grid gap-6 md:grid-cols-[1.05fr_0.95fr]">
-              <div className="overflow-hidden rounded-[32px] bg-muted">
+            <div
+              className={
+                isMobile
+                  ? "flex h-full flex-col overflow-hidden bg-[#F7F3EC]"
+                  : "grid gap-6 md:grid-cols-[1.05fr_0.95fr]"
+              }
+            >
+              <div
+                className={
+                  isMobile
+                    ? "relative h-[50vh] w-full overflow-hidden bg-muted"
+                    : "overflow-hidden rounded-[32px] bg-muted"
+                }
+              >
                 <img
                   src={activeProduct.image}
                   alt={activeProduct.name}
                   loading="lazy"
                   className="h-full w-full object-cover"
                 />
+                <SheetClose className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg transition hover:bg-foreground hover:text-background">
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close</span>
+                </SheetClose>
               </div>
-              <div className="flex min-h-full flex-col justify-between gap-6">
-                <div className="space-y-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-                        {activeProduct.note}
-                      </p>
-                      <SheetTitle className="mt-3 font-serif text-4xl leading-tight text-foreground">
-                        {activeProduct.name}
-                      </SheetTitle>
-                    </div>
-                    <SheetClose className="rounded-full border border-border/50 bg-background p-3 text-foreground transition hover:bg-foreground hover:text-background">
-                      <X className="h-4 w-4" />
-                      <span className="sr-only">Close</span>
-                    </SheetClose>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {activeProduct.description}
-                  </p>
-                </div>
 
-                <div className="space-y-6">
-                  <div className="rounded-[28px] border border-border/30 bg-background/90 p-6">
-                    <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Price</p>
-                    <p className="mt-3 font-serif text-3xl text-foreground">{activeProduct.price}</p>
+              <div
+                className={
+                  isMobile
+                    ? "flex min-h-0 flex-1 flex-col overflow-hidden bg-[#F7F3EC] p-6"
+                    : "flex min-h-full flex-col justify-between gap-6"
+                }
+              >
+                <div className={isMobile ? "flex min-h-0 flex-1 flex-col overflow-y-auto" : "space-y-6"}>
+                  <div className="space-y-6">
+                    <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                      {activeProduct.note}
+                    </p>
+                    <SheetTitle
+                      className={
+                        isMobile
+                          ? "font-serif text-[2rem] font-bold leading-tight text-foreground"
+                          : "mt-3 font-serif text-4xl leading-tight text-foreground"
+                      }
+                    >
+                      {activeProduct.name}
+                    </SheetTitle>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {activeProduct.description}
+                    </p>
                   </div>
+
                   {activeProduct.features?.length ? (
                     <div className="rounded-[28px] border border-border/30 bg-muted p-6">
                       <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">Details</p>
@@ -232,14 +256,16 @@ export function BoutiqueSection({
                   ) : null}
                 </div>
 
-                <a
-                  href={activeProduct.amazonUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-6 text-sm uppercase tracking-[0.22em] text-background transition hover:bg-foreground/90"
-                >
-                  Shop on Amazon
-                </a>
+                <div className={isMobile ? "mt-4" : "space-y-6"}>
+                  <a
+                    href={activeProduct.amazonUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex w-full items-center justify-center rounded-[2rem] bg-foreground px-6 py-4 text-sm uppercase tracking-[0.22em] text-background transition hover:bg-foreground/90 md:w-auto"
+                  >
+                    Shop on Amazon
+                  </a>
+                </div>
               </div>
             </div>
           ) : null}
