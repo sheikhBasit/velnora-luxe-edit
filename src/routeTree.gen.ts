@@ -9,14 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product/$id'
 import { Route as CategorySlugRouteImport } from './routes/category/$slug'
 
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,64 +49,86 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-<<<<<<< HEAD
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
-=======
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-<<<<<<< HEAD
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
-=======
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-<<<<<<< HEAD
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
-=======
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-<<<<<<< HEAD
-  fullPaths: '/' | '/shop' | '/category/$slug' | '/product/$id'
+  fullPaths:
+    | '/'
+    | '/privacy-policy'
+    | '/shop'
+    | '/terms-of-service'
+    | '/category/$slug'
+    | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop' | '/category/$slug' | '/product/$id'
-  id: '__root__' | '/' | '/shop' | '/category/$slug' | '/product/$id'
-=======
-  fullPaths: '/' | '/category/$slug' | '/product/$id'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/category/$slug' | '/product/$id'
-  id: '__root__' | '/' | '/category/$slug' | '/product/$id'
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  to:
+    | '/'
+    | '/privacy-policy'
+    | '/shop'
+    | '/terms-of-service'
+    | '/category/$slug'
+    | '/product/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/privacy-policy'
+    | '/shop'
+    | '/terms-of-service'
+    | '/category/$slug'
+    | '/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-<<<<<<< HEAD
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ShopRoute: typeof ShopRoute
-=======
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   CategorySlugRoute: typeof CategorySlugRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -123,10 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-<<<<<<< HEAD
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ShopRoute: ShopRoute,
-=======
->>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
+  TermsOfServiceRoute: TermsOfServiceRoute,
   CategorySlugRoute: CategorySlugRoute,
   ProductIdRoute: ProductIdRoute,
 }
