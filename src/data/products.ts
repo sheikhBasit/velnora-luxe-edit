@@ -1,23 +1,35 @@
+<<<<<<< HEAD
 ﻿export type Product = {
+=======
+export type Product = {
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   id: string;
   name: string;
   note: string;
   price: string;
   image: string;
   category: string; // matches the section id: "makeup", "skincare", etc.
+<<<<<<< HEAD
   amazonUrl: string; // Amazon affiliate link
+=======
+  amazonUrl: string; // your Amazon affiliate link
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   description: string;
   features: string[];
   badge?: string; // e.g. "Editor's Pick", "Best Seller"
 };
 
 export const products: Product[] = [
+<<<<<<< HEAD
   // --- MAKEUP SUITE (makeup) ---
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   {
     id: "velvet-noir-lip-lacquer",
     name: "Velvet Noir Lip Lacquer",
     note: "Liquid · Deep Plum",
     price: "$48",
+<<<<<<< HEAD
     image: "/assets/makeup.jpg",
     category: "makeup",
     amazonUrl: "https://www.amazon.com/dp/B0716KGFKK?tag=velnora-luxe-20",
@@ -515,6 +527,16 @@ export const products: Product[] = [
       "A professional, stationary phototherapy panel engineered for broad-coverage face and chest treatments. Accelerates structural tissue repair and eviscerates widespread skin dullness.",
     features: ["Broad coverage therapy", "Red + NIR phototherapy", "Professional-grade output"],
   },
+=======
+    image: "/assets/products/makeup-1.jpg",
+    category: "makeup",
+    amazonUrl: "https://www.amazon.com/dp/XXXXXXXXXX?tag=YOUR-AFFILIATE-TAG",
+    description: "A couture-grade lip lacquer with an impossibly smooth matte finish.",
+    features: ["Long-wearing formula", "Hydrating base", "16-hour wear"],
+    badge: "Editor's Pick",
+  },
+  // ... add all your products
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
 ];
 
 // Helper: get products by category

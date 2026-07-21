@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, X } from "lucide-react";
+=======
+import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
 
 export function Header() {
   const [solid, setSolid] = useState(false);
@@ -54,6 +59,7 @@ export function Header() {
   };
 
   return (
+<<<<<<< HEAD
     <>
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 pointer-events-auto"
@@ -134,5 +140,27 @@ export function Header() {
         </div>
       ) : null}
     </>
+=======
+    <header
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        backgroundColor: solid ? "var(--color-background)" : "transparent",
+        borderBottom: solid ? "1px solid var(--color-border)" : "1px solid transparent",
+        backdropFilter: solid ? "saturate(140%) blur(8px)" : "none",
+      }}
+    >
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-12">
+        <a href="/" className="font-serif text-2xl tracking-[0.2em] text-foreground md:text-[28px]">
+          VELNORA
+        </a>
+        <nav className="hidden items-center gap-10 md:flex">
+          <Link to="/category/$slug" params={{ slug: "makeup" }} className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">The Edits</Link>
+          <a href="#about" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">About</a>
+          <a href="#editorial" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition">Editorial</a>
+        </nav>
+        <div className="h-11 w-11" />
+      </div>
+    </header>
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   );
 }

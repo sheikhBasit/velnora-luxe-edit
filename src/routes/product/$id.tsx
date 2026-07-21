@@ -11,6 +11,7 @@ export const Route = createFileRoute("/product/$id")({
     if (!product) throw notFound();
     return { product };
   },
+<<<<<<< HEAD
   head: ({ loaderData }) => {
     const product = loaderData?.product;
     return {
@@ -29,10 +30,16 @@ export const Route = createFileRoute("/product/$id")({
       ],
     };
   },
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
 });
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
+<<<<<<< HEAD
+=======
+  const priceLabel = `${product.price} — View at Retailer`;
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
 
   return (
     <main className="bg-background text-foreground min-h-screen">
@@ -48,13 +55,25 @@ function ProductPage() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="aspect-square overflow-hidden rounded-sm bg-muted">
+<<<<<<< HEAD
             <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+=======
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-cover"
+            />
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
           </div>
           <div className="flex flex-col justify-center">
             {product.badge && <p className="eyebrow mb-4">{product.badge}</p>}
             <h1 className="font-serif text-4xl md:text-5xl mb-3">{product.name}</h1>
             <p className="text-muted-foreground text-sm mb-6">{product.note}</p>
+<<<<<<< HEAD
             <p className="font-serif text-3xl mb-8">{product.price}</p>
+=======
+            <p className="font-serif text-3xl mb-8">{priceLabel}</p>
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
             <p className="text-sm leading-relaxed text-muted-foreground mb-8">
               {product.description}
             </p>
@@ -66,6 +85,7 @@ function ProductPage() {
                 </li>
               ))}
             </ul>
+<<<<<<< HEAD
             <div className="flex justify-center">
               <a
                 href={product.amazonUrl}
@@ -78,6 +98,19 @@ function ProductPage() {
             </div>
             <p className="mt-4 text-[10px] text-muted-foreground">
               As an Amazon Associate, Velnora earns from qualifying purchases.
+=======
+            {/* THE MONEY BUTTON */}
+            <a
+              href={product.amazonUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="pill-btn inline-flex items-center gap-2 w-fit"
+            >
+              View at Retailer <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
+            </a>
+            <p className="mt-4 text-[10px] text-muted-foreground">
+              This recommendation opens the current retailer listing for reference.
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
             </p>
           </div>
         </div>

@@ -37,34 +37,53 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/shop': typeof ShopRoute
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/shop': typeof ShopRoute
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/shop': typeof ShopRoute
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
+<<<<<<< HEAD
   fullPaths: '/' | '/shop' | '/category/$slug' | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/shop' | '/category/$slug' | '/product/$id'
   id: '__root__' | '/' | '/shop' | '/category/$slug' | '/product/$id'
+=======
+  fullPaths: '/' | '/category/$slug' | '/product/$id'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/category/$slug' | '/product/$id'
+  id: '__root__' | '/' | '/category/$slug' | '/product/$id'
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+<<<<<<< HEAD
   ShopRoute: typeof ShopRoute
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   CategorySlugRoute: typeof CategorySlugRoute
   ProductIdRoute: typeof ProductIdRoute
 }
@@ -104,7 +123,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+<<<<<<< HEAD
   ShopRoute: ShopRoute,
+=======
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
   CategorySlugRoute: CategorySlugRoute,
   ProductIdRoute: ProductIdRoute,
 }

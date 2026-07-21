@@ -23,6 +23,7 @@ export const Route = createFileRoute("/category/$slug")({
 
 function CategoryPage() {
   const { category, products } = Route.useLoaderData();
+<<<<<<< HEAD
 
   return (
     <main className="bg-background text-foreground">
@@ -35,11 +36,28 @@ function CategoryPage() {
           <h1 className="font-serif text-5xl md:text-7xl mb-6">The {category.label}</h1>
           <p className="text-muted-foreground max-w-lg mb-16">
             Curated selections, editor-tested and affiliate-linked to Amazon.
+=======
+  const formatPriceLabel = (price: string) => `${price} — View at Retailer`;
+
+  return (
+    <main className="bg-background text-foreground min-h-screen">
+      <Header />
+      <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <Reveal>
+          <p className="eyebrow mb-4">{category.index} — {category.label}</p>
+          <h1 className="font-serif text-5xl md:text-7xl mb-6">The {category.label}</h1>
+          <p className="text-muted-foreground max-w-lg mb-16">
+            Curated selections, editor-tested and linked to retailer listings for reference.
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
           </p>
         </Reveal>
 
         {/* Filter bar (optional) */}
+<<<<<<< HEAD
         <div className="flex gap-3 mb-12 overflow-x-auto pb-2 no-scrollbar">
+=======
+        <div className="flex gap-3 mb-12 overflow-x-auto pb-2">
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
           {categories.map((c) => (
             <Link
               key={c.id}
@@ -55,11 +73,19 @@ function CategoryPage() {
         </div>
 
         {/* Product grid */}
+<<<<<<< HEAD
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
                 <Link to="/product/$id" params={{ id: product.id }}>
+=======
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          {products.map((product, i) => (
+            <Reveal key={product.id} delay={i * 60}>
+              <article className="group flex flex-col">
+                <a href={product.amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className="block">
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
                   <div className="relative aspect-square overflow-hidden rounded-sm bg-muted mb-4">
                     <img
                       src={product.image}
@@ -76,16 +102,28 @@ function CategoryPage() {
                   <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-2">
                     {product.note}
                   </p>
+<<<<<<< HEAD
                 </Link>
                 <div className="mt-auto flex items-center justify-between gap-3">
                   <span className="text-sm text-foreground/80">{product.price}</span>
+=======
+                </a>
+                <div className="mt-auto flex items-center justify-between gap-3">
+                  <span className="text-sm">{formatPriceLabel(product.price)}</span>
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
                   <a
                     href={product.amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
+<<<<<<< HEAD
                     className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
                   >
                     Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+=======
+                    className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                  >
+                    View at Retailer <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
                   </a>
                 </div>
               </article>

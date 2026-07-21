@@ -34,6 +34,7 @@ export function Footer() {
         </form>
 
         <nav className="mt-14 flex flex-wrap justify-center gap-x-10 gap-y-4 text-[11px] uppercase tracking-[0.28em] text-background/70">
+<<<<<<< HEAD
           <a href="/category/makeup" className="hover:text-background transition">
             Shop
           </a>
@@ -50,6 +51,12 @@ export function Footer() {
           <a href="mailto:hello@velnora.com" className="hover:text-background transition">
             Contact
           </a>
+=======
+          <a href="#" className="hover:text-background transition">The Edits</a>
+          <a href="#" className="hover:text-background transition">About</a>
+          <a href="#" className="hover:text-background transition">Disclosure</a>
+          <a href="#" className="hover:text-background transition">Contact</a>
+>>>>>>> 4a85e38 (Refine site to editorial beauty curation UI)
         </nav>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
