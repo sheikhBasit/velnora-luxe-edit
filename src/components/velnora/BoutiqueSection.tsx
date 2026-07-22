@@ -30,7 +30,7 @@ export function BoutiqueSection({
   products: ProductPreview[];
   reverse?: boolean;
 }) {
-  const defaultRetailerUrl = "https://www.amazon.com/";
+  const defaultRetailerUrl = "";
   const featuredHref = featured.retailerUrl ?? defaultRetailerUrl;
 
   return (
