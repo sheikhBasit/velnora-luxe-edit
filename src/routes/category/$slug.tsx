@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { getProductsByCategory, categories } from "@/data/products";
+import { getProductsByCategory, categories, type Product } from "@/data/products";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
@@ -22,59 +22,68 @@ export const Route = createFileRoute("/category/$slug")({
 });
 
 function CategoryPage() {
-  const { category, products } = Route.useLoaderData();
-  const formatPriceLabel = (price: string) => {
-    return `${price} — View at Retailer`;
+  const { category, products } = Route.useLoaderData() as {
+    category: (typeof categories)[number];
+    products: Product[];
   };
+  const formatPriceLabel = (price: string) => `${price} — View at Retailer`;
+
+  const filterOptions = [
+    { id: "all", label: "ALL", slug: category.id },
+    ...categories.map((c) => ({ id: c.id, label: c.label.toUpperCase(), slug: c.id })),
+  ];
 
   return (
-    <main className="bg-background text-foreground min-h-screen">
+    <main className="min-h-screen bg-background text-foreground">
       <Header />
-      <div className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <div className="mx-auto max-w-[1400px] px-6 pb-24 pt-32 md:px-12">
         <Reveal>
-          <p className="eyebrow mb-4">{category.index} — {category.label}</p>
-          <h1 className="font-serif text-5xl md:text-7xl mb-6">The {category.label}</h1>
-          <p className="text-muted-foreground max-w-lg mb-16">
-            Curated selections, editor-tested and linked to retailer listings for reference.
-          </p>
+          <div className="max-w-3xl">
+            <p className="eyebrow mb-4">Curated edit · {category.label.toUpperCase()}</p>
+            <h1 className="mb-6 font-serif text-5xl leading-[0.95] md:text-7xl">The Edits</h1>
+            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Curated selections, editor-tested and linked to retailer listings for reference.
+            </p>
+          </div>
         </Reveal>
 
-        {/* Filter bar (optional) */}
-        <div className="flex gap-3 mb-12 overflow-x-auto pb-2">
-          {categories.map((c) => (
-            <Link
-              key={c.id}
-              to="/category/$slug"
-              params={{ slug: c.id }}
-              className={`pill-btn text-xs h-9 px-5 whitespace-nowrap ${
-                c.id === category.id ? "" : "pill-btn-outline"
-              }`}
-            >
-              {c.label}
-            </Link>
-          ))}
+        <div className="mt-10 flex flex-wrap gap-3 pb-2">
+          {filterOptions.map((option) => {
+            const isActive = option.slug === category.id || (option.id === "all" && category.id === "makeup");
+            return (
+              <Link
+                key={option.id}
+                to="/category/$slug"
+                params={{ slug: option.slug }}
+                className={`pill-btn h-10 px-5 text-[11px] uppercase tracking-[0.24em] whitespace-nowrap ${
+                  isActive ? "" : "pill-btn-outline"
+                }`}
+              >
+                {option.label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Product grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 md:gap-8">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
                 <a href={product.amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className="block">
-                  <div className="relative aspect-square overflow-hidden rounded-sm bg-muted mb-4">
+                  <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     {product.badge && (
-                      <span className="absolute top-3 left-3 text-[10px] uppercase tracking-[0.2em] bg-background px-2 py-1 rounded-full">
+                      <span className="absolute left-3 top-3 rounded-full bg-background px-2 py-1 text-[10px] uppercase tracking-[0.2em]">
                         {product.badge}
                       </span>
                     )}
                   </div>
-                  <h3 className="font-serif text-base mb-0.5">{product.name}</h3>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-2">
+                  <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
+                  <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                     {product.note}
                   </p>
                 </a>
@@ -84,7 +93,7 @@ function CategoryPage() {
                     href={product.amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
-                    className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                    className="flex items-center gap-1.5 rounded-full border border-foreground/20 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] transition-colors hover:bg-foreground hover:text-background"
                   >
                     View at Retailer <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
                   </a>

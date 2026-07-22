@@ -84,9 +84,9 @@ export const products: Product[] = [
 ];
 
 export const categories = [
-  { id: "makeup", name: "Makeup", description: "Editorial color stories" },
-  { id: "skincare", name: "Skincare", description: "Skin-first rituals" },
-  { id: "hair", name: "Hair", description: "Gloss and movement" },
+  { id: "makeup", name: "Makeup", label: "Makeup", description: "Editorial color stories", index: "01" },
+  { id: "skincare", name: "Skincare", label: "Skincare", description: "Skin-first rituals", index: "02" },
+  { id: "hair", name: "Hair", label: "Hair", description: "Gloss and movement", index: "03" },
 ];
 
 export function getProductsByCategory(category: string) {

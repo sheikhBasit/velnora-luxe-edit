@@ -34,24 +34,21 @@ export function Footer() {
         </form>
 
         <nav className="mt-14 flex flex-wrap justify-center gap-x-10 gap-y-4 text-[11px] uppercase tracking-[0.28em] text-background/70">
-          <Link to="/category/$slug" params={{ slug: "makeup" }} className="hover:text-background transition">
+          <Link to="/category/$slug" params={{ slug: "makeup" }} className="transition hover:text-background">
             THE EDITS
           </Link>
-          <Link to="/#about" className="hover:text-background transition">
+          <Link to="/#about" className="transition hover:text-background">
             ABOUT
           </Link>
-          <button type="button" onClick={() => setDisclosureOpen(true)} className="hover:text-background transition">
+          <button type="button" onClick={() => setDisclosureOpen(true)} className="transition hover:text-background">
             DISCLOSURE
           </button>
-          <Link to="/privacy-policy" className="hover:text-background transition">
+          <Link to="/privacy-policy" className="transition hover:text-background">
             PRIVACY POLICY
           </Link>
-          <Link to="/terms-of-service" className="hover:text-background transition">
+          <Link to="/terms-of-service" className="transition hover:text-background">
             TERMS OF SERVICE
           </Link>
-          <a href="mailto:hello@velnora.com" className="hover:text-background transition">
-            CONTACT
-          </a>
         </nav>
 
         <div className="mt-16 border-t border-background/10 pt-8 text-[11px] leading-relaxed text-background/45">
@@ -67,10 +64,10 @@ export function Footer() {
           <DialogTitle>Disclosure</DialogTitle>
           <DialogDescription className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
             <p>
-              As an Amazon Associate, I earn from qualifying purchases. VELNORA is an independent curation and a Skimlinks partner.
+              VELNORA is an independent editorial curation platform. We partner with various affiliate networks to earn commissions on curated selections through retailer links at no extra cost to you.
             </p>
             <p>
-              This editorial is produced independently and is not a storefront. The selections shown represent a curated beauty edit, and affiliate partnerships allow the Maison to publish without pay-to-play placement.
+              Our recommendations are curated for editorial interest and are not a substitute for personal shopping advice. Purchases, shipping, returns, and customer support are managed directly by the relevant third-party retailers.
             </p>
           </DialogDescription>
         </DialogContent>

@@ -17,20 +17,21 @@ function PrivacyPage() {
       <div className="mx-auto max-w-[900px] px-6 py-24 md:py-32">
         <h1 className="font-serif text-4xl md:text-6xl">Privacy Policy</h1>
         <p className="mt-8 text-base leading-relaxed text-muted-foreground">
-          We respect your privacy. This page outlines our commitment to protecting visitor
-          information. It describes what data we collect, how it's used, and how you can manage
-          your preferences.
+          VELNORA is an independent editorial curation platform. We respect your privacy and are committed to protecting your personal information while you browse our recommendations and retailer links.
         </p>
 
-        <section className="mt-10 space-y-6 text-sm text-muted-foreground">
+        <section className="mt-10 space-y-6 text-sm leading-relaxed text-muted-foreground">
           <p>
-            Velnora collects minimal analytics to understand site performance and improve the
-            editorial experience. We may also use affiliate tracking to attribute commissions on
-            purchases made through links on our site.
+            We collect only the information necessary to operate the site, understand performance, and improve the editorial experience. This may include standard analytics data such as device, browser, and site interaction information, as well as information you voluntarily provide through forms or communications.
           </p>
           <p>
-            If you have questions about your data or would like more details, please contact us at
-            <a className="underline ml-1" href="mailto:hello@velnora.com">hello@velnora.com</a>.
+            VELNORA may use affiliate and referral tracking to attribute purchases made through curated retailer links. This helps us maintain our editorial platform at no additional cost to you. We do not sell personal data to third parties for unrelated marketing purposes.
+          </p>
+          <p>
+            VELNORA operates strictly as an editorial curation portal. Transactions, shipping, returns, refunds, and customer support are handled entirely by third-party retailers and merchants when you choose to purchase a featured product.
+          </p>
+          <p>
+            If you have questions about this policy or would like to request access to or deletion of your information, please contact us at <a className="ml-1 underline" href="mailto:hello@velnora.com">hello@velnora.com</a>.
           </p>
         </section>
 
