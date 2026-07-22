@@ -28,9 +28,10 @@ function ShopPage() {
       "skincare-sanctuary": "skincare",
       hair: "hair",
       "hair-lab": "hair",
-      bath: "bath",
-      "bath-body": "bath",
-      "bath-and-body": "bath",
+      body: "body",
+      bath: "body",
+      "bath-body": "body",
+      "bath-and-body": "body",
       tools: "tools",
       "tool-box": "tools",
       fragrance: "fragrance",
@@ -122,7 +123,7 @@ function ShopPage() {
                   <a
                     href={product.amazonUrl}
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="noopener noreferrer sponsored"
                     className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
                   >
                     Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />

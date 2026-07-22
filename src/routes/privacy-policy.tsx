@@ -28,10 +28,7 @@ function PrivacyPage() {
             VELNORA may use affiliate and referral tracking to attribute purchases made through curated retailer links. This helps us maintain our editorial platform at no additional cost to you. We do not sell personal data to third parties for unrelated marketing purposes.
           </p>
           <p>
-            VELNORA operates strictly as an editorial curation portal. Transactions, shipping, returns, refunds, and customer support are handled entirely by third-party retailers and merchants when you choose to purchase a featured product.
-          </p>
-          <p>
-            If you have questions about this policy or would like to request access to or deletion of your information, please contact us at <a className="ml-1 underline" href="mailto:hello@velnora.com">hello@velnora.com</a>.
+            VELNORA operates strictly as an editorial curation portal and shopping directory. We do not collect, process, or store personal user accounts, payment data, or order records. Any transactions, data inquiries, support requests, and account-related matters are handled directly on the destination merchant or brand websites.
           </p>
         </section>
 

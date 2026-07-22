@@ -55,7 +55,7 @@ export function BoutiqueSection({
         <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
           <Reveal className="lg:col-span-3 lg:[direction:ltr]">
             <article className="group relative overflow-hidden rounded-sm bg-muted">
-              <a href={featuredHref} target="_blank" rel="noopener noreferrer nofollow" className="block">
+              <a href={featuredHref} target="_blank" rel="noopener noreferrer sponsored" className="block">
                 <div className="aspect-[4/5] w-full overflow-hidden md:aspect-[5/4]">
                   <img
                     src={image}
@@ -75,7 +75,7 @@ export function BoutiqueSection({
               <a
                 href={featuredHref}
                 target="_blank"
-                rel="noopener noreferrer nofollow"
+                rel="noopener noreferrer sponsored"
                 className="pill-btn pill-btn-outline absolute bottom-6 right-6 border-background text-background hover:bg-background hover:text-foreground"
               >
                 View at Retailer
@@ -91,7 +91,7 @@ export function BoutiqueSection({
                 return (
                   <Reveal key={product.name} delay={index * 80}>
                     <article className="group flex h-full flex-col">
-                      <a href={href} target="_blank" rel="noopener noreferrer nofollow" className="block">
+                      <a href={href} target="_blank" rel="noopener noreferrer sponsored" className="block">
                         <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
                           <img
                             src={product.image}

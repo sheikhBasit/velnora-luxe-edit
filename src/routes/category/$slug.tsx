@@ -28,10 +28,7 @@ function CategoryPage() {
   };
   const formatPriceLabel = (price: string) => `${price} — View at Retailer`;
 
-  const filterOptions = [
-    { id: "all", label: "ALL", slug: category.id },
-    ...categories.map((c) => ({ id: c.id, label: c.label.toUpperCase(), slug: c.id })),
-  ];
+  const filterOptions = categories.map((c) => ({ id: c.id, label: c.label, slug: c.id }));
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -49,7 +46,7 @@ function CategoryPage() {
 
         <div className="mt-10 flex flex-wrap gap-3 pb-2">
           {filterOptions.map((option) => {
-            const isActive = option.slug === category.id || (option.id === "all" && category.id === "makeup");
+            const isActive = option.slug === category.id;
             return (
               <Link
                 key={option.id}
@@ -69,7 +66,7 @@ function CategoryPage() {
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
-                <a href={product.amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className="block">
+                <a href={product.amazonUrl} target="_blank" rel="noopener noreferrer sponsored" className="block">
                   <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
                     <img
                       src={product.image}
@@ -92,7 +89,7 @@ function CategoryPage() {
                   <a
                     href={product.amazonUrl}
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="noopener noreferrer sponsored"
                     className="flex items-center gap-1.5 rounded-full border border-foreground/20 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] transition-colors hover:bg-foreground hover:text-background"
                   >
                     View at Retailer <ExternalLink className="h-3 w-3" strokeWidth={1.5} />

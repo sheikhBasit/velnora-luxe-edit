@@ -57,7 +57,7 @@ function ProductPage() {
             <a
               href={product.amazonUrl}
               target="_blank"
-              rel="noopener noreferrer nofollow"
+              rel="noopener noreferrer sponsored"
               className="pill-btn inline-flex items-center gap-2 w-fit"
             >
               View at Retailer <ExternalLink className="h-4 w-4" strokeWidth={1.5} />

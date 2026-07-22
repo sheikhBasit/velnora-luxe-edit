@@ -31,7 +31,7 @@ function TermsPage() {
             The content on this site, including text, imagery, and editorial selections, is protected by copyright and other intellectual property rights. You may view and share content for personal, non-commercial use, but you may not copy, reproduce, or redistribute it without permission.
           </p>
           <p>
-            For questions regarding these terms or the operation of the site, please contact us at <a className="underline" href="mailto:hello@velnora.com">hello@velnora.com</a>.
+            VELNORA does not collect, process, or store personal user accounts, payment data, or transaction records. Any account, payment, or support matter related to a purchase is handled directly on the destination merchant or brand website.
           </p>
         </section>
 
