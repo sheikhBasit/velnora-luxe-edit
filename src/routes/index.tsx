@@ -60,6 +60,14 @@ export const Route = createFileRoute("/")({
         name: "fo-verify",
         content: "29fd5c78-ee73-4760-83fa-f1f6953db833"
       },
+      {
+        name: "verify-admitad",
+        content: "e29cc7bdb5",
+      },
+      {
+        name: "p:domain_verify",
+        content: "e41e5ff4edbb018d9c2ea72e9c5126c0",
+      },
       { property: "og:title", content: "Velnora — The 2026 Beauty Edit" },
       { property: "og:description", content: "A curated house of luxury beauty." },
       { property: "og:type", content: "website" },
