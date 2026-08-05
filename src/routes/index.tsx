@@ -355,9 +355,6 @@ function Index() {
               <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                 Eight chapters. One obsession. From the Maison's archive to your vanity.
               </p>
-              <p className="mt-4 text-[11px] font-medium uppercase tracking-[0.24em] text-foreground">
-                AFFILIATE PARTNERSHIP VERIFICATION — HELLO AWIN
-              </p>
             </div>
           </Reveal>
         </div>
