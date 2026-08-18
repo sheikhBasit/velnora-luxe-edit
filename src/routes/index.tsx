@@ -96,7 +96,7 @@ const sections: Array<{
       featured: { id: "velvet-noir-lip-lacquer", name: "Velvet Noir Lip Lacquer", tag: "Editor's Pick", price: "$48" },
       products: [
         { id: "cashmere-blush", name: "Cashmere Blush", note: "Powder · Rose", price: "$38", image: makeup1 },
-        { id: "obsidian-liner", name: "Obsidian Liner", note: "Liquid · Jet", price: "$26", image: makeup2 },
+        { id: "sisley-phyto-noir-mascara", name: "Phyto-Noir Mascara", note: "SISLEY PARIS · 1 DEEP BLACK", price: "$90", image: makeup2, retailerUrl: "https://click.linksynergy.com/link?id=9rwYl9JSYLI&offerid=816416.4620810021565468351465882&type=2&murl=https%3a%2f%2fwww.sisley-paris.com%2fen-US%2fphyto-noir-mascara-100209.html" },
         { id: "halo-highlighter", name: "Halo Highlighter", note: "Cream · Champagne", price: "$42", image: makeup3 },
         { id: "silk-foundation", name: "Silk Foundation", note: "Liquid · 30ml", price: "$58", image: makeup4 },
       ],

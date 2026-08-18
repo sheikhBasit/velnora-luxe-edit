@@ -90,26 +90,34 @@ export function BoutiqueSection({
 
                 return (
                   <Reveal key={product.name} delay={index * 80}>
-                    <article className="group flex h-full flex-col">
-                      <a href={href} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                        <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            loading="lazy"
-                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
+                    <article className="group relative flex h-full flex-col">
+                      <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        
+                        {/* Slide-up White Box CTA */}
+                        <a 
+                          href={href} 
+                          target="_blank" 
+                          rel="noopener noreferrer sponsored" 
+                          className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 w-[85%] py-2.5 bg-background text-foreground border border-foreground text-[10px] font-semibold tracking-[0.15em] uppercase text-center opacity-0 transition-all duration-300 ease-out shadow-lg group-hover:bottom-3 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
+                        >
+                          VIEW AT RETAILER
+                        </a>
+                      </div>
+                      <div className="mt-4 flex items-baseline justify-between gap-2">
+                        <div>
+                          <h4 className="font-serif text-base text-foreground">{product.name}</h4>
+                          <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                            {product.note}
+                          </p>
                         </div>
-                        <div className="mt-4 flex items-baseline justify-between gap-2">
-                          <div>
-                            <h4 className="font-serif text-base text-foreground">{product.name}</h4>
-                            <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                              {product.note}
-                            </p>
-                          </div>
-                          <span className="font-sans text-sm text-foreground">{product.price}</span>
-                        </div>
-                      </a>
+                        <span className="font-sans text-sm text-foreground">{product.price}</span>
+                      </div>
                     </article>
                   </Reveal>
                 );
