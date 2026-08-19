@@ -215,7 +215,8 @@ function Hero() {
   return (
     <section id="editorial" className="relative">
       {/* Mobile: full-bleed banner */}
-      <div className="relative h-[100svh] min-h-[640px] w-full lg:hidden anti-gravity-section mobile-hero-banner">
+      <div className="lg:hidden">
+        <div className="relative h-[65svh] min-h-[460px] w-full overflow-hidden bg-muted">
         <img
           src={hero}
           alt="Velnora — The 2026 Beauty Edit"
@@ -223,23 +224,17 @@ function Hero() {
           height={1600}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.85) 100%)",
-          }}
-        />
-        <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 text-background">
-          <p className="text-[10px] uppercase tracking-[0.4em] opacity-80">
+        </div>
+        <div className="bg-background px-6 py-12 text-foreground">
+          <p className="eyebrow">
             Maison Velnora · Volume X
           </p>
-          <h1 className="mt-4 font-serif text-[3.25rem] leading-[0.95]">
+          <h1 className="mt-4 font-serif text-5xl leading-[0.95]">
             The 2026
             <br />
             Beauty Edit.
           </h1>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed opacity-90">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
             A private curation of the year's most coveted objects in beauty — from the Maison's
             archive to your vanity.
           </p>
@@ -297,16 +292,6 @@ function Hero() {
             height={1600}
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.75) 100%)",
-            }}
-          />
-          <div className="absolute bottom-8 right-8 rounded-full bg-background/90 px-5 py-3 text-[10px] uppercase tracking-[0.3em] text-foreground backdrop-blur">
-            Cover · No. 01
-          </div>
         </div>
       </div>
     </section>

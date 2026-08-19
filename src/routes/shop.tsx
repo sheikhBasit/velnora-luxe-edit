@@ -5,7 +5,6 @@ import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
 import { Link } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/shop")({
   component: ShopPage,
@@ -100,35 +99,30 @@ function ShopPage() {
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
-                <Link to="/product/$id" params={{ id: product.id }}>
-                  <div className="relative aspect-square overflow-hidden rounded-sm bg-muted mb-4">
+                <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
+                  <Link to="/product/$id" params={{ id: product.id }} className="block h-full">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {product.badge && (
-                      <span className="absolute top-3 left-3 text-[10px] uppercase tracking-[0.2em] bg-background px-2 py-1 rounded-full">
-                        {product.badge}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-serif text-base mb-0.5">{product.name}</h3>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mb-2">
-                    {product.note}
-                  </p>
-                </Link>
-                <div className="mt-auto flex items-center justify-between gap-3">
-                  <span className="text-sm text-foreground/80">{product.price}</span>
+                  </Link>
                   <a
-                    href={product.amazonUrl}
+                    href={product.amazonUrl || undefined}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] border border-foreground/20 rounded-full px-3 py-1.5 hover:bg-foreground hover:text-background transition-colors"
+                    className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
                   >
-                    Shop <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
+                    VIEW AT RETAILER
                   </a>
                 </div>
+                <Link to="/product/$id" params={{ id: product.id }}>
+                  <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
+                  <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {product.note}
+                  </p>
+                  <span className="text-sm text-foreground/80">{product.price}</span>
+                </Link>
               </article>
             </Reveal>
           ))}

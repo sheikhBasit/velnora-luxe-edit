@@ -285,6 +285,10 @@
 
 /* Hide mobile-only bottom floating nav containing Editorial / Shop / Search */
 @media (max-width: 768px) {
+  .product-card-cta {
+    display: none;
+  }
+
   .mobile-bottom-nav,
   .bottom-navigation,
   .nav-bottom,

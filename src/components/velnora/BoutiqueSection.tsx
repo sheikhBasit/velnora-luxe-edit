@@ -55,7 +55,7 @@ export function BoutiqueSection({
         <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
           <Reveal className="lg:col-span-3 lg:[direction:ltr]">
             <article className="group relative overflow-hidden rounded-sm bg-muted">
-              <a href={featuredHref} target="_blank" rel="noopener noreferrer sponsored" className="block">
+              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
                 <div className="aspect-[4/5] w-full overflow-hidden md:aspect-[5/4]">
                   <img
                     src={image}
@@ -64,21 +64,6 @@ export function BoutiqueSection({
                     className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent p-6 md:p-10">
-                  <div className="text-background">
-                    <p className="text-[10px] uppercase tracking-[0.32em] opacity-80">{featured.tag}</p>
-                    <h3 className="mt-2 font-serif text-2xl md:text-4xl">{featured.name}</h3>
-                    <p className="mt-2 text-sm opacity-90">{`${featured.price} — View at Retailer`}</p>
-                  </div>
-                </div>
-              </a>
-              <a
-                href={featuredHref}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="pill-btn pill-btn-outline absolute bottom-6 right-6 border-background text-background hover:bg-background hover:text-foreground"
-              >
-                View at Retailer
               </a>
             </article>
           </Reveal>
@@ -92,19 +77,24 @@ export function BoutiqueSection({
                   <Reveal key={product.name} delay={index * 80}>
                     <article className="group relative flex h-full flex-col">
                       <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          loading="lazy"
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        
-                        {/* Slide-up White Box CTA */}
-                        <a 
-                          href={href} 
-                          target="_blank" 
-                          rel="noopener noreferrer sponsored" 
-                          className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 w-[85%] py-2.5 bg-background text-foreground border border-foreground text-[10px] font-semibold tracking-[0.15em] uppercase text-center opacity-0 transition-all duration-300 ease-out shadow-lg group-hover:bottom-3 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
+                        <a
+                          href={href || undefined}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="product-card-link block h-full"
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </a>
+                        <a
+                          href={href || undefined}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
                         >
                           VIEW AT RETAILER
                         </a>

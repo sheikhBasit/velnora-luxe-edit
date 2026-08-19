@@ -4,7 +4,6 @@ import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
 import { Link } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
 
 export const Route = createFileRoute("/category/$slug")({
   component: CategoryPage,
@@ -26,8 +25,6 @@ function CategoryPage() {
     category: (typeof categories)[number];
     products: Product[];
   };
-  const formatPriceLabel = (price: string) => `${price} — View at Retailer`;
-
   const filterOptions = categories.map((c) => ({ id: c.id, label: c.label, slug: c.id }));
 
   return (
@@ -66,35 +63,30 @@ function CategoryPage() {
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
-                <a href={product.amazonUrl} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                  <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
+                <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
+                  <a href={product.amazonUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block h-full">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {product.badge && (
-                      <span className="absolute left-3 top-3 rounded-full bg-background px-2 py-1 text-[10px] uppercase tracking-[0.2em]">
-                        {product.badge}
-                      </span>
-                    )}
-                  </div>
+                  </a>
+                  <a
+                    href={product.amazonUrl || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
+                  >
+                    VIEW AT RETAILER
+                  </a>
+                </div>
+                <a href={product.amazonUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
                   <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
                   <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                     {product.note}
                   </p>
+                  <span className="text-sm">{product.price}</span>
                 </a>
-                <div className="mt-auto flex items-center justify-between gap-3">
-                  <span className="text-sm">{formatPriceLabel(product.price)}</span>
-                  <a
-                    href={product.amazonUrl}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 rounded-full border border-foreground/20 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] transition-colors hover:bg-foreground hover:text-background"
-                  >
-                    View at Retailer <ExternalLink className="h-3 w-3" strokeWidth={1.5} />
-                  </a>
-                </div>
               </article>
             </Reveal>
           ))}

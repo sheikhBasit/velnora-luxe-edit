@@ -2,7 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { getProduct } from "@/data/products";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
-import { ExternalLink, Check, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
   component: ProductPage,
@@ -15,8 +15,6 @@ export const Route = createFileRoute("/product/$id")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  const priceLabel = `${product.price} — View at Retailer`;
-
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Header />
@@ -30,42 +28,14 @@ function ProductPage() {
         </Link>
 
         <div className="grid md:grid-cols-2 gap-16">
-          <div className="aspect-square overflow-hidden rounded-sm bg-muted">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            {product.badge && <p className="eyebrow mb-4">{product.badge}</p>}
-            <h1 className="font-serif text-4xl md:text-5xl mb-3">{product.name}</h1>
-            <p className="text-muted-foreground text-sm mb-6">{product.note}</p>
-            <p className="font-serif text-3xl mb-8">{priceLabel}</p>
-            <p className="text-sm leading-relaxed text-muted-foreground mb-8">
-              {product.description}
-            </p>
-            <ul className="mb-10 space-y-2">
-              {product.features.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            {/* THE MONEY BUTTON */}
-            <a
-              href={product.amazonUrl}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="pill-btn inline-flex items-center gap-2 w-fit"
-            >
-              View at Retailer <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
-            </a>
-            <p className="mt-4 text-[10px] text-muted-foreground">
-              This recommendation opens the current retailer listing for reference.
-            </p>
-          </div>
+          <a
+            href={product.amazonUrl || undefined}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="block aspect-square overflow-hidden rounded-sm bg-muted md:col-span-2"
+          >
+            <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+          </a>
         </div>
       </div>
       <Footer />
