@@ -1,13 +1,13 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { getProduct } from "@/data/products";
+import { getProductById } from "@/lib/products.server";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
   component: ProductPage,
-  loader: ({ params }) => {
-    const product = getProduct(params.id);
+  loader: async ({ params }) => {
+    const product = await getProductById({ data: params.id });
     if (!product) throw notFound();
     return { product };
   },
@@ -29,7 +29,7 @@ function ProductPage() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <a
-            href={product.amazonUrl || undefined}
+            href={product.retailerUrl || undefined}
             target="_blank"
             rel="noopener noreferrer sponsored"
             className="block aspect-square overflow-hidden rounded-sm bg-muted md:col-span-2"

@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { getProductsByCategory, categories, type Product } from "@/data/products";
+import { categories, type Product } from "@/data/products";
+import { listProducts } from "@/lib/products.server";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { Reveal } from "@/components/velnora/Reveal";
@@ -13,10 +14,10 @@ export const Route = createFileRoute("/category/$slug")({
       meta: [{ title: `${cat?.label ?? "Category"} — Velnora` }],
     };
   },
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const cat = categories.find((c) => c.id === params.slug);
     if (!cat) throw notFound();
-    return { category: cat, products: getProductsByCategory(params.slug) };
+    return { category: cat, products: await listProducts({ data: { category: params.slug } }) };
   },
 });
 
@@ -64,7 +65,7 @@ function CategoryPage() {
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
                 <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
-                  <a href={product.amazonUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block h-full">
+                  <a href={product.retailerUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block h-full">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -72,7 +73,7 @@ function CategoryPage() {
                     />
                   </a>
                   <a
-                    href={product.amazonUrl || undefined}
+                    href={product.retailerUrl || undefined}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
                     className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
@@ -80,11 +81,18 @@ function CategoryPage() {
                     VIEW AT RETAILER
                   </a>
                 </div>
-                <a href={product.amazonUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                  <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
-                  <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {product.note}
-                  </p>
+                <a
+                  href={product.retailerUrl || undefined}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="flex items-baseline justify-between gap-2"
+                >
+                  <div>
+                    <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {product.note}
+                    </p>
+                  </div>
                   <span className="text-sm">{product.price}</span>
                 </a>
               </article>
