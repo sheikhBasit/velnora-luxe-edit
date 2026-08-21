@@ -1,6 +1,8 @@
 // End-to-end check of the admin dashboard against a live deployment: log in, create a product
-// with a photo, confirm it live-syncs to the public category page with no redeploy, delete it,
-// and confirm the delete syncs too. Run with:
+// with a photo, confirm it live-syncs to the public category page with no redeploy, edit it,
+// cancel a delete, then delete it for real and confirm the delete syncs too, then log out.
+// Only ever touches the one test product this script creates — never the existing catalog.
+// Run with:
 //   BASE_URL=https://www.velnorabeauty.store ADMIN_PASSWORD=... node tests/e2e/admin-flow.mjs
 import { chromium } from "playwright";
 import fs from "node:fs";
@@ -95,22 +97,55 @@ try {
     "new product appears on the public category page (live sync, no redeploy)",
   );
 
-  log("cleaning up: deleting the test product");
+  log("testing the Edit button");
+  const updatedName = `${productName} (edited)`;
   await page.goto(`${BASE_URL}/admin`);
   await page.waitForLoadState("networkidle");
-  const row = page.locator("tr", { hasText: productName });
+  await page.locator("tr", { hasText: productName }).locator('a:has-text("Edit")').click();
+  await page.waitForURL(/\/admin\/product\/e2e-test-product/);
+  await assertEventually(
+    async () => (await page.locator("#name").inputValue()) === productName,
+    "edit form is pre-filled with the product's current name",
+  );
+  await page.fill("#name", updatedName);
+  await page.click('button[type="submit"]:has-text("Save changes")');
+  await page.waitForURL(`${BASE_URL}/admin`, { timeout: 15000 });
+  await assertEventually(
+    async () => (await page.locator(`text=${updatedName}`).count()) > 0,
+    "edited name appears in admin list",
+  );
+
+  log("testing Cancel on the delete confirmation dialog");
+  await page.locator("tr", { hasText: updatedName }).locator('button:has-text("Delete")').click();
+  await page.click('button:has-text("Cancel"):visible');
+  await assertEventually(
+    async () => (await page.locator(`text=${updatedName}`).count()) > 0,
+    "Cancel on the delete dialog leaves the product in place",
+  );
+
+  log("cleaning up: deleting the test product");
+  const row = page.locator("tr", { hasText: updatedName });
   await row.locator('button:has-text("Delete")').click();
   await page.locator('button:has-text("Delete"):visible').last().click();
   await assertEventually(
-    async () => (await page.locator(`text=${productName}`).count()) === 0,
+    async () => (await page.locator(`text=${updatedName}`).count()) === 0,
     "test product removed from admin list",
   );
 
   await page.goto(`${BASE_URL}/category/${category}`);
   await assertEventually(
-    async () => (await page.locator(`text=${productName}`).count()) === 0,
+    async () => (await page.locator(`text=${updatedName}`).count()) === 0,
     "delete also disappears from the public category page (live sync)",
   );
+
+  log("testing the Log out button");
+  await page.goto(`${BASE_URL}/admin`);
+  await page.click('button:has-text("Log out")');
+  await page.waitForURL(`${BASE_URL}/admin-login`, { timeout: 15000 });
+  log("ok: log out redirects to /admin-login");
+  await page.goto(`${BASE_URL}/admin`);
+  await page.waitForURL(`${BASE_URL}/admin-login`, { timeout: 15000 });
+  log("ok: /admin requires login again after logout (session actually cleared)");
 
   log("ALL CHECKS PASSED");
 } catch (err) {
