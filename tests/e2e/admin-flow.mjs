@@ -44,6 +44,15 @@ async function assertEventually(check, msg, timeoutMs = 8000) {
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
+page.on("response", async (res) => {
+  if (res.request().method() === "POST" && res.url().includes("_serverFn")) {
+    let body = "";
+    try {
+      body = (await res.text()).slice(0, 1000);
+    } catch {}
+    console.log("[debug serverFn]", res.status(), res.url(), "BODY:", body);
+  }
+});
 
 try {
   log(`logging in at ${BASE_URL}/admin-login`);
