@@ -1,17 +1,19 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import { useSession } from "@tanstack/react-start/server";
 import { z } from "zod";
 
 type AdminSessionData = { isAdmin: boolean };
 
 // Not a React hook despite the name — it's a TanStack Start server utility for reading/sealing
-// the session cookie for the current request.
-function adminSession() {
+// the session cookie for the current request. Wrapped in createServerOnlyFn so the compiler
+// strips this (and its @tanstack/react-start/server import) from the client bundle — a plain
+// top-level function using useSession isn't enough for the import-protection plugin.
+const adminSession = createServerOnlyFn(function adminSession() {
   const secret = process.env.SESSION_SECRET;
   if (!secret) throw new Error("SESSION_SECRET is not set");
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useSession<AdminSessionData>({ password: secret, name: "velnora_admin" });
-}
+});
 
 async function timingSafeEqual(a: string, b: string) {
   const enc = new TextEncoder();
