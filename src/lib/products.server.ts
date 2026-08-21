@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { put } from "@vercel/blob";
 import { sql, ensureSchema } from "@/lib/db";
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdmin } from "@/lib/admin-auth.server";
 import { seedProducts } from "@/data/seed-products.mjs";
 import type { Product } from "@/data/products";
 

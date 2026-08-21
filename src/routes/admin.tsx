@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect, useNavigate, Link } from "@tanstack/react-router";
-import { checkAdminSession, logout } from "@/lib/admin-auth";
+import { checkAdminSession, logout } from "@/lib/admin-auth.server";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 
