@@ -78,14 +78,13 @@ try {
     "new product appears in admin list",
   );
 
-  const imageSrc = await page
-    .locator("tr", { hasText: productName })
-    .locator("img")
-    .getAttribute("src");
-  if (!imageSrc?.includes("blob.vercel-storage.com")) {
-    throw new Error(`ASSERTION FAILED: product image is hosted on Vercel Blob (got: ${imageSrc})`);
-  }
-  log("ok: product image is hosted on Vercel Blob");
+  await assertEventually(async () => {
+    const src = await page
+      .locator("tr", { hasText: productName })
+      .locator("img")
+      .getAttribute("src");
+    return !!src?.includes("blob.vercel-storage.com");
+  }, "product image is hosted on Vercel Blob");
 
   log("checking live sync on the public category page");
   await page.goto(`${BASE_URL}/category/${category}`);
