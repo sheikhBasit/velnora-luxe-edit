@@ -14,9 +14,11 @@ if (!BASE_URL || !ADMIN_PASSWORD) {
   process.exit(1);
 }
 
-// 2x2 red PNG, for exercising the image-upload-to-Vercel-Blob path.
+// 64x64 red PNG, for exercising the image-upload-to-Vercel-Blob path. (A 2x2 pixel PNG
+// reproducibly fails createImageBitmap in Chromium — real product photos are never that tiny,
+// so a realistically-sized fixture is the right test, not chasing that decoder edge case.)
 const TEST_IMAGE_B64 =
-  "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFUlEQVR42mP8z8BQz0AEYBxVSF+FAAhKDveMKXTBAAAAAElFTkSuQmCC";
+  "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYklEQVR4nO3PMQ0AIADAMEAI/qUgCxEcDcmqYJtn7/GzpQNeNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaA1oDWgNaBdQ3UBhOjh6FcAAAAASUVORK5CYII=";
 const testImagePath = path.join(os.tmpdir(), "e2e-test-image.png");
 fs.writeFileSync(testImagePath, Buffer.from(TEST_IMAGE_B64, "base64"));
 
@@ -44,15 +46,6 @@ async function assertEventually(check, msg, timeoutMs = 8000) {
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
-page.on("response", async (res) => {
-  if (res.request().method() === "POST" && res.url().includes("_serverFn")) {
-    let body = "";
-    try {
-      body = (await res.text()).slice(0, 1000);
-    } catch {}
-    console.log("[debug serverFn]", res.status(), res.url(), "BODY:", body);
-  }
-});
 
 try {
   log(`logging in at ${BASE_URL}/admin-login`);
