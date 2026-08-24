@@ -75,7 +75,7 @@ export function BoutiqueSection({
 
                 return (
                   <Reveal key={product.name} delay={index * 80}>
-                    <article className="group relative flex h-full flex-col">
+                    <article className="editorial-product-card group relative flex h-full flex-col bg-background p-3 md:p-4">
                       <div className="relative aspect-square overflow-hidden rounded-sm bg-muted">
                         <a
                           href={href || undefined}
@@ -94,7 +94,7 @@ export function BoutiqueSection({
                           href={href || undefined}
                           target="_blank"
                           rel="noopener noreferrer sponsored"
-                          className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
+                          className="product-card-cta pill-btn pill-btn-outline pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-105 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
                         >
                           VIEW AT RETAILER
                         </a>
