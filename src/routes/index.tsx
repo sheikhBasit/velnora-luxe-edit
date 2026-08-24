@@ -120,7 +120,7 @@ function buildSections(allProducts: Awaited<ReturnType<typeof listProducts>>) {
   return sectionMeta.map((meta) => {
     const inCategory = allProducts.filter((p) => p.category === meta.category);
     const featuredProduct = inCategory.find((p) => p.featured) ?? inCategory[0];
-    const gridProducts = inCategory.filter((p) => p.id !== featuredProduct?.id).slice(0, 4);
+    const gridProducts = inCategory.filter((p) => p.id !== featuredProduct?.id && p.showOnEditorial !== false).slice(0, 4);
 
     return {
       ...meta,

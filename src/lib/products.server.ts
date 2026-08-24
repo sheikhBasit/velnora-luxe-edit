@@ -12,8 +12,8 @@ export const seedStarterCatalog = createServerFn({ method: "POST" }).handler(asy
   let inserted = 0;
   for (const p of seedProducts) {
     const rows = await sql`
-      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
-      values (${p.id}, ${p.brandName ?? ""}, ${p.name}, ${p.note}, ${p.price}, ${p.image}, ${p.category}, ${p.retailerUrl}, ${p.description}, ${p.features}, ${p.badge ?? null}, ${p.featured}, ${p.sortOrder})
+      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, show_on_editorial, sort_order)
+      values (${p.id}, ${p.brandName ?? ""}, ${p.name}, ${p.note}, ${p.price}, ${p.image}, ${p.category}, ${p.retailerUrl}, ${p.description}, ${p.features}, ${p.badge ?? null}, ${p.featured}, ${p.showOnEditorial ?? true}, ${p.sortOrder})
       on conflict (id) do nothing
       returning id
     `;
@@ -50,6 +50,7 @@ type ProductRow = {
   features: string[];
   badge: string | null;
   featured: boolean;
+  show_on_editorial: boolean;
   sort_order: number;
 };
 
@@ -67,6 +68,7 @@ function rowToProduct(row: ProductRow): Product {
     features: row.features,
     badge: row.badge ?? undefined,
     featured: row.featured,
+    showOnEditorial: row.show_on_editorial,
     sortOrder: row.sort_order,
   };
 }
@@ -110,6 +112,7 @@ const productInput = z.object({
   features: z.array(z.string()).default([]),
   badge: z.string().optional(),
   featured: z.boolean().default(false),
+  showOnEditorial: z.boolean().default(true),
   sortOrder: z.number().default(0),
 });
 
@@ -119,8 +122,8 @@ export const saveProduct = createServerFn({ method: "POST" })
     await requireAdmin();
     await ensureSchema();
     const rows = (await sql`
-      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
-      values (${data.id}, ${data.brandName}, ${data.name}, ${data.note}, ${data.price}, ${data.image}, ${data.category}, ${data.retailerUrl}, ${data.description}, ${data.features}, ${data.badge ?? null}, ${data.featured}, ${data.sortOrder})
+      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, show_on_editorial, sort_order)
+      values (${data.id}, ${data.brandName}, ${data.name}, ${data.note}, ${data.price}, ${data.image}, ${data.category}, ${data.retailerUrl}, ${data.description}, ${data.features}, ${data.badge ?? null}, ${data.featured}, ${data.showOnEditorial}, ${data.sortOrder})
       on conflict (id) do update set
         brand_name = excluded.brand_name,
         name = excluded.name,
@@ -133,6 +136,7 @@ export const saveProduct = createServerFn({ method: "POST" })
         features = excluded.features,
         badge = excluded.badge,
         featured = excluded.featured,
+        show_on_editorial = excluded.show_on_editorial,
         sort_order = excluded.sort_order
       returning *
     `) as ProductRow[];

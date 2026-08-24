@@ -94,6 +94,7 @@ function AdminProductList() {
             <TableHead>Category</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>Featured</TableHead>
+            <TableHead>Editorial</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -112,6 +113,7 @@ function AdminProductList() {
               <TableCell>{categoryLabel(product.category)}</TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.featured ? "Yes" : ""}</TableCell>
+              <TableCell>{product.showOnEditorial !== false ? "Yes" : ""}</TableCell>
               <TableCell className="text-right space-x-2">
                 <Button variant="outline" size="sm" asChild>
                   <Link to="/admin/product/$id" params={{ id: product.id }}>

@@ -284,6 +284,15 @@ function AdminProductForm() {
         <Label htmlFor="featured">Featured on homepage section</Label>
       </div>
 
+      <div className="flex items-center gap-3">
+        <Switch
+          id="showOnEditorial"
+          checked={form.showOnEditorial ?? true}
+          onCheckedChange={(showOnEditorial) => setForm((f) => ({ ...f, showOnEditorial }))}
+        />
+        <Label htmlFor="showOnEditorial">Show on Editorial page</Label>
+      </div>
+
       <div className="flex gap-3">
         <Button type="submit" disabled={saving || imageBusy}>
           {saving ? "Saving…" : isNew ? "Create product" : "Save changes"}

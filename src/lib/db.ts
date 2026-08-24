@@ -22,11 +22,13 @@ export function ensureSchema() {
         features     text[] not null default '{}',
         badge        text,
         featured     boolean not null default false,
+        show_on_editorial boolean not null default true,
         sort_order   int not null default 0,
         created_at   timestamptz not null default now()
       )
     `.then(async () => {
       await sql`alter table products add column if not exists brand_name text not null default ''`;
+      await sql`alter table products add column if not exists show_on_editorial boolean not null default true`;
     });
   }
   return schemaReady;

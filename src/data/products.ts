@@ -11,6 +11,7 @@ export type Product = {
   features: string[];
   badge?: string;
   featured: boolean;
+  showOnEditorial?: boolean;
   sortOrder: number;
 };
 
