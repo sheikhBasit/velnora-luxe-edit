@@ -2,6 +2,7 @@ import { Reveal } from "./Reveal";
 
 type ProductPreview = {
   id?: string;
+  brandName?: string;
   name: string;
   note: string;
   price: string;
@@ -53,15 +54,15 @@ export function BoutiqueSection({
         </Reveal>
 
         <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
-          <Reveal className="lg:col-span-3 lg:[direction:ltr]">
-            <article className="group relative overflow-hidden rounded-sm bg-muted">
-              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                <div className="aspect-[4/5] w-full overflow-hidden md:aspect-[5/4]">
+          <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
+            <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
+              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block lg:h-full">
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full">
                   <img
                     src={image}
                     alt={featured.name}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                   />
                 </div>
               </a>
@@ -74,9 +75,9 @@ export function BoutiqueSection({
                 const href = product.retailerUrl ?? defaultRetailerUrl;
 
                 return (
-                  <Reveal key={product.name} delay={index * 80}>
-                    <article className="editorial-product-card group relative flex h-full flex-col bg-background p-3 md:p-4">
-                      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted">
+                  <Reveal key={product.name} delay={index * 80} className="h-full">
+                    <article className="editorial-product-card group relative flex h-full flex-col">
+                      <div className="relative aspect-square overflow-hidden rounded-md bg-muted shrink-0">
                         <a
                           href={href || undefined}
                           target="_blank"
@@ -99,10 +100,16 @@ export function BoutiqueSection({
                           VIEW AT RETAILER
                         </a>
                       </div>
-                      <div className="mt-0 flex items-baseline justify-between gap-2">
+                      <div className="mt-4 flex flex-1 items-baseline justify-between gap-2">
                         <div>
                           <h4 className="mb-0 font-serif text-base text-foreground">{product.name}</h4>
                           <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                            {product.brandName && (
+                              <>
+                                <span className="font-bold">{product.brandName}</span>
+                                {product.note ? " · " : ""}
+                              </>
+                            )}
                             {product.note}
                           </p>
                         </div>

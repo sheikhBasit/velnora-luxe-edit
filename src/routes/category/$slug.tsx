@@ -90,6 +90,12 @@ function CategoryPage() {
                   <div>
                     <h3 className="mb-0 font-serif text-base">{product.name}</h3>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {product.brandName && (
+                        <>
+                          <span className="font-bold">{product.brandName}</span>
+                          {product.note ? " · " : ""}
+                        </>
+                      )}
                       {product.note}
                     </p>
                   </div>

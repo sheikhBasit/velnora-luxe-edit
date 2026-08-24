@@ -134,6 +134,7 @@ function buildSections(allProducts: Awaited<ReturnType<typeof listProducts>>) {
       },
       products: gridProducts.map((p) => ({
         id: p.id,
+        brandName: p.brandName,
         name: p.name,
         note: p.note,
         price: p.price,
