@@ -26,7 +26,7 @@ import {
 
 export const Route = createFileRoute("/admin/")({
   component: AdminProductList,
-  loader: async () => ({ products: await listProducts() }),
+  loader: async () => ({ products: await listProducts({ data: {} }) }),
 });
 
 function AdminProductList() {
@@ -89,6 +89,7 @@ function AdminProductList() {
         <TableHeader>
           <TableRow>
             <TableHead className="w-16">Image</TableHead>
+            <TableHead>Brand</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Category</TableHead>
             <TableHead>Price</TableHead>
@@ -106,6 +107,7 @@ function AdminProductList() {
                   className="h-10 w-10 rounded-sm object-cover bg-muted"
                 />
               </TableCell>
+              <TableCell>{product.brandName}</TableCell>
               <TableCell className="font-medium">{product.name}</TableCell>
               <TableCell>{categoryLabel(product.category)}</TableCell>
               <TableCell>{product.price}</TableCell>

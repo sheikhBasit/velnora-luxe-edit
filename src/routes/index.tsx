@@ -5,6 +5,7 @@ import { Footer } from "@/components/velnora/Footer";
 import { BoutiqueSection } from "@/components/velnora/BoutiqueSection";
 import { Reveal } from "@/components/velnora/Reveal";
 import { listProducts } from "@/lib/products.server";
+import { seedProducts } from "@/data/seed-products.mjs";
 import hero from "@/assets/hero.jpg";
 import makeup from "@/assets/makeup.jpg";
 import skincare from "@/assets/skincare.jpg";
@@ -17,7 +18,7 @@ import tech from "@/assets/tech.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  loader: async () => ({ allProducts: await listProducts() }),
+  loader: async () => ({ allProducts: seedProducts }),
   head: () => ({
     meta: [
       { title: "Velnora — The 2026 Beauty Edit" },

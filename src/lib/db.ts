@@ -1,10 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not set");
-}
-
-export const sql = neon(process.env.DATABASE_URL);
+export const sql = neon(process.env.DATABASE_URL ?? "postgresql://localhost/velnora");
 
 // Bootstraps the products table on first use so a fresh production database (env vars connected,
 // migration never run) self-heals on the first request instead of 500ing. Memoized per cold start
@@ -15,6 +11,7 @@ export function ensureSchema() {
     schemaReady = sql`
       create table if not exists products (
         id           text primary key,
+        brand_name   text not null default '',
         name         text not null,
         note         text not null default '',
         price        text not null default '',
@@ -28,7 +25,9 @@ export function ensureSchema() {
         sort_order   int not null default 0,
         created_at   timestamptz not null default now()
       )
-    `.then(() => undefined);
+    `.then(async () => {
+      await sql`alter table products add column if not exists brand_name text not null default ''`;
+    });
   }
   return schemaReady;
 }

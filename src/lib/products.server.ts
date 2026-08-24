@@ -12,8 +12,8 @@ export const seedStarterCatalog = createServerFn({ method: "POST" }).handler(asy
   let inserted = 0;
   for (const p of seedProducts) {
     const rows = await sql`
-      insert into products (id, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
-      values (${p.id}, ${p.name}, ${p.note}, ${p.price}, ${p.image}, ${p.category}, ${p.retailerUrl}, ${p.description}, ${p.features}, ${p.badge ?? null}, ${p.featured}, ${p.sortOrder})
+      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
+      values (${p.id}, ${p.brandName ?? ""}, ${p.name}, ${p.note}, ${p.price}, ${p.image}, ${p.category}, ${p.retailerUrl}, ${p.description}, ${p.features}, ${p.badge ?? null}, ${p.featured}, ${p.sortOrder})
       on conflict (id) do nothing
       returning id
     `;
@@ -39,6 +39,7 @@ export const uploadProductImage = createServerFn({ method: "POST" })
 
 type ProductRow = {
   id: string;
+  brand_name: string | null;
   name: string;
   note: string;
   price: string;
@@ -55,6 +56,7 @@ type ProductRow = {
 function rowToProduct(row: ProductRow): Product {
   return {
     id: row.id,
+    brandName: row.brand_name ?? "",
     name: row.name,
     note: row.note,
     price: row.price,
@@ -72,6 +74,11 @@ function rowToProduct(row: ProductRow): Product {
 export const listProducts = createServerFn({ method: "GET" })
   .inputValidator(z.object({ category: z.string().optional() }).optional())
   .handler(async ({ data }) => {
+    if (!process.env.DATABASE_URL) {
+      return data?.category
+        ? seedProducts.filter((product) => product.category === data.category)
+        : seedProducts;
+    }
     await ensureSchema();
     const rows = data?.category
       ? await sql`select * from products where category = ${data.category} order by sort_order, name`
@@ -82,6 +89,9 @@ export const listProducts = createServerFn({ method: "GET" })
 export const getProductById = createServerFn({ method: "GET" })
   .inputValidator(z.string())
   .handler(async ({ data: id }) => {
+    if (!process.env.DATABASE_URL) {
+      return seedProducts.find((product) => product.id === id) ?? null;
+    }
     await ensureSchema();
     const rows = (await sql`select * from products where id = ${id}`) as ProductRow[];
     return rows[0] ? rowToProduct(rows[0]) : null;
@@ -89,6 +99,7 @@ export const getProductById = createServerFn({ method: "GET" })
 
 const productInput = z.object({
   id: z.string().min(1),
+  brandName: z.string().default(""),
   name: z.string().min(1),
   note: z.string().default(""),
   price: z.string().default(""),
@@ -108,9 +119,10 @@ export const saveProduct = createServerFn({ method: "POST" })
     await requireAdmin();
     await ensureSchema();
     const rows = (await sql`
-      insert into products (id, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
-      values (${data.id}, ${data.name}, ${data.note}, ${data.price}, ${data.image}, ${data.category}, ${data.retailerUrl}, ${data.description}, ${data.features}, ${data.badge ?? null}, ${data.featured}, ${data.sortOrder})
+      insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, sort_order)
+      values (${data.id}, ${data.brandName}, ${data.name}, ${data.note}, ${data.price}, ${data.image}, ${data.category}, ${data.retailerUrl}, ${data.description}, ${data.features}, ${data.badge ?? null}, ${data.featured}, ${data.sortOrder})
       on conflict (id) do update set
+        brand_name = excluded.brand_name,
         name = excluded.name,
         note = excluded.note,
         price = excluded.price,

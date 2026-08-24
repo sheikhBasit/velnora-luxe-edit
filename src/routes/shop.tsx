@@ -12,7 +12,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [{ title: "Shop — Velnora" }],
   }),
-  loader: async () => ({ allProducts: await listProducts() }),
+  loader: async () => ({ allProducts: await listProducts({ data: {} }) }),
 });
 
 function ShopPage() {
@@ -102,7 +102,7 @@ function ShopPage() {
           {products.map((product, i) => (
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
-                <div className="relative mb-4 aspect-square overflow-hidden rounded-sm bg-muted">
+                <div className="relative mb-0 aspect-square overflow-hidden rounded-sm bg-muted">
                   <Link to="/product/$id" params={{ id: product.id }} className="block h-full">
                     <img
                       src={product.image}
@@ -114,7 +114,7 @@ function ShopPage() {
                     href={product.retailerUrl || undefined}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="product-card-cta pill-btn pill-btn-outline absolute bottom-3 left-1/2 z-10 -translate-x-1/2 border-foreground bg-background px-4 py-2 text-[10px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
+                    className="product-card-cta pill-btn pill-btn-outline absolute bottom-2 left-1/2 z-10 h-8 w-[112px] !min-w-0 -translate-x-1/2 rounded-full border-foreground bg-background !px-2 py-0 !text-[9px] text-foreground opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 hover:!bg-foreground hover:!text-background"
                   >
                     VIEW AT RETAILER
                   </a>
@@ -125,7 +125,7 @@ function ShopPage() {
                   className="flex items-baseline justify-between gap-2"
                 >
                   <div>
-                    <h3 className="mb-0.5 font-serif text-base">{product.name}</h3>
+                    <h3 className="mb-0 font-serif text-base">{product.name}</h3>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                       {product.note}
                     </p>

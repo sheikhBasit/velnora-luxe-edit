@@ -48,6 +48,7 @@ function slugify(value: string) {
 
 const emptyProduct: Product = {
   id: "",
+  brandName: "",
   name: "",
   note: "",
   price: "",
@@ -129,6 +130,15 @@ function AdminProductForm() {
       <h1 className="font-serif text-2xl">{isNew ? "Add product" : `Edit "${product.name}"`}</h1>
 
       <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-2">
+          <Label htmlFor="brandName">Brand name</Label>
+          <Input
+            id="brandName"
+            placeholder="SISLEY PARIS"
+            value={form.brandName ?? ""}
+            onChange={(e) => setForm((f) => ({ ...f, brandName: e.target.value }))}
+          />
+        </div>
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
           <Input
