@@ -57,15 +57,15 @@ export function BoutiqueSection({
           <Reveal className="lg:col-span-3 lg:[direction:ltr]">
             <article className="group relative overflow-hidden rounded-md bg-muted">
               <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                {/* Fixed height (not aspect-ratio) so every section's hero box is identically sized
-                    regardless of category/sibling content, and object-contain so the source photo is
-                    never cropped — it fits whole inside the box, letterboxed on bg-muted if needed. */}
-                <div className="relative h-[320px] w-full overflow-hidden md:h-[380px] lg:h-[440px]">
+                {/* lg height fixed at ~620px to match the original full-bleed look (previously
+                    lg:h-full, matching whatever height the sibling grid happened to have — which
+                    was 0 for a category with no grid cards). Fixed height keeps it non-zero always. */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-[620px]">
                   <img
                     src={image}
                     alt={featured.name}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                   />
                 </div>
               </a>
@@ -91,7 +91,7 @@ export function BoutiqueSection({
                             src={product.image}
                             alt={product.name}
                             loading="lazy"
-                            className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
+                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </a>
                         <a
