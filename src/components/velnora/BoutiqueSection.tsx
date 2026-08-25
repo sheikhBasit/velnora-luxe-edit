@@ -57,7 +57,9 @@ export function BoutiqueSection({
           <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
             <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
               <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block lg:h-full">
-                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full">
+                {/* min-h floor: lg:h-full collapses to 0 when the grid column has no product cards
+                    (category with a single product), since the empty sibling sets the row height. */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[480px]">
                   <img
                     src={image}
                     alt={featured.name}
