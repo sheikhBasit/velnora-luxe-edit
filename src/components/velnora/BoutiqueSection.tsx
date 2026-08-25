@@ -54,13 +54,12 @@ export function BoutiqueSection({
         </Reveal>
 
         <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
-          <Reveal className="lg:col-span-3 lg:[direction:ltr]">
-            <article className="group relative overflow-hidden rounded-md bg-muted">
-              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
-                {/* lg height fixed at ~620px to match the original full-bleed look (previously
-                    lg:h-full, matching whatever height the sibling grid happened to have — which
-                    was 0 for a category with no grid cards). Fixed height keeps it non-zero always. */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-[620px]">
+          <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
+            <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
+              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block lg:h-full">
+                {/* lg:h-full grows to match a taller sibling grid (e.g. a full 2x2 grid of 4 cards),
+                    with min-h-[620px] as a floor so it never collapses for a sparse/empty grid. */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[620px]">
                   <img
                     src={image}
                     alt={featured.name}
