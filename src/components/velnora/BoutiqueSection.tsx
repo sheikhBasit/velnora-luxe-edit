@@ -54,12 +54,14 @@ export function BoutiqueSection({
         </Reveal>
 
         <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
-          <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
-            <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
-              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block lg:h-full">
-                {/* min-h floor: lg:h-full collapses to 0 when the grid column has no product cards
-                    (category with a single product), since the empty sibling sets the row height. */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[480px]">
+          <Reveal className="lg:col-span-3 lg:[direction:ltr]">
+            <article className="group relative overflow-hidden rounded-md bg-muted">
+              <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block">
+                {/* All hero source photos are natively 4:5 portrait — lg:aspect-auto lg:h-full previously
+                    stretched this box to match the sibling grid's height instead, producing a short, wide
+                    box that object-cover had to crop heavily to fill (and collapsed to 0 height when the
+                    sibling grid was empty). Keeping the native ratio avoids both. */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-[4/5]">
                   <img
                     src={image}
                     alt={featured.name}
