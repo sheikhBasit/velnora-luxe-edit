@@ -119,36 +119,21 @@ function buildSections(allProducts: Awaited<ReturnType<typeof listProducts>>) {
   return sectionMeta.map((meta) => {
     const inCategory = allProducts.filter((p) => p.category === meta.category);
     const editorial = inCategory.filter((p) => p.showOnEditorial !== false);
-    const toPreview = (p: (typeof inCategory)[number]) => ({
-      id: p.id,
-      brandName: p.brandName,
-      name: p.name,
-      note: p.note,
-      price: p.price,
-      image: p.image,
-      retailerUrl: p.retailerUrl,
-    });
-
-    // With 3 or fewer products, a hero photo eats one of them and leaves almost nothing for
-    // the grid — skip it and show them all as equal grid cards instead.
-    if (inCategory.length <= 3) {
-      return { ...meta, id: meta.category, featured: null, products: editorial.map(toPreview) };
-    }
-
-    const featuredProduct = inCategory.find((p) => p.featured) ?? inCategory[0];
-    const gridProducts = editorial.filter((p) => p.id !== featuredProduct?.id).slice(0, 4);
 
     return {
       ...meta,
       id: meta.category,
-      featured: {
-        id: featuredProduct?.id,
-        name: featuredProduct?.name ?? "",
-        tag: featuredProduct?.badge ?? "",
-        price: featuredProduct?.price ?? "",
-        retailerUrl: featuredProduct?.retailerUrl,
-      },
-      products: gridProducts.map(toPreview),
+      // The hero is always the category's own fixed photo (meta.image), never a product —
+      // so every editorial-visible product goes in the grid, none of them get consumed by it.
+      products: editorial.slice(0, 4).map((p) => ({
+        id: p.id,
+        brandName: p.brandName,
+        name: p.name,
+        note: p.note,
+        price: p.price,
+        image: p.image,
+        retailerUrl: p.retailerUrl,
+      })),
     };
   });
 }

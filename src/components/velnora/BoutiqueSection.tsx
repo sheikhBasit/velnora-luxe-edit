@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
 
 type ProductPreview = {
@@ -60,7 +61,6 @@ export function BoutiqueSection({
   title,
   description,
   image,
-  featured,
   products,
   reverse = false,
 }: {
@@ -70,13 +70,9 @@ export function BoutiqueSection({
   title: string;
   description: string;
   image: string;
-  featured: { id?: string; name: string; tag: string; price: string; retailerUrl?: string } | null;
   products: ProductPreview[];
   reverse?: boolean;
 }) {
-  const defaultRetailerUrl = "";
-  const featuredHref = featured?.retailerUrl ?? defaultRetailerUrl;
-
   return (
     <section id={id} className="border-t border-border/60 bg-background">
       <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 md:py-32">
@@ -96,42 +92,34 @@ export function BoutiqueSection({
           </div>
         </Reveal>
 
-        {featured ? (
-          <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
-            <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
-              <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
-                <a href={featuredHref || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block lg:h-full">
-                  {/* lg:h-full grows to match a taller sibling grid (e.g. a full 2x2 grid of 4 cards),
-                      with min-h-[620px] as a floor so it never collapses for a sparse/empty grid. */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[620px]">
-                    <img
-                      src={image}
-                      alt={featured.name}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-                    />
-                  </div>
-                </a>
-              </article>
-            </Reveal>
+        <div className={`grid gap-8 md:gap-10 lg:grid-cols-5 ${reverse ? "lg:[direction:rtl]" : ""}`}>
+          <Reveal className="lg:col-span-3 lg:[direction:ltr] lg:h-full">
+            <article className="group relative overflow-hidden rounded-md bg-muted lg:h-full">
+              {/* Hero is always this category's own fixed photo, never a product — so no
+                  product ever gets pulled out of the grid to "become" it. */}
+              <Link to="/category/$slug" params={{ slug: id }} className="block lg:h-full">
+                {/* lg:h-full grows to match a taller sibling grid (e.g. a full 2x2 grid of 4 cards),
+                    with min-h-[620px] as a floor so it never collapses for a sparse/empty grid. */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[620px]">
+                  <img
+                    src={image}
+                    alt={title}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+                  />
+                </div>
+              </Link>
+            </article>
+          </Reveal>
 
-            <div className="lg:col-span-2 lg:[direction:ltr]">
-              <div className="grid grid-cols-2 gap-4 md:gap-6">
-                {products.map((product, i) => (
-                  <ProductCard key={product.name} product={product} delay={i * 80} />
-                ))}
-              </div>
+          <div className="lg:col-span-2 lg:[direction:ltr]">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
+              {products.map((product, i) => (
+                <ProductCard key={product.name} product={product} delay={i * 80} />
+              ))}
             </div>
           </div>
-        ) : (
-          // Categories with 3 or fewer products skip the hero photo entirely — with so few
-          // products, one occupying the whole hero slot left barely anything for the grid.
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6">
-            {products.map((product, i) => (
-              <ProductCard key={product.name} product={product} delay={i * 80} />
-            ))}
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
