@@ -85,7 +85,7 @@ function CategoryPage() {
                   href={product.retailerUrl || undefined}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="flex items-baseline justify-between gap-2"
+                  className="mt-4 flex items-baseline justify-between gap-2"
                 >
                   <div>
                     <h3 className="mb-0 font-serif text-base">{product.name}</h3>
