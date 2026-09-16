@@ -29,6 +29,18 @@ export function ensureSchema() {
     `.then(async () => {
       await sql`alter table products add column if not exists brand_name text not null default ''`;
       await sql`alter table products add column if not exists show_on_editorial boolean not null default true`;
+      await sql`
+        create table if not exists blogs (
+          id           text primary key,
+          title        text not null,
+          slug         text not null unique,
+          category     text not null,
+          excerpt      text not null,
+          cover_image  text not null,
+          content      text not null,
+          created_at   timestamptz not null default now()
+        )
+      `;
     });
   }
   return schemaReady;

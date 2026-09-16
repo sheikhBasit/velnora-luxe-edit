@@ -68,6 +68,12 @@ export function Header({ hideMobileBottomNav }: HeaderProps) {
             <a href="/#editorial" className="text-xs uppercase tracking-[0.2em] text-foreground/80 transition hover:text-foreground">
               Editorial
             </a>
+            <Link
+              to="/blog"
+              className="text-xs uppercase tracking-[0.2em] text-foreground/80 transition hover:text-foreground"
+            >
+              Blog
+            </Link>
           </nav>
 
           <button

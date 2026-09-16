@@ -24,9 +24,19 @@ function AdminLayout() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <Link to="/admin" className="font-serif text-xl">
-          Velnora Admin
-        </Link>
+        <div className="flex items-center gap-8">
+          <Link to="/admin" className="font-serif text-xl">
+            Velnora Admin
+          </Link>
+          <nav className="flex items-center gap-4 text-sm font-medium">
+            <Link to="/admin" className="text-muted-foreground hover:text-foreground [&.active]:text-foreground" activeOptions={{ exact: true }}>
+              Products
+            </Link>
+            <Link to="/admin/blog" className="text-muted-foreground hover:text-foreground [&.active]:text-foreground">
+              Blogs
+            </Link>
+          </nav>
+        </div>
         <Button variant="ghost" size="sm" onClick={handleLogout}>
           Log out
         </Button>
