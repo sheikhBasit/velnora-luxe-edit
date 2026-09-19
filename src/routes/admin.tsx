@@ -33,7 +33,10 @@ function AdminLayout() {
               Products
             </Link>
             <Link to="/admin/blog" className="text-muted-foreground hover:text-foreground [&.active]:text-foreground">
-              Blogs
+              Content
+            </Link>
+            <Link to="/admin/settings" className="text-muted-foreground hover:text-foreground [&.active]:text-foreground">
+              Settings
             </Link>
           </nav>
         </div>

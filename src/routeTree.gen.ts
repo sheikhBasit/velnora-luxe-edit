@@ -15,11 +15,14 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TutorialIndexRouteImport } from './routes/tutorial/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as TutorialSlugRouteImport } from './routes/tutorial/$slug'
 import { Route as ProductIdRouteImport } from './routes/product/$id'
 import { Route as CategorySlugRouteImport } from './routes/category/$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminBlogIndexRouteImport } from './routes/admin/blog/index'
 import { Route as AdminProductIdRouteImport } from './routes/admin/product/$id'
 import { Route as AdminBlogIdRouteImport } from './routes/admin/blog/$id'
@@ -54,6 +57,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TutorialIndexRoute = TutorialIndexRouteImport.update({
+  id: '/tutorial/',
+  path: '/tutorial/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -63,6 +71,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const TutorialSlugRoute = TutorialSlugRouteImport.update({
+  id: '/tutorial/$slug',
+  path: '/tutorial/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ProductIdRoute = ProductIdRouteImport.update({
   id: '/product/$id',
@@ -78,6 +91,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
   id: '/blog/',
@@ -102,11 +120,14 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
+  '/tutorial/$slug': typeof TutorialSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/tutorial/': typeof TutorialIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/product/$id': typeof AdminProductIdRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
@@ -117,11 +138,14 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
+  '/tutorial/$slug': typeof TutorialSlugRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
+  '/tutorial': typeof TutorialIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/product/$id': typeof AdminProductIdRoute
   '/admin/blog': typeof AdminBlogIndexRoute
@@ -134,11 +158,14 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/category/$slug': typeof CategorySlugRoute
   '/product/$id': typeof ProductIdRoute
+  '/tutorial/$slug': typeof TutorialSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/tutorial/': typeof TutorialIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/product/$id': typeof AdminProductIdRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
@@ -152,11 +179,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/shop'
     | '/terms-of-service'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/category/$slug'
     | '/product/$id'
+    | '/tutorial/$slug'
     | '/admin/'
     | '/blog/'
+    | '/tutorial/'
     | '/admin/blog/$id'
     | '/admin/product/$id'
     | '/admin/blog/'
@@ -167,11 +197,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/shop'
     | '/terms-of-service'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/category/$slug'
     | '/product/$id'
+    | '/tutorial/$slug'
     | '/admin'
     | '/blog'
+    | '/tutorial'
     | '/admin/blog/$id'
     | '/admin/product/$id'
     | '/admin/blog'
@@ -183,11 +216,14 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/shop'
     | '/terms-of-service'
+    | '/admin/settings'
     | '/blog/$slug'
     | '/category/$slug'
     | '/product/$id'
+    | '/tutorial/$slug'
     | '/admin/'
     | '/blog/'
+    | '/tutorial/'
     | '/admin/blog/$id'
     | '/admin/product/$id'
     | '/admin/blog/'
@@ -203,7 +239,9 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   CategorySlugRoute: typeof CategorySlugRoute
   ProductIdRoute: typeof ProductIdRoute
+  TutorialSlugRoute: typeof TutorialSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  TutorialIndexRoute: typeof TutorialIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -250,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tutorial/': {
+      id: '/tutorial/'
+      path: '/tutorial'
+      fullPath: '/tutorial/'
+      preLoaderRoute: typeof TutorialIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -263,6 +308,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/tutorial/$slug': {
+      id: '/tutorial/$slug'
+      path: '/tutorial/$slug'
+      fullPath: '/tutorial/$slug'
+      preLoaderRoute: typeof TutorialSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/product/$id': {
       id: '/product/$id'
@@ -284,6 +336,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/admin/blog/': {
       id: '/admin/blog/'
@@ -310,6 +369,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminBlogIdRoute: typeof AdminBlogIdRoute
   AdminProductIdRoute: typeof AdminProductIdRoute
@@ -317,6 +377,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminBlogIdRoute: AdminBlogIdRoute,
   AdminProductIdRoute: AdminProductIdRoute,
@@ -335,7 +396,9 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   CategorySlugRoute: CategorySlugRoute,
   ProductIdRoute: ProductIdRoute,
+  TutorialSlugRoute: TutorialSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  TutorialIndexRoute: TutorialIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

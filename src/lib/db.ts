@@ -37,8 +37,25 @@ export function ensureSchema() {
           category     text not null,
           excerpt      text not null,
           cover_image  text not null,
+          video_url    text,
           content      text not null,
+          published    boolean not null default true,
+          type         text not null default 'blog',
+          prerequisites text[] not null default '{}',
+          steps        jsonb not null default '[]',
           created_at   timestamptz not null default now()
+        )
+      `;
+      await sql`alter table blogs add column if not exists published boolean not null default true`;
+      await sql`alter table blogs add column if not exists type text not null default 'blog'`;
+      await sql`alter table blogs add column if not exists prerequisites text[] not null default '{}'`;
+      await sql`alter table blogs add column if not exists steps jsonb not null default '[]'`;
+      await sql`alter table blogs add column if not exists video_url text`;
+
+      await sql`
+        create table if not exists site_settings (
+          key text primary key,
+          value text not null
         )
       `;
     });

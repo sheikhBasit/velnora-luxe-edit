@@ -37,10 +37,10 @@ function AdminBlogList() {
     setDeletingId(id);
     try {
       await deleteBlog({ data: id });
-      toast.success("Blog post deleted");
+      toast.success("Item deleted");
       await router.invalidate();
     } catch {
-      toast.error("Failed to delete blog post");
+      toast.error("Failed to delete item");
     } finally {
       setDeletingId(null);
     }
@@ -49,10 +49,10 @@ function AdminBlogList() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="font-serif text-2xl">Blogs ({blogs.length})</h1>
+        <h1 className="font-serif text-2xl">Blogs & Tutorials ({blogs.length})</h1>
         <Button asChild>
           <Link to="/admin/blog/$id" params={{ id: "new" }}>
-            Add blog post
+            Add New
           </Link>
         </Button>
       </div>
@@ -60,7 +60,7 @@ function AdminBlogList() {
       {blogs.length === 0 && (
         <div className="mb-6 flex items-center justify-between rounded-md border border-border bg-muted/40 px-4 py-3">
           <p className="text-sm text-muted-foreground">
-            No blog posts yet. Click the button to create your first post.
+            No items yet. Click the button to create your first post.
           </p>
         </div>
       )}
@@ -70,7 +70,9 @@ function AdminBlogList() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-16">Image</TableHead>
+              <TableHead>Type</TableHead>
               <TableHead>Title</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Date</TableHead>
               <TableHead className="text-right">Actions</TableHead>
@@ -86,7 +88,17 @@ function AdminBlogList() {
                     className="h-10 w-10 rounded-sm object-cover bg-muted"
                   />
                 </TableCell>
+                <TableCell>
+                  <span className="uppercase text-xs tracking-wider text-muted-foreground font-medium">
+                    {blog.type}
+                  </span>
+                </TableCell>
                 <TableCell className="font-medium">{blog.title}</TableCell>
+                <TableCell>
+                  <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${blog.published ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
+                    {blog.published ? "Published" : "Draft"}
+                  </span>
+                </TableCell>
                 <TableCell>{blog.category}</TableCell>
                 <TableCell>{new Date(blog.createdAt).toLocaleDateString()}</TableCell>
                 <TableCell className="text-right space-x-2">
@@ -105,7 +117,7 @@ function AdminBlogList() {
                       <AlertDialogHeader>
                         <AlertDialogTitle>Delete "{blog.title}"?</AlertDialogTitle>
                         <AlertDialogDescription>
-                          This removes the blog post everywhere on the site. This can't be undone.
+                          This removes the item everywhere on the site. This can't be undone.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>

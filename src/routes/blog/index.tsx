@@ -6,7 +6,10 @@ import { useEffect, Fragment } from "react";
 
 export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
-  loader: async () => ({ blogs: await listBlogs({ data: undefined }) }),
+  loader: async () => {
+    const allBlogs = await listBlogs({ data: { type: 'blog' } });
+    return { blogs: allBlogs.filter(b => b.published) };
+  },
 });
 
 function AdSenseUnit() {
