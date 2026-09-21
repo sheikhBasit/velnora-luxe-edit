@@ -74,6 +74,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "impact-site-verification",
+        content: "b18e3449-eba8-41a8-b98e-a320744e3b41",
+        value: "b18e3449-eba8-41a8-b98e-a320744e3b41",
+      },
       { title: "Lovable App" },
       { name: "description", content: "Lovable Generated Project" },
       { name: "author", content: "Lovable" },
