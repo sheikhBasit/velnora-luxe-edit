@@ -65,19 +65,26 @@ function ProductEmbed({ id }: { id: string }) {
   return (
     <div className="my-8 flex flex-col sm:flex-row gap-6 p-6 border border-border rounded-lg bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
       <div className="shrink-0">
-        <img src={product.image} alt={product.name} className="w-full sm:w-32 aspect-square object-cover rounded-md" />
+        <Link to="/product/$id" params={{ id: product.id }} className="block w-full sm:w-32">
+          <img src={product.image} alt={product.name} className="aspect-square w-full rounded-md object-cover" />
+        </Link>
       </div>
       <div className="flex-1 flex flex-col justify-center">
-        <h4 className="font-serif text-xl mb-2">{product.brandName} {product.name}</h4>
+        <Link to="/product/$id" params={{ id: product.id }} className="font-serif text-xl mb-2">
+          {product.brandName && `${product.brandName} `}{product.name}
+        </Link>
+        <p className="mb-3 text-sm font-medium">{product.price}</p>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{product.description}</p>
-        <a 
-          href={product.retailerUrl} 
-          target="_blank" 
-          rel="noreferrer"
-          className="inline-flex items-center text-sm font-medium hover:underline text-primary"
-        >
-          Shop Now <ExternalLink className="ml-1 w-3 h-3" />
-        </a>
+        {product.retailerUrl && (
+          <a
+            href={product.retailerUrl}
+            target="_blank"
+            rel="noreferrer sponsored"
+            className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+          >
+            Shop Now <ExternalLink className="ml-1 w-3 h-3" />
+          </a>
+        )}
       </div>
     </div>
   );
@@ -85,43 +92,30 @@ function ProductEmbed({ id }: { id: string }) {
 
 function BlogPostContent({ content, settings }: { content: string, settings: Record<string, string> }) {
   const renderPart = (html: string) => {
+    const normalizedHtml = html.replace(/(?:&nbsp;|&#160;|\u00a0)/gi, " ");
     const regex = /\{\{product:([a-zA-Z0-9_-]+)\}\}/g;
     const blocks = [];
     let lastIndex = 0;
     let match;
 
-    while ((match = regex.exec(html)) !== null) {
+    while ((match = regex.exec(normalizedHtml)) !== null) {
       if (match.index > lastIndex) {
-        blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex, match.index) }} />);
+        blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: normalizedHtml.substring(lastIndex, match.index) }} />);
       }
       blocks.push(<ProductEmbed key={`prod-${match[1]}-${match.index}`} id={match[1]} />);
       lastIndex = match.index + match[0].length;
     }
     
-    if (lastIndex < html.length) {
-      blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex) }} />);
+    if (lastIndex < normalizedHtml.length) {
+      blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: normalizedHtml.substring(lastIndex) }} />);
     }
     
-    return blocks.length > 0 ? blocks : <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return blocks.length > 0 ? blocks : <div dangerouslySetInnerHTML={{ __html: normalizedHtml }} />;
   };
 
-  const pTagSplit = content.split("</p>");
-  let part1 = content;
-  let part2 = null;
-  if (pTagSplit.length > 2) {
-    part1 = pTagSplit.slice(0, 2).join("</p>") + "</p>";
-    part2 = pTagSplit.slice(2).join("</p>");
-  }
-
   return (
-    <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-foreground/90 [&>div>p]:mb-6 [&>div>h2]:font-serif [&>div>h2]:text-2xl [&>div>h2]:mt-10 [&>div>h2]:mb-4 [&>div>h3]:font-serif [&>div>h3]:text-xl [&>div>h3]:mt-6 [&>div>h3]:mb-4 [&>div>ul]:list-disc [&>div>ul]:pl-6 [&>div>ul]:mb-6 [&>div>a]:underline [&>div>a]:underline-offset-4 hover:[&>div>a]:text-muted-foreground transition-colors [&>div>iframe]:w-full [&>div>iframe]:aspect-video [&>div>iframe]:rounded-lg [&>div>iframe]:my-8 [&>div>img]:rounded-lg [&>div>img]:my-8 [&>div>p>img]:rounded-lg [&>div>p>img]:my-8 [&>div>p>iframe]:w-full [&>div>p>iframe]:aspect-video [&>div>p>iframe]:rounded-lg [&>div>p>iframe]:my-8">
-      {renderPart(part1)}
-      {part2 && (
-        <>
-          <AdSenseUnit className="my-10" client={settings.adsense_client} slot={settings.adsense_slot} />
-          {renderPart(part2)}
-        </>
-      )}
+    <div className="blog-reader-content mx-auto w-full max-w-5xl text-left text-foreground/90">
+      {renderPart(content)}
     </div>
   );
 }
@@ -136,18 +130,24 @@ function BlogPost() {
       <main className="pt-32 pb-24">
         <article className="mx-auto max-w-[1400px] px-6 md:px-12">
           {/* Header */}
-          <header className="mb-12 text-center">
-            <div className="mb-4 flex items-center justify-center space-x-2 text-sm text-muted-foreground">
+          <header className="mx-auto mb-10 w-full max-w-5xl text-left sm:mb-12">
+            <div className="mb-4 flex flex-wrap items-center justify-start gap-x-2 gap-y-1 text-xs text-muted-foreground sm:text-sm">
               <span className="uppercase tracking-wider text-primary">{blog.category}</span>
               <span>•</span>
               <time dateTime={blog.createdAt}>{new Date(blog.createdAt).toLocaleDateString()}</time>
             </div>
-            <h1 className="mb-6 font-serif text-4xl md:text-5xl lg:text-6xl">{blog.title}</h1>
-            {blog.excerpt && <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{blog.excerpt}</p>}
+            <h1 className="font-serif text-[2.125rem] font-semibold leading-[1.12] sm:text-5xl sm:leading-[1.08] md:text-6xl lg:text-7xl">
+              {blog.title}
+            </h1>
+            {blog.excerpt && (
+              <p className="mt-5 max-w-4xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {blog.excerpt}
+              </p>
+            )}
           </header>
 
           {/* Hero Media */}
-          <div className="mb-16 space-y-8">
+          <div className="mx-auto mb-14 w-full max-w-5xl space-y-8 sm:mb-16">
             {blog.coverImage && (
               <div className="overflow-hidden rounded-2xl bg-muted">
                 <img
@@ -171,7 +171,7 @@ function BlogPost() {
             )}
           </div>
 
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto w-full max-w-5xl">
             <BlogPostContent content={blog.content} settings={settings} />
           </div>
         </article>

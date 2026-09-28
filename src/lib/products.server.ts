@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { put } from "@vercel/blob";
-import { sql, ensureSchema } from "@/lib/db";
+import { hasDatabaseConnection, sql, ensureSchema } from "@/lib/db";
 import { requireAdmin } from "@/lib/admin-auth.server";
 import { seedProducts } from "@/data/seed-products.mjs";
 import type { Product } from "@/data/products";
@@ -14,7 +14,20 @@ export const seedStarterCatalog = createServerFn({ method: "POST" }).handler(asy
     const rows = await sql`
       insert into products (id, brand_name, name, note, price, image, category, retailer_url, description, features, badge, featured, show_on_editorial, sort_order)
       values (${p.id}, ${p.brandName ?? ""}, ${p.name}, ${p.note}, ${p.price}, ${p.image}, ${p.category}, ${p.retailerUrl}, ${p.description}, ${p.features}, ${p.badge ?? null}, ${p.featured}, ${p.showOnEditorial ?? true}, ${p.sortOrder})
-      on conflict (id) do nothing
+      on conflict (id) do update set
+        brand_name = excluded.brand_name,
+        name = excluded.name,
+        note = excluded.note,
+        price = excluded.price,
+        image = excluded.image,
+        category = excluded.category,
+        retailer_url = excluded.retailer_url,
+        description = excluded.description,
+        features = excluded.features,
+        badge = excluded.badge,
+        featured = excluded.featured,
+        show_on_editorial = excluded.show_on_editorial,
+        sort_order = excluded.sort_order
       returning id
     `;
     if (rows.length) inserted++;
@@ -76,7 +89,7 @@ function rowToProduct(row: ProductRow): Product {
 export const listProducts = createServerFn({ method: "GET" })
   .inputValidator(z.object({ category: z.string().optional() }).optional())
   .handler(async ({ data }) => {
-    if (!process.env.DATABASE_URL) {
+    if (!hasDatabaseConnection) {
       return data?.category
         ? seedProducts.filter((product) => product.category === data.category)
         : seedProducts;
@@ -91,7 +104,7 @@ export const listProducts = createServerFn({ method: "GET" })
 export const getProductById = createServerFn({ method: "GET" })
   .inputValidator(z.string())
   .handler(async ({ data: id }) => {
-    if (!process.env.DATABASE_URL) {
+    if (!hasDatabaseConnection) {
       return seedProducts.find((product) => product.id === id) ?? null;
     }
     await ensureSchema();

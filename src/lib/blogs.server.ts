@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { sql, ensureSchema } from "@/lib/db";
+import { hasDatabaseConnection, sql, ensureSchema } from "@/lib/db";
+import { seedBlogs } from "@/data/seed-blogs.mjs";
 import { requireAdmin } from "@/lib/admin-auth.server";
 
 export type BlogStep = {
@@ -61,7 +62,11 @@ function rowToBlog(row: BlogRow): Blog {
 export const listBlogs = createServerFn({ method: "GET" })
   .inputValidator(z.object({ type: z.string().optional() }).optional())
   .handler(async ({ data }) => {
-    if (!process.env.DATABASE_URL) return [];
+    if (!hasDatabaseConnection) {
+      return seedBlogs
+        .filter((blog) => blog.published && (!data?.type || blog.type === data.type))
+        .map(({ sortOrder: _sortOrder, ...blog }) => blog);
+    }
     await ensureSchema();
     const rows = data?.type
       ? await sql`select * from blogs where type = ${data.type} order by created_at desc`
@@ -72,7 +77,12 @@ export const listBlogs = createServerFn({ method: "GET" })
 export const getBlogBySlug = createServerFn({ method: "GET" })
   .inputValidator(z.string())
   .handler(async ({ data: slug }) => {
-    if (!process.env.DATABASE_URL) return null;
+    if (!hasDatabaseConnection) {
+      const blog = seedBlogs.find((item) => item.slug === slug && item.published);
+      if (!blog) return null;
+      const { sortOrder: _sortOrder, ...result } = blog;
+      return result;
+    }
     await ensureSchema();
     const rows = await sql`select * from blogs where slug = ${slug}`;
     return (rows as BlogRow[])[0] ? rowToBlog((rows as BlogRow[])[0]) : null;
@@ -81,7 +91,12 @@ export const getBlogBySlug = createServerFn({ method: "GET" })
 export const getBlogById = createServerFn({ method: "GET" })
   .inputValidator(z.string())
   .handler(async ({ data: id }) => {
-    if (!process.env.DATABASE_URL) return null;
+    if (!hasDatabaseConnection) {
+      const blog = seedBlogs.find((item) => item.id === id);
+      if (!blog) return null;
+      const { sortOrder: _sortOrder, ...result } = blog;
+      return result;
+    }
     await ensureSchema();
     const rows = await sql`select * from blogs where id = ${id}`;
     return (rows as BlogRow[])[0] ? rowToBlog((rows as BlogRow[])[0]) : null;

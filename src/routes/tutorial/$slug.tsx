@@ -65,19 +65,26 @@ function ProductEmbed({ id }: { id: string }) {
   return (
     <div className="my-8 flex flex-col sm:flex-row gap-6 p-6 border border-border rounded-lg bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
       <div className="shrink-0">
-        <img src={product.image} alt={product.name} className="w-full sm:w-32 aspect-square object-cover rounded-md" />
+        <Link to="/product/$id" params={{ id: product.id }} className="block w-full sm:w-32">
+          <img src={product.image} alt={product.name} className="aspect-square w-full rounded-md object-cover" />
+        </Link>
       </div>
       <div className="flex-1 flex flex-col justify-center">
-        <h4 className="font-serif text-xl mb-2">{product.brandName} {product.name}</h4>
+        <Link to="/product/$id" params={{ id: product.id }} className="font-serif text-xl mb-2">
+          {product.brandName && `${product.brandName} `}{product.name}
+        </Link>
+        <p className="mb-3 text-sm font-medium">{product.price}</p>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{product.description}</p>
-        <a 
-          href={product.retailerUrl} 
-          target="_blank" 
-          rel="noreferrer"
-          className="inline-flex items-center text-sm font-medium hover:underline text-primary"
-        >
-          Shop Now <ExternalLink className="ml-1 w-3 h-3" />
-        </a>
+        {product.retailerUrl && (
+          <a
+            href={product.retailerUrl}
+            target="_blank"
+            rel="noreferrer sponsored"
+            className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+          >
+            Shop Now <ExternalLink className="ml-1 w-3 h-3" />
+          </a>
+        )}
       </div>
     </div>
   );

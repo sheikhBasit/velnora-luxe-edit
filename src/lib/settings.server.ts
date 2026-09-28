@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { sql, ensureSchema } from "@/lib/db";
+import { hasDatabaseConnection, sql, ensureSchema } from "@/lib/db";
 import { requireAdmin } from "@/lib/admin-auth.server";
 
 export const getSiteSettings = createServerFn({ method: "GET" }).handler(async () => {
-  if (!process.env.DATABASE_URL) return {};
+  if (!hasDatabaseConnection) return {};
   await ensureSchema();
   const rows = await sql`select key, value from site_settings`;
   const settings: Record<string, string> = {};

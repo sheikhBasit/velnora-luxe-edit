@@ -65,26 +65,27 @@ function CategoryPage() {
             <Reveal key={product.id} delay={i * 60}>
               <article className="group flex flex-col">
                 <div className="relative mb-0 aspect-square overflow-hidden rounded-sm bg-muted">
-                  <a href={product.retailerUrl || undefined} target="_blank" rel="noopener noreferrer sponsored" className="block h-full">
+                  <Link to="/product/$id" params={{ id: product.id }} className="block h-full">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                  </a>
-                  <a
-                    href={product.retailerUrl || undefined}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
-                  >
-                    VIEW AT RETAILER
-                  </a>
+                  </Link>
+                  {product.retailerUrl && (
+                    <a
+                      href={product.retailerUrl}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
+                    >
+                      VIEW AT RETAILER
+                    </a>
+                  )}
                 </div>
-                <a
-                  href={product.retailerUrl || undefined}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
+                <Link
+                  to="/product/$id"
+                  params={{ id: product.id }}
                   className="mt-4 flex items-baseline justify-between gap-2"
                 >
                   <div>
@@ -100,7 +101,7 @@ function CategoryPage() {
                     </p>
                   </div>
                   <span className="text-sm">{product.price}</span>
-                </a>
+                </Link>
               </article>
             </Reveal>
           ))}

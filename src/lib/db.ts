@@ -1,6 +1,23 @@
 import { neon } from "@neondatabase/serverless";
 
-export const sql = neon(process.env.DATABASE_URL ?? "postgresql://localhost/velnora");
+const configuredDatabaseUrl = process.env.DATABASE_URL;
+const isValidDatabaseUrl = (() => {
+  if (!configuredDatabaseUrl) return false;
+  try {
+    const url = new URL(configuredDatabaseUrl);
+    return (
+      ["postgres:", "postgresql:"].includes(url.protocol) &&
+      Boolean(url.username && url.password && url.hostname && url.pathname.length > 1)
+    );
+  } catch {
+    return false;
+  }
+})();
+
+export const hasDatabaseConnection = isValidDatabaseUrl;
+export const sql = neon(
+  isValidDatabaseUrl ? configuredDatabaseUrl! : "postgresql://user:password@localhost.localdomain/velnora",
+);
 
 // Bootstraps the products table on first use so a fresh production database (env vars connected,
 // migration never run) self-heals on the first request instead of 500ing. Memoized per cold start

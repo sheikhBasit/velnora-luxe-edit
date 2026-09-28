@@ -12,31 +12,34 @@ type ProductPreview = {
 };
 
 function ProductCard({ product, delay }: { product: ProductPreview; delay: number }) {
-  const href = product.retailerUrl ?? "";
   return (
     <Reveal delay={delay} className="h-full">
       <article className="editorial-product-card group relative flex h-full flex-col">
         <div className="relative aspect-square overflow-hidden rounded-md bg-muted shrink-0">
-          <a href={href || undefined} target="_blank" rel="noopener noreferrer sponsored" className="product-card-link block h-full">
+          <Link to="/product/$id" params={{ id: product.id ?? "" }} className="product-card-link block h-full">
             <img
               src={product.image}
               alt={product.name}
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-          </a>
-          <a
-            href={href || undefined}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
-          >
-            VIEW AT RETAILER
-          </a>
+          </Link>
+          {product.retailerUrl && (
+            <a
+              href={product.retailerUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
+            >
+              VIEW AT RETAILER
+            </a>
+          )}
         </div>
         <div className="mt-4 flex flex-1 items-baseline justify-between gap-2">
           <div>
-            <h4 className="mb-0 font-serif text-base text-foreground">{product.name}</h4>
+            <Link to="/product/$id" params={{ id: product.id ?? "" }} className="mb-0 font-serif text-base text-foreground">
+              {product.name}
+            </Link>
             <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               {product.brandName && (
                 <>

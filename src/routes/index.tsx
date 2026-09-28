@@ -4,6 +4,7 @@ import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { BoutiqueSection } from "@/components/velnora/BoutiqueSection";
 import { Reveal } from "@/components/velnora/Reveal";
+import type { Product } from "@/data/products";
 import { listProducts } from "@/lib/products.server";
 import hero from "@/assets/hero.jpg";
 import makeup from "@/assets/makeup.jpg";
@@ -17,7 +18,10 @@ import tech from "@/assets/tech.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  loader: async () => ({ allProducts: await listProducts({ data: {} }) }),
+  loader: async () => {
+    const allProducts: Product[] = await listProducts({ data: {} });
+    return { allProducts };
+  },
   head: () => ({
     meta: [
       { title: "Velnora — The 2026 Beauty Edit" },
@@ -115,7 +119,7 @@ const sectionMeta = [
   },
 ];
 
-function buildSections(allProducts: Awaited<ReturnType<typeof listProducts>>) {
+function buildSections(allProducts: Product[]) {
   return sectionMeta.map((meta) => {
     const inCategory = allProducts.filter((p) => p.category === meta.category);
     const editorial = inCategory.filter((p) => p.showOnEditorial !== false);

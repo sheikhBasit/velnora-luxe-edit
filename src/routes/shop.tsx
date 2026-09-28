@@ -110,14 +110,16 @@ function ShopPage() {
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </Link>
-                  <a
-                    href={product.retailerUrl || undefined}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
-                  >
-                    VIEW AT RETAILER
-                  </a>
+                  {product.retailerUrl && (
+                    <a
+                      href={product.retailerUrl}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="product-card-cta pill-btn pointer-events-none absolute bottom-4 left-1/2 z-10 !h-10 w-[85%] max-w-[240px] !min-w-0 -translate-x-1/2 scale-95 !px-2 py-0 !text-[10px] sm:!text-[11px] font-semibold opacity-0 shadow-xl transition-[opacity,transform] duration-300 group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100"
+                    >
+                      VIEW AT RETAILER
+                    </a>
+                  )}
                 </div>
                 <Link
                   to="/product/$id"

@@ -65,13 +65,15 @@ function BlogIndex() {
                     </div>
                   )}
                   <article className="group flex flex-col space-y-4">
-                    <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block overflow-hidden rounded-sm aspect-[4/3]">
-                      <img
-                        src={blog.coverImage || "/placeholder.svg"}
-                        alt={blog.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </Link>
+                    {blog.coverImage && (
+                      <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block aspect-[4/3] overflow-hidden rounded-sm">
+                        <img
+                          src={blog.coverImage}
+                          alt={blog.title}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </Link>
+                    )}
                     <div className="space-y-2">
                       <p className="text-xs uppercase tracking-widest text-muted-foreground">
                         {blog.category}
