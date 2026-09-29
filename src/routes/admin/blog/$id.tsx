@@ -87,6 +87,7 @@ const emptyBlog: Blog = {
   type: "blog",
   title: "",
   slug: "",
+  retailerLink: "",
   category: "makeup",
   excerpt: "",
   coverImage: "",
@@ -231,6 +232,7 @@ function AdminBlogForm() {
           type: form.type,
           title: form.title,
           slug: form.slug,
+          retailerLink: form.retailerLink ?? "",
           category: form.category,
           excerpt: form.excerpt,
           coverImage: form.coverImage,
@@ -403,6 +405,17 @@ function AdminBlogForm() {
             required
           />
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="retailerLink">Retailer link (Amazon, etc.)</Label>
+        <Input
+          id="retailerLink"
+          type="url"
+          placeholder="https://..."
+          value={form.retailerLink ?? ""}
+          onChange={(e) => setForm((f) => ({ ...f, retailerLink: e.target.value }))}
+        />
       </div>
 
       <div className="space-y-2">

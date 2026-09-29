@@ -14,6 +14,7 @@ export type Blog = {
   type: "blog" | "tutorial";
   title: string;
   slug: string;
+  retailerLink?: string;
   category: string;
   excerpt: string;
   coverImage: string;
@@ -30,6 +31,7 @@ type BlogRow = {
   type: string;
   title: string;
   slug: string;
+  retailer_link: string | null;
   category: string;
   excerpt: string;
   cover_image: string;
@@ -47,6 +49,7 @@ function rowToBlog(row: BlogRow): Blog {
     type: (row.type as "blog" | "tutorial") || "blog",
     title: row.title,
     slug: row.slug,
+    retailerLink: row.retailer_link || "",
     category: row.category,
     excerpt: row.excerpt,
     coverImage: row.cover_image,
@@ -107,6 +110,7 @@ const blogInput = z.object({
   type: z.enum(["blog", "tutorial"]).default("blog"),
   title: z.string().min(1),
   slug: z.string().min(1),
+  retailerLink: z.string().default(""),
   category: z.string().min(1),
   excerpt: z.string().default(""),
   coverImage: z.string().default(""),
@@ -140,12 +144,13 @@ export const saveBlog = createServerFn({ method: "POST" })
     await requireAdmin();
     await ensureSchema();
     const rows = await sql`
-      insert into blogs (id, type, title, slug, category, excerpt, cover_image, video_url, content, prerequisites, steps, published)
-      values (${data.id}, ${data.type}, ${data.title}, ${data.slug}, ${data.category}, ${data.excerpt}, ${data.coverImage}, ${data.videoUrl}, ${data.content}, ${data.prerequisites}, ${JSON.stringify(data.steps)}, ${data.published})
+      insert into blogs (id, type, title, slug, retailer_link, category, excerpt, cover_image, video_url, content, prerequisites, steps, published)
+      values (${data.id}, ${data.type}, ${data.title}, ${data.slug}, ${data.retailerLink}, ${data.category}, ${data.excerpt}, ${data.coverImage}, ${data.videoUrl}, ${data.content}, ${data.prerequisites}, ${JSON.stringify(data.steps)}, ${data.published})
       on conflict (id) do update set
         type = excluded.type,
         title = excluded.title,
         slug = excluded.slug,
+        retailer_link = excluded.retailer_link,
         category = excluded.category,
         excerpt = excluded.excerpt,
         cover_image = excluded.cover_image,

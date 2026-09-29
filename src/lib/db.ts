@@ -51,6 +51,7 @@ export function ensureSchema() {
           id           text primary key,
           title        text not null,
           slug         text not null unique,
+          retailer_link text not null default '',
           category     text not null,
           excerpt      text not null,
           cover_image  text not null,
@@ -68,6 +69,7 @@ export function ensureSchema() {
       await sql`alter table blogs add column if not exists prerequisites text[] not null default '{}'`;
       await sql`alter table blogs add column if not exists steps jsonb not null default '[]'`;
       await sql`alter table blogs add column if not exists video_url text`;
+      await sql`alter table blogs add column if not exists retailer_link text not null default ''`;
 
       await sql`
         create table if not exists site_settings (
