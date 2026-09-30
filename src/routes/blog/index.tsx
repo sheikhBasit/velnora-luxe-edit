@@ -56,6 +56,7 @@ function BlogIndex() {
             {blogs.map((blog: Blog, index: number) => {
               // Insert AdSense after the first 3 posts (or any strategic spot)
               const showAd = index === 3;
+              const retailerLink = blog.retailerLink?.trim();
               
               return (
                 <Fragment key={blog.id}>
@@ -66,22 +67,36 @@ function BlogIndex() {
                   )}
                   <article className="group flex flex-col space-y-4">
                     {blog.coverImage && (
-                      <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block aspect-[4/3] overflow-hidden rounded-sm">
-                        <img
-                          src={blog.coverImage}
-                          alt={blog.title}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                      </Link>
+                      retailerLink ? (
+                        <a href={retailerLink} className="block aspect-[4/3] overflow-hidden rounded-sm">
+                          <img
+                            src={blog.coverImage}
+                            alt={blog.title}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </a>
+                      ) : (
+                        <Link to="/blog/$slug" params={{ slug: blog.slug }} className="block aspect-[4/3] overflow-hidden rounded-sm">
+                          <img
+                            src={blog.coverImage}
+                            alt={blog.title}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </Link>
+                      )
                     )}
                     <div className="space-y-2">
                       <p className="text-xs uppercase tracking-widest text-muted-foreground">
                         {blog.category}
                       </p>
                       <h2 className="font-serif text-xl tracking-wide group-hover:underline">
-                        <Link to="/blog/$slug" params={{ slug: blog.slug }}>
-                          {blog.title}
-                        </Link>
+                        {retailerLink ? (
+                          <a href={retailerLink}>{blog.title}</a>
+                        ) : (
+                          <Link to="/blog/$slug" params={{ slug: blog.slug }}>
+                            {blog.title}
+                          </Link>
+                        )}
                       </h2>
                       <p className="line-clamp-2 text-sm text-muted-foreground">
                         {blog.excerpt}
