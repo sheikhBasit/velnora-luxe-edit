@@ -99,17 +99,17 @@ function RichTextWithProducts({ content }: { content: string }) {
 
     while ((match = regex.exec(html)) !== null) {
       if (match.index > lastIndex) {
-        blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex, match.index) }} />);
+        blocks.push(<div className="rich-article-html" key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex, match.index) }} />);
       }
       blocks.push(<ProductEmbed key={`prod-${match[1]}-${match.index}`} id={match[1]} />);
       lastIndex = match.index + match[0].length;
     }
     
     if (lastIndex < html.length) {
-      blocks.push(<div key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex) }} />);
+      blocks.push(<div className="rich-article-html" key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: html.substring(lastIndex) }} />);
     }
     
-    return blocks.length > 0 ? blocks : <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return blocks.length > 0 ? blocks : <div className="rich-article-html" dangerouslySetInnerHTML={{ __html: html }} />;
   };
 
   return (
@@ -143,11 +143,11 @@ function TutorialPage() {
           {/* Hero Media */}
           <div className="mb-16 space-y-8 mx-auto max-w-5xl">
             {tutorial.coverImage && (
-              <div className="aspect-video overflow-hidden rounded-sm bg-muted">
+              <div className="flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-sm bg-muted">
                 <img
                   src={tutorial.coverImage}
                   alt={tutorial.title}
-                  className="h-full w-full object-cover"
+                  className="m-auto h-full w-full object-cover object-top"
                 />
               </div>
             )}

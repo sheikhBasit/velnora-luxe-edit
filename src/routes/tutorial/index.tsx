@@ -32,11 +32,11 @@ function TutorialIndex() {
             {tutorials.map((tutorial: Blog) => (
               <Fragment key={tutorial.id}>
                 <article className="group flex flex-col space-y-4">
-                  <Link to="/tutorial/$slug" params={{ slug: tutorial.slug }} className="block overflow-hidden rounded-sm aspect-[4/3]">
+                  <Link to="/tutorial/$slug" params={{ slug: tutorial.slug }} className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-sm">
                     <img
                       src={tutorial.coverImage || "/placeholder.svg"}
                       alt={tutorial.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="m-auto h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   </Link>
                   <div className="space-y-2">

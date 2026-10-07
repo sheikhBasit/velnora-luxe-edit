@@ -265,12 +265,12 @@
 }
 
 .blog-reader-content {
-  width: 100%;
-  max-width: 64rem;
-  margin-inline: auto;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: left;
-  font-size: 1.0625rem;
-  line-height: 1.8;
+  font-size: 1.25rem;
+  line-height: 1.6;
 }
 
 .blog-reader-content [class~="mx-auto"] {
@@ -294,12 +294,12 @@
 
 .blog-reader-content h2 {
   margin-block: 2.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 2.75rem;
 }
 
 .blog-reader-content h3 {
   margin-block: 1.75rem 0.75rem;
-  font-size: 1.25rem;
+  font-size: 2.75rem;
 }
 
 .blog-reader-content ul,
@@ -325,6 +325,13 @@
 .blog-reader-content iframe {
   max-width: 100%;
   border-radius: var(--radius);
+}
+.blog-reader-content img {
+  width: 600px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
 }
 
 @media (max-width: 640px) {

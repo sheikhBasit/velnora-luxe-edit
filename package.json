@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "sync:live": "node scripts/sync-live-content.mjs",
+    "sync:blogs": "node scripts/sync-live-blogs.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",

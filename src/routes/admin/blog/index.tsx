@@ -85,7 +85,7 @@ function AdminBlogList() {
                   <img
                     src={blog.coverImage || "/placeholder.svg"}
                     alt={blog.title}
-                    className="h-10 w-10 rounded-sm object-cover bg-muted"
+                    className="mx-auto aspect-[4/5] h-10 w-8 rounded-sm bg-muted object-cover object-top"
                   />
                 </TableCell>
                 <TableCell>
