@@ -321,6 +321,12 @@
   margin-top: 0.5rem;
 }
 
+.blog-reader-content .affiliate-product-link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .blog-reader-content img,
 .blog-reader-content iframe {
   max-width: 100%;

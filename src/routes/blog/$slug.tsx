@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { getBlogBySlug, type Blog } from "@/lib/blogs.server";
 import { getSiteSettings } from "@/lib/settings.server";
 import { getProductById } from "@/lib/products.server";
+import { filterBlogAffiliateLinks } from "@/lib/blog-content";
 import { Header } from "@/components/velnora/Header";
 import { Footer } from "@/components/velnora/Footer";
 import { useEffect, useMemo } from "react";
@@ -92,7 +93,7 @@ function ProductEmbed({ id }: { id: string }) {
 
 function BlogPostContent({ content, settings }: { content: string, settings: Record<string, string> }) {
   const renderPart = (html: string) => {
-    const normalizedHtml = html.replace(/(?:&nbsp;|&#160;|\u00a0)/gi, " ");
+    const normalizedHtml = filterBlogAffiliateLinks(html);
     const regex = /\{\{product:([a-zA-Z0-9_-]+)\}\}/g;
     const blocks = [];
     let lastIndex = 0;
