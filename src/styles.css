@@ -322,6 +322,8 @@
 }
 
 .blog-reader-content .affiliate-product-link {
+  display: inline;
+  white-space: normal;
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 0.2em;
