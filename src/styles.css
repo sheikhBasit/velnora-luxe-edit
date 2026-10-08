@@ -326,12 +326,19 @@
   max-width: 100%;
   border-radius: var(--radius);
 }
-.blog-reader-content img {
-  width: 600px;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+.blog-reader-content img,
+.blog-content-editor .ql-editor img {
   display: block;
+  width: 100%;
+  max-width: 42rem;
+  aspect-ratio: 5 / 4;
+  height: auto;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--color-muted);
+  object-fit: cover;
+  object-position: top;
 }
 
 @media (max-width: 640px) {

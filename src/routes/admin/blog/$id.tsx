@@ -510,7 +510,7 @@ function AdminBlogForm() {
       {form.type === "blog" && (
         <div className="space-y-2">
           <Label>Article Content</Label>
-          <div className="bg-background [&_.ql-container]:min-h-[400px] [&_.ql-container]:text-base [&_.ql-editor]:min-h-[400px]">
+          <div className="blog-content-editor bg-background [&_.ql-container]:min-h-[400px] [&_.ql-container]:text-base [&_.ql-editor]:min-h-[400px]">
             <QuillEditor
               value={form.content}
               onChange={(content) => setForm((f) => ({ ...f, content }))}
