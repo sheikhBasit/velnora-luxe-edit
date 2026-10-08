@@ -326,8 +326,7 @@
   max-width: 100%;
   border-radius: var(--radius);
 }
-.blog-reader-content img,
-.blog-content-editor .ql-editor img {
+.blog-reader-content img {
   display: block;
   width: 100%;
   max-width: 42rem;
@@ -339,6 +338,20 @@
   background-color: var(--color-muted);
   object-fit: cover;
   object-position: top;
+}
+
+.blog-content-editor .ql-editor img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 650px !important;
+  aspect-ratio: 5 / 4 !important;
+  height: auto !important;
+  margin: 2rem auto !important;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--color-muted);
+  object-fit: cover !important;
+  object-position: center top !important;
 }
 
 @media (max-width: 640px) {

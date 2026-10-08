@@ -48,6 +48,10 @@ export const logout = createServerFn({ method: "POST" }).handler(async () => {
 });
 
 export const checkAdminSession = createServerFn({ method: "GET" }).handler(async () => {
+  if (!process.env.SESSION_SECRET) {
+    console.error("Admin session check failed: SESSION_SECRET is not set");
+    return false;
+  }
   const session = await adminSession();
   return session.data.isAdmin === true;
 });
