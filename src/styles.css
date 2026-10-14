@@ -265,12 +265,15 @@
 }
 
 .blog-reader-content {
+  box-sizing: border-box;
   width: 90%;
-  max-width: 1200px;
+  min-width: 0;
+  max-width: 100%;
   margin: 0 auto;
   text-align: left;
   font-size: 1.25rem;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .blog-reader-content [class~="mx-auto"] {
@@ -321,12 +324,35 @@
   margin-top: 0.5rem;
 }
 
-.blog-reader-content .affiliate-product-link {
+.blog-reader-content .affiliate-product-link,
+.blog-content-editor .ql-editor .affiliate-product-link {
   display: inline;
   white-space: normal;
   color: var(--primary);
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.08em;
+  overflow-wrap: anywhere;
+}
+
+.blog-reader-content .affiliate-product-link:hover,
+.blog-content-editor .ql-editor .affiliate-product-link:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+.blog-reader-content .affiliate-product-link:focus-visible,
+.blog-content-editor .ql-editor .affiliate-product-link:focus-visible {
+  border-radius: 0.125rem;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.blog-content-editor .ql-editor {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .blog-reader-content img,
@@ -352,20 +378,25 @@
   display: block !important;
   width: 100% !important;
   max-width: 650px !important;
-  aspect-ratio: 5 / 4 !important;
+  aspect-ratio: auto !important;
   height: auto !important;
   margin: 2rem auto !important;
   overflow: hidden;
   border-radius: 1rem;
   background-color: var(--color-muted);
-  object-fit: cover !important;
-  object-position: center top !important;
+  object-fit: contain !important;
+  object-position: center !important;
 }
 
 @media (max-width: 640px) {
   .blog-reader-content {
     font-size: 1rem;
     line-height: 1.75;
+  }
+
+  .blog-content-editor .ql-editor img {
+    max-width: 100% !important;
+    margin-block: 1.25rem !important;
   }
 }
 

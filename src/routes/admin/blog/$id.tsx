@@ -1,7 +1,14 @@
 import { useState, useRef, useCallback, useMemo } from "react";
 import { createFileRoute, notFound, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { getBlogById, saveBlog, uploadBlogImage, type Blog, type BlogStep } from "@/lib/blogs.server";
+import {
+  getBlogById,
+  saveBlog,
+  uploadBlogImage,
+  type Blog,
+  type BlogStep,
+} from "@/lib/blogs.server";
+import { linkBlogAffiliateProducts } from "@/lib/blog-content";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,14 +33,32 @@ import "react-quill-new/dist/quill.snow.css";
 
 const ReactQuill = lazy(() => import("react-quill-new"));
 
-function ClientOnly({ children, fallback }: { children: React.ReactNode, fallback?: React.ReactNode }) {
+function ClientOnly({
+  children,
+  fallback,
+}: {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+}) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return mounted ? <>{children}</> : <>{fallback}</>;
 }
 
-function QuillEditor({ value, onChange, modules, minHeight }: { value: string, onChange: (v: string) => void, modules: any, minHeight: string }) {
-  const fallback = <div style={{ minHeight }} className="bg-muted animate-pulse rounded-md w-full" />;
+function QuillEditor({
+  value,
+  onChange,
+  modules,
+  minHeight,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  modules: any;
+  minHeight: string;
+}) {
+  const fallback = (
+    <div style={{ minHeight }} className="bg-muted animate-pulse rounded-md w-full" />
+  );
   return (
     <ClientOnly fallback={fallback}>
       <Suspense fallback={fallback}>
@@ -51,12 +76,12 @@ export const Route = createFileRoute("/admin/blog/$id")({
     if (params.id === "new") return { blog: null, products };
     const blog = await getBlogById({ data: params.id });
     if (!blog) throw notFound();
-    return { blog, products };
+    return { blog: { ...blog, content: linkBlogAffiliateProducts(blog.content) }, products };
   },
   errorComponent: ({ error }) => (
     <div className="p-4 text-red-500 font-mono text-sm whitespace-pre-wrap">
       Error: {error.message}
-      {'\n\n'}
+      {"\n\n"}
       {error.stack}
     </div>
   ),
@@ -110,11 +135,17 @@ const blogCategories = [
   { id: "beauty-tech", label: "BEAUTY TECH" },
 ];
 
-function ProductEmbedButton({ products, onSelect }: { products: any[], onSelect: (id: string) => void }) {
+function ProductEmbedButton({
+  products,
+  onSelect,
+}: {
+  products: any[];
+  onSelect: (id: string) => void;
+}) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+  const filtered = products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -129,13 +160,13 @@ function ProductEmbedButton({ products, onSelect }: { products: any[], onSelect:
           <DialogTitle>Select a Product</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <Input 
-            placeholder="Search products..." 
-            value={search} 
-            onChange={(e) => setSearch(e.target.value)} 
+          <Input
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <div className="max-h-[300px] overflow-y-auto space-y-2">
-            {filtered.map(p => (
+            {filtered.map((p) => (
               <button
                 key={p.id}
                 type="button"
@@ -146,11 +177,15 @@ function ProductEmbedButton({ products, onSelect }: { products: any[], onSelect:
                 }}
                 className="w-full text-left px-3 py-2 rounded-md hover:bg-muted text-sm flex items-center space-x-3"
               >
-                {p.image && <img src={p.image} alt="" className="w-8 h-8 rounded-sm object-cover" />}
+                {p.image && (
+                  <img src={p.image} alt="" className="w-8 h-8 rounded-sm object-cover" />
+                )}
                 <span>{p.name}</span>
               </button>
             ))}
-            {filtered.length === 0 && <p className="text-sm text-muted-foreground p-2">No products found.</p>}
+            {filtered.length === 0 && (
+              <p className="text-sm text-muted-foreground p-2">No products found.</p>
+            )}
           </div>
         </div>
       </DialogContent>
@@ -163,7 +198,15 @@ function AdminBlogForm() {
   const isNew = blog === null;
   const navigate = useNavigate();
 
-  const [form, setForm] = useState<Blog>(blog ?? { ...emptyBlog, id: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString() });
+  const [form, setForm] = useState<Blog>(
+    blog ?? {
+      ...emptyBlog,
+      id:
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : Date.now().toString(),
+    },
+  );
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [saving, setSaving] = useState(false);
   const [imageBusy, setImageBusy] = useState(false);
@@ -252,27 +295,32 @@ function AdminBlogForm() {
     }
   };
 
-  const addPrerequisite = () => setForm(f => ({ ...f, prerequisites: [...f.prerequisites, ""] }));
-  const removePrerequisite = (index: number) => setForm(f => ({ ...f, prerequisites: f.prerequisites.filter((_, i) => i !== index) }));
-  const updatePrerequisite = (index: number, val: string) => setForm(f => ({
-    ...f,
-    prerequisites: f.prerequisites.map((p, i) => i === index ? val : p)
-  }));
+  const addPrerequisite = () => setForm((f) => ({ ...f, prerequisites: [...f.prerequisites, ""] }));
+  const removePrerequisite = (index: number) =>
+    setForm((f) => ({ ...f, prerequisites: f.prerequisites.filter((_, i) => i !== index) }));
+  const updatePrerequisite = (index: number, val: string) =>
+    setForm((f) => ({
+      ...f,
+      prerequisites: f.prerequisites.map((p, i) => (i === index ? val : p)),
+    }));
 
-  const addStep = () => setForm(f => ({ ...f, steps: [...f.steps, { title: "", instructions: "" }] }));
-  const removeStep = (index: number) => setForm(f => ({ ...f, steps: f.steps.filter((_, i) => i !== index) }));
-  const updateStep = (index: number, field: keyof BlogStep, val: string) => setForm(f => ({
-    ...f,
-    steps: f.steps.map((s, i) => i === index ? { ...s, [field]: val } : s)
-  }));
+  const addStep = () =>
+    setForm((f) => ({ ...f, steps: [...f.steps, { title: "", instructions: "" }] }));
+  const removeStep = (index: number) =>
+    setForm((f) => ({ ...f, steps: f.steps.filter((_, i) => i !== index) }));
+  const updateStep = (index: number, field: keyof BlogStep, val: string) =>
+    setForm((f) => ({
+      ...f,
+      steps: f.steps.map((s, i) => (i === index ? { ...s, [field]: val } : s)),
+    }));
 
   const quillRef = useRef<any>(null);
   const stepQuillRefs = useRef<Array<any | null>>([]);
 
-  const imageHandler = useCallback(function(this: any) {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+  const imageHandler = useCallback(function (this: any) {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
     input.click();
     input.onchange = async () => {
       const file = input.files?.[0];
@@ -286,11 +334,11 @@ function AdminBlogForm() {
           const dataUrl = await fileToDataUrl(file);
           const filename = `content/${Date.now()}.jpg`;
           const { url } = await uploadBlogImage({ data: { filename, dataUrl } });
-          
+
           const quill = this.quill;
           if (quill) {
             const range = quill.getSelection(true);
-            quill.insertEmbed(range.index, 'image', url);
+            quill.insertEmbed(range.index, "image", url);
           }
           toast.success("Image uploaded", { id: toastId });
         } catch (error) {
@@ -300,10 +348,10 @@ function AdminBlogForm() {
     };
   }, []);
 
-  const videoHandler = useCallback(function(this: any) {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'video/mp4,video/webm');
+  const videoHandler = useCallback(function (this: any) {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "video/mp4,video/webm");
     input.click();
     input.onchange = async () => {
       const file = input.files?.[0];
@@ -321,11 +369,11 @@ function AdminBlogForm() {
             const dataUrl = reader.result as string;
             const filename = `content/${Date.now()}-${file.name}`;
             const { url } = await uploadBlogImage({ data: { filename, dataUrl } });
-            
+
             const quill = this.quill;
             if (quill) {
               const range = quill.getSelection(true);
-              quill.insertEmbed(range.index, 'video', url);
+              quill.insertEmbed(range.index, "video", url);
             }
             toast.success("Video uploaded", { id: toastId });
           };
@@ -336,21 +384,24 @@ function AdminBlogForm() {
     };
   }, []);
 
-  const modules = useMemo(() => ({
-    toolbar: {
-      container: [
-        [{ 'header': [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-        ['link', 'image', 'video'],
-        ['clean']
-      ],
-      handlers: {
-        image: imageHandler,
-        video: videoHandler
-      }
-    }
-  }), [imageHandler, videoHandler]);
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+          ["link", "image", "video"],
+          ["clean"],
+        ],
+        handlers: {
+          image: imageHandler,
+          video: videoHandler,
+        },
+      },
+    }),
+    [imageHandler, videoHandler],
+  );
 
   return (
     <form onSubmit={handleSubmit} className="max-w-4xl space-y-6 pb-12">
@@ -471,7 +522,7 @@ function AdminBlogForm() {
         </div>
         <div className="space-y-2">
           <Label>Preview</Label>
-          {previewUrl ?? form.coverImage ? (
+          {(previewUrl ?? form.coverImage) ? (
             <img
               src={previewUrl ?? form.coverImage}
               alt=""
@@ -522,12 +573,12 @@ function AdminBlogForm() {
             <p className="text-xs text-muted-foreground">
               Tip: You can also manually type {"{{"}product:PRODUCT_ID{"}}"} to embed a product.
             </p>
-            <ProductEmbedButton 
-              products={products} 
+            <ProductEmbedButton
+              products={products}
               onSelect={(id) => {
                 const text = `{{product:${id}}}`;
-                setForm(f => ({ ...f, content: f.content + `\n<p>${text}</p>\n` }));
-              }} 
+                setForm((f) => ({ ...f, content: f.content + `\n<p>${text}</p>\n` }));
+              }}
             />
           </div>
         </div>
@@ -539,8 +590,17 @@ function AdminBlogForm() {
             <Label className="text-lg">Prerequisites</Label>
             {form.prerequisites.map((p, i) => (
               <div key={i} className="flex items-center space-x-2">
-                <Input value={p} onChange={(e) => updatePrerequisite(i, e.target.value)} placeholder="e.g. Moisturizer, Specific Brush..." />
-                <Button type="button" variant="ghost" size="sm" onClick={() => removePrerequisite(i)}>
+                <Input
+                  value={p}
+                  onChange={(e) => updatePrerequisite(i, e.target.value)}
+                  placeholder="e.g. Moisturizer, Specific Brush..."
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => removePrerequisite(i)}
+                >
                   <Trash2 className="w-4 h-4 text-destructive" />
                 </Button>
               </div>
@@ -562,28 +622,33 @@ function AdminBlogForm() {
                 </div>
                 <div className="space-y-2">
                   <Label>Step Title</Label>
-                  <Input value={s.title} onChange={(e) => updateStep(i, 'title', e.target.value)} required />
+                  <Input
+                    value={s.title}
+                    onChange={(e) => updateStep(i, "title", e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Instructions</Label>
                   <div className="bg-background [&_.ql-container]:min-h-[150px] [&_.ql-container]:text-base [&_.ql-editor]:min-h-[150px]">
                     <QuillEditor
                       value={s.instructions}
-                      onChange={(content) => updateStep(i, 'instructions', content)}
+                      onChange={(content) => updateStep(i, "instructions", content)}
                       modules={modules}
                       minHeight="150px"
                     />
                   </div>
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-xs text-muted-foreground">
-                      Tip: You can also manually type {"{{"}product:PRODUCT_ID{"}}"} to embed a product.
+                      Tip: You can also manually type {"{{"}product:PRODUCT_ID{"}}"} to embed a
+                      product.
                     </p>
-                    <ProductEmbedButton 
-                      products={products} 
+                    <ProductEmbedButton
+                      products={products}
                       onSelect={(id) => {
                         const text = `{{product:${id}}}`;
-                        updateStep(i, 'instructions', s.instructions + `\n<p>${text}</p>\n`);
-                      }} 
+                        updateStep(i, "instructions", s.instructions + `\n<p>${text}</p>\n`);
+                      }}
                     />
                   </div>
                 </div>
