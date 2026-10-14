@@ -364,14 +364,13 @@
   display: block;
   width: 100%;
   max-width: 42rem;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: auto;
   height: auto;
   margin: 2rem auto;
-  overflow: hidden;
   border-radius: 1rem;
   background-color: var(--color-muted);
-  object-fit: cover;
-  object-position: top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .blog-content-editor .ql-editor img {
